@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "l3rdInfo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "player 1",
+      "default": ["Winners Bracket", "FX Game & Console Repair, Plano TX"]
+    }
+  },
+
+  "required": ["l3rdInfo"]
+}

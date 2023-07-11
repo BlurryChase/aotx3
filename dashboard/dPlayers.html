@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://kit.fontawesome.com/2fe116318a.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+</head>
+<body>
+<datalist id="bracketLocList">
+	<option>Winners Bracket</option>
+	<option>Losers Bracket</option>
+	<option>Pools</option>
+	<option>Winners Quarters</option> 
+	<option>Winners Semis</option> 
+	<option>Winners Finals</option> 
+	<option>Losers Eighths</option> 
+	<option>Losers Quarters</option> 
+	<option>Losers Semis</option> 
+	<option>Losers Finals</option> 
+	<option>Grand Finals</option>
+</datalist>
+
+<button id="submitButton">
+	<i class="fa-solid fa-floppy-disk"> SAVE</i>
+</button>
+<button id="clearButton">
+	<i class="fa-solid fa-x"> CLEAR</i>
+</button>
+<br><br>
+<div>SINGLES</div>
+<table>
+	<tr>
+		<td>
+			<input id="player1Team" type="text" placeholder="P1 Team" size="6"></input>
+		</td>
+		<td>
+			<input id="player1Tag" type="text" placeholder="P1 Tag"></input>
+		</td>
+		<td>
+			<input id="player1Grands" type="text" placeholder="W/L" size="3"></input>	
+		</td>		
+		<td>
+			<input id="player1Score" type="number" value="0" size="2" max="2"></input>
+		</td>
+		<td rowspan="2">
+			<button id="swapButton" onclick="swapPlayers()">
+				<i class="fa-solid fa-rotate"> SWAP</i>
+			</button>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input id="player2Team" type="text" placeholder="P2 Team" size="6"></input>
+		</td>
+		<td>
+			<input id="player2Tag" type="text" placeholder="P2 Tag"></input>
+		</td>
+		<td>
+			<input id="player2Grands" type="text" placeholder="W/L" size="3"></input>
+		</td>		
+		<td>
+			<input id="player2Score" type="number" value="0" size="2" max="2"></input>
+		</td>
+	</tr>
+</table>
+<br>
+<table>
+	<tr>
+		<td>
+			<input id="bracketLoc"
+			type="text"
+			placeholder="Bracket Location"
+			list="bracketLocList"
+			autocomplete="off"></input>
+		</td>
+		<td>
+			<select name="BoX" id="bracketLen">
+				<option value="Best of 3">Bo3</option>
+				<option value="Best of 5">Bo5</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br>
+<div>DOUBLES (INDEV)</div>
+<table>
+	<tr>
+		<td>
+			<input id="player3Team" type="text" placeholder="Partner1 Team" size="6"></input>
+		</td>
+		<td>
+			<input id="player3Tag" type="text" placeholder="Partner1 Tag"></input>
+		</td>
+		<td rowspan="2">
+			<button id="swapButton">
+				<i class="fa-solid fa-rotate"> SWAP</i>
+			</button>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input id="player4Team" type="text" placeholder="Partner2 Team" size="6"></input>
+		</td>
+		<td>
+			<input id="player4Tag" type="text" placeholder="Partner2 Tag"></input>
+		</td>
+	</tr>
+</table>
+<br>
+<div>Queue</div>
+<div>Note from Chase, add StartGG queue soon</div>
+
+	
+</body>
+<script src="js/players.js" defer></script>
+</html>
