@@ -38,7 +38,7 @@ function init(){
 		// We can access Replicants from other bundles by specifying the bundle name as a second parameter.
 		// NodeCG requires that bundle names match their directory names, but you can always check the `package.json` to double check.
 		
-		const matchRep = nodecg.Replicant('match', 'USW')
+		const matchRep = nodecg.Replicant('match')
 
 		if (startup == true) {
 
@@ -76,9 +76,7 @@ function init(){
 		
 		matchRep.on('change', (newValue, oldValue) => {
 
-			if (newValue.player1Info[0] == oldValue.player1Info[0] && newValue.player1Info[1] == oldValue.player1Info[1]) {
-
-			} else {
+			if (newValue.player1Info[0] != oldValue.player1Info[0] || newValue.player1Info[1] != oldValue.player1Info[1]) {
 				gsap.to("#p1Wrapper", {x:p1Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
 					p1Tag.innerHTML = newValue.player1Info[0];
 					p1Team.innerHTML = newValue.player1Info[1];
@@ -87,18 +85,14 @@ function init(){
 				}});
 			};
 
-			if (newValue.playerScore[0] == oldValue.playerScore[0]) {
-
-			} else {
+			if (newValue.playerScore[0] != oldValue.playerScore[0]) {
 				gsap.to("#p1Score", {duration: scTime, opacity: 0, delay: 0, onComplete: function () {
 					p1Score.innerHTML = newValue.playerScore[0];
 					gsap.to("#p1Score", { duration: scTime, opacity: 1, delay: 0 });
 				}
 			})};
 
-			if (newValue.player2Info[0] == oldValue.player2Info[0] && newValue.player2Info[1] == oldValue.player2Info[1]) {
-
-			} else {
+			if (newValue.player2Info[0] != oldValue.player2Info[0] || newValue.player2Info[1] != oldValue.player2Info[1]) {
 				gsap.to("#p2Wrapper", {x:p2Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
 					p2Tag.innerHTML = newValue.player2Info[0];
 					p2Team.innerHTML = newValue.player2Info[1];
@@ -107,18 +101,14 @@ function init(){
 				}});
 			};
 			
-			if (newValue.playerScore[1] == oldValue.playerScore[1]) {
-				
-			} else {
+			if (newValue.playerScore[1] != oldValue.playerScore[1]) {
 				gsap.to("#p2Score", {duration: scTime, opacity: 0, delay: 0, onComplete: function () {
 					p2Score.innerHTML = newValue.playerScore[1];
 					gsap.to("#p2Score", { duration: scTime, opacity: 1, delay: 0 });
 				}
 			})};
 			
-			if (newValue.bracketInfo[0] == oldValue.bracketInfo[0] && newValue.bracketInfo[1] == oldValue.bracketInfo[1]) {
-				
-			} else {
+			if (newValue.bracketInfo[0] != oldValue.bracketInfo[0] || newValue.bracketInfo[1] != oldValue.bracketInfo[1]) {
 				gsap.to("#rdWrapper", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
 					bracketLoc.innerHTML = newValue.bracketInfo[0];
 					bracketLen.innerHTML = newValue.bracketInfo[1];
