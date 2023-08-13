@@ -8,8 +8,16 @@
       "items": {
         "type": "string"
       },
-      "description": "player 1",
+      "description": "lower thirds",
       "default": ["Winners Bracket", "FX Game & Console Repair, Plano TX"]
+    },
+    "eventGame": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "lower thirds",
+      "default": ["USW", "SSBU"]
     }
   },
 

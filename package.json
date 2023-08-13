@@ -1,5 +1,5 @@
 {
-  "name": "USW",
+  "name": "Weeklies",
   "version": "0.0.0",
   "description": "",
   "homepage": "",
@@ -10,9 +10,7 @@
   },
   "files": [
     "dashboard",
-    "graphics",
-    "extension.js",
-    "extension"
+    "graphics"
   ],
   "keywords": [
     "",
@@ -37,9 +35,23 @@
       },
       {
         "name": "l3rds",
-        "title": "Lower Thirds & Downtime",
+        "title": "Lower Thirds",
         "width": 3,
         "file": "dL3rds.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "queue",
+        "title": "Stream Queue",
+        "width": 3,
+        "file": "dQueue.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "event & game",
+        "title": "Event & Game",
+        "width": 2,
+        "file": "dEventGame.html",
         "headerColor": "#525F78"
       }
     ],

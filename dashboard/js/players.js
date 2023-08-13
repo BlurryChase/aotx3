@@ -6,19 +6,16 @@ const p1Tag = document.querySelector('#player1Tag');
 const p1Grands = document.querySelector('#player1Grands');
 const p1Score = document.querySelector('#player1Score');
 
+
 // Player 2 const
 const p2Team = document.querySelector('#player2Team');
 const p2Tag = document.querySelector('#player2Tag');
 const p2Grands = document.querySelector('#player2Grands');
 const p2Score = document.querySelector('#player2Score');
 
-// Player 3 const
-const p3Team = document.querySelector('#player3Team');
-const p3Tag = document.querySelector('#player3Tag');
+const leftChar = document.querySelector('#leftChar');
+const rightChar = document.querySelector('#rightChar');
 
-// Player 4 const
-const p4Team = document.querySelector('#player4Team');
-const p4Tag = document.querySelector('#player4Tag');
 
 // Bracket Location & Length
 const bracketLoc = document.querySelector('#bracketLoc');
@@ -51,6 +48,9 @@ matchRep.on('change', newValue => {
 
   bracketLoc.value = newValue.bracketInfo[0];
   bracketLen.value = newValue.bracketInfo[1];
+
+  leftChar.value = newValue.playerCharacters[0];
+  rightChar.value = newValue.playerCharacters[1];
 });
 
 
@@ -79,10 +79,14 @@ submitButton.onclick = () => {
   // player 2 info
   matchRep.value.playerScore = [];
   // fill array
-  console.log(matchRep.value.playerScore);
   matchRep.value.playerScore.push(Number(p1Score.value));
   matchRep.value.playerScore.push(Number(p2Score.value));
-  // player 2 info
+  // player character info
+  matchRep.value.playerCharacters = [];
+  // fill array
+  matchRep.value.playerCharacters.push(leftChar.value);
+  matchRep.value.playerCharacters.push(rightChar.value);
+  // match info
   matchRep.value.bracketInfo = [];
   // fill array
   matchRep.value.bracketInfo.push(bracketLoc.value);

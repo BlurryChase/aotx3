@@ -1,5 +1,12 @@
 window.onload = init;
 
+var params = {}
+fetch("js/params.json")
+	.then((res) => res.json())
+	.then((data) => {
+		params = data;
+	})
+
 function init(){
 
   // general init variables
@@ -19,6 +26,49 @@ function init(){
   var twitter2Move = '87px';
   var twitterTime = 0.3;
   var twitterDelay = 0.1;
+
+	const eventRep = nodecg.Replicant('events') 
+	// create the link for the html page
+	let head = document.getElementsByTagName('HEAD')[0];
+	
+	let link = document.createElement('link');
+	
+	link.rel = 'stylesheet';
+	
+	link.type = 'text/css';
+
+	NodeCG.waitForReplicants(eventRep).then(() => {
+		// load replicants
+		let thisEvent = eventRep.value.eventGame[0];
+		console.log(thisEvent)
+		
+		link.href = `assets/${thisEvent}/comm.css`;
+		
+		head.appendChild(link);
+
+		nameSize = params[thisEvent]["commNameSize"];
+
+		// var for GSAP & Textfit, Player Team & Name
+		c1Move = params[thisEvent]["c1Move"];
+		c2Move = params[thisEvent]["c2Move"];
+		nameTime = params[thisEvent]["nameTime"];
+		nameDelay = params[thisEvent]["nameDelay"];
+		
+		// var for GSAP & Textfit, Player Team & Name 
+		twitterSize = params[thisEvent]["twitterSize"];
+		twitter1Move = params[thisEvent]["twitter1Move"];
+		twitter2Move = params[thisEvent]["twitter2Move"];
+		twitterTime = params[thisEvent]["twitterTime"];
+		twitterDelay = params[thisEvent]["twitterDelay"];
+
+	})
+
+	eventRep.on('change', (newValue, oldValue) => { 
+
+		if (newValue.eventGame[0] != oldValue.eventGame[0]) {
+			location.reload()
+		}
+	});
   
   
   function casterl3rd (){

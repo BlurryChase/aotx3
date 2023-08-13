@@ -36,6 +36,14 @@
       "description": "player scores",
       "default": [0,0]
     },
+    "playerCharacters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": ["",""],
+      "description": "player character and colors"
+    },
     "bracketInfo": {
       "type": "array",
       "items": {

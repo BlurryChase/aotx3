@@ -1,11 +1,16 @@
 window.onload = init;
 
+var params = {}
+fetch("js/params.json")
+	.then((res) => res.json())
+	.then((data) => {
+		params = data;
+	})
+
 function init(){
 
   // general init variables
   var startup = true;
-  var animate = false;  
-  var nameSize = 50;
 
   // top text
   var topTextSize = 40;
@@ -18,6 +23,47 @@ function init(){
   var botTextMove = '93px';
   var botTextTime = 0.3;
   var botTextDelay = 0.3;
+
+  const eventRep = nodecg.Replicant('events') 
+	// create the link for the html page
+	let head = document.getElementsByTagName('HEAD')[0];
+	
+	let link = document.createElement('link');
+	
+	link.rel = 'stylesheet';
+	
+	link.type = 'text/css';
+
+	NodeCG.waitForReplicants(eventRep).then(() => {
+		// load replicants
+		let thisEvent = eventRep.value.eventGame[0];
+		console.log(thisEvent)
+		
+		link.href = `assets/${thisEvent}/l3rd.css`;
+		
+		head.appendChild(link);
+
+    // top text
+    topTextSize = params[thisEvent]["topTextSize"];
+    topTextMove = params[thisEvent]["topTextMove"];
+    topTextTime = params[thisEvent]["topTextTime"];
+    topTextDelay = params[thisEvent]["topTextDelay"];
+
+    // bottom text
+    botTextSize = params[thisEvent]["botTextSize"];
+    botTextMove = params[thisEvent]["botTextMove"];
+    botTextTime = params[thisEvent]["botTextTime"];
+    botTextDelay = params[thisEvent]["botTextDelay"];
+		
+	})
+	
+	
+	eventRep.on('change', (newValue, oldValue) => { 
+
+		if (newValue.eventGame[0] != oldValue.eventGame[0]) {
+			location.reload()
+		}
+	});
   
   
   function casterl3rd (){

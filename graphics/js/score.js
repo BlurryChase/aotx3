@@ -1,26 +1,93 @@
 window.onload = init;
 
-function init(){
+var params = {}
+fetch("js/params.json")
+	.then((res) => res.json())
+	.then((data) => {
+		params = data;
+	})
 
+function init(){
+	
 	var startup = true;
 	var animated = false;
-
+	
 	var nameSize = 40;
 	var p1Move = '-60px';
 	var p2Move = '60px';
 	var nameTime = 0.3;
-
+	
 	var rdSize = 17;
 	var rdTime = 0.2;
-
+	
 	var scTime = 0.3;
 	var scDelay = 0;
+	
+	const eventRep = nodecg.Replicant('events') 
+	// create the link for the html page
+	let head = document.getElementsByTagName('HEAD')[0];
+	
+	let link = document.createElement('link');
+	
+	link.rel = 'stylesheet';
+	
+	link.type = 'text/css';
+	
+	NodeCG.waitForReplicants(eventRep).then(() => {
+		// load replicants
+		let thisEvent = eventRep.value.eventGame[0];
+		console.log(thisEvent)
+		let thisGame = eventRep.value.eventGame[1];
+		console.log(thisGame)
+		
+		
+		link.href = `assets/${thisEvent}/score_${thisGame}.css`;
+		
+		head.appendChild(link);
+		
+		let suplexOverlay = document.querySelector("#suplexOverlay")
+		let suplexHTML = ''
+		if (thisGame === 'SF6' || thisGame === 'GGST' ) {
+			suplexOverlay.innerHTML = '';
+			suplexHTML +=
+			`<video loop preload mute id="suplexVideo" width="1920" height="1080">
+			<source src="assets/SUPLEX/img/${thisGame}.webm" type="video/webm">
+			</video>`;
+			suplexOverlay.innerHTML = suplexHTML;
+			gsap.to("#bracketLen", {opacity: 0});
+			var bgVid = document.getElementById("suplexVideo");
+			console.log(bgVid)
+			
+		}
+		
+		
+		nameSize = params[thisEvent]["nameSize"];
+		console.log(nameSize)
+		p1Move = params[thisEvent]["p1Move"];
+		p2Move = params[thisEvent]["p2Move"];
+		nameTime = params[thisEvent]["nameTime"];
+		
+		rdSize = params[thisEvent]["rdSize"];
+		rdTime = params[thisEvent]["rdTime"];
+		
+		scTime = params[thisEvent]["scTime"];
+		scDelay = params[thisEvent]["scDelay"];
+		
+		bgVid.play()
+		
+	})
+	
+	
+	eventRep.on('change', (newValue, oldValue) => { 
 
-	const seperator = document.querySelector('#separator');
+		if (newValue.eventGame[0] != oldValue.eventGame[0] || newValue.eventGame[1] != oldValue.eventGame[1]) {
+			location.reload()
+		}
 
-	seperator.innerHTML = "&nbsp-&nbsp";
-
-
+	});
+	
+	
+	
 	function scoreboard() {
 		if (startup == true) {
 			getData();
@@ -31,7 +98,7 @@ function init(){
 			getData();
 		}
 	}
-
+	
 	setTimeout(scoreboard, 300); // runs it if parseJSON doesn't, aka animates it in
 
 	function getData() {
@@ -42,39 +109,81 @@ function init(){
 
 		if (startup == true) {
 
-      NodeCG.waitForReplicants(matchRep).then(() => {
-        p1Tag.innerHTML = matchRep.value.player1Info[0];
+			
+			
+			NodeCG.waitForReplicants(matchRep).then(() => {
+				p1Tag.innerHTML = matchRep.value.player1Info[0];
         p1Team.innerHTML = matchRep.value.player1Info[1];
-
+				
 				p1Score.innerHTML = matchRep.value.playerScore[0];
-
+				
         p2Tag.innerHTML = matchRep.value.player2Info[0];
         p2Team.innerHTML = matchRep.value.player2Info[1];
-
+				
 				p2Score.innerHTML = matchRep.value.playerScore[1];
-
-				bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
-				bracketLen.innerHTML = matchRep.value.bracketInfo[1];
-
+				
 				textFit(document.getElementsByClassName('wrappers'), { maxFontSize: nameSize, alignVert: true });
-				textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
-	
 				gsap.to("#p1Wrapper", { x: 0, startAt: { x: p1Move }, duration: nameTime, opacity: 1, delay: 0 });
 				gsap.to("#p2Wrapper", { x: 0, startAt: { x: p2Move }, duration: nameTime, opacity: 1, delay: 0 });
-				gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
 				gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
 
+				switch (eventRep.value.eventGame[0]) {
+					case ('USW'):
+						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
+						bracketLen.innerHTML = ` - ${matchRep.value.bracketInfo[1]}`;
+						
+						textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
+						break;
+					case ('MNM'):
+
+						var char1 = matchRep.value.playerCharacters[0];
+						var char2 = matchRep.value.playerCharacters[1];
+		
+						document.getElementById("seat1Character").setAttribute("src", "assets/MNM/img/chars/LeftSide/" + char1 + ".png");
+						document.getElementById("seat2Character").setAttribute("src", "assets/MNM/img/chars/RightSide/" + char2 + ".png");
+
+						gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
+						gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});
+
+						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
+						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
+
+						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+
+						break;
+					case ('SUPLEX'):
+						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
+						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
+
+						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+						gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0 });
+
+
+						break;
+					case ('SSO'):
+						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
+						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
+
+						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+				}
+
 				startup = false;
-
+				
+				
       });
-
-
+			
 		}
-		
-		
-		// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-		
+			
+			
+			
+			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+			
 		matchRep.on('change', (newValue, oldValue) => {
+
+			
 
 			if (newValue.player1Info[0] != oldValue.player1Info[0] || newValue.player1Info[1] != oldValue.player1Info[1]) {
 				gsap.to("#p1Wrapper", {x:p1Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
@@ -109,36 +218,96 @@ function init(){
 			})};
 			
 			if (newValue.bracketInfo[0] != oldValue.bracketInfo[0] || newValue.bracketInfo[1] != oldValue.bracketInfo[1]) {
-				gsap.to("#rdWrapper", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
-					bracketLoc.innerHTML = newValue.bracketInfo[0];
-					bracketLen.innerHTML = newValue.bracketInfo[1];
-					textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
-					gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
-				}
-			})};
+				switch (eventRep.value.eventGame[0]) {
+					case ('USW'):
+						gsap.to("#rdWrapper", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
+						bracketLen.innerHTML = ` - ${matchRep.value.bracketInfo[1]}`;
+							
+						textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
+						}});
+						break;
+					case ('MNM'):
+						if (newValue.bracketInfo[0] != oldValue.bracketInfo[0]) {
+							gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+								bracketLoc.innerHTML = newValue.bracketInfo[0];
+								textFit(document.getElementById('bracketLoc'), { maxFontSize: rdSize, alignVert: true });
+								gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+							}
+						})};
+			
+						if (newValue.bracketInfo[1] != oldValue.bracketInfo[1]) {
+							gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+								bracketLen.innerHTML = newValue.bracketInfo[1];
+								textFit(document.getElementById('bracketLen'), { maxFontSize: rdSize, alignVert: true });
+								gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+							}
+						})};
+						break;
+					case ('SSO'):
+						if (newValue.bracketInfo[0] != oldValue.bracketInfo[0]) {
+							gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+								bracketLoc.innerHTML = newValue.bracketInfo[0];
+								textFit(document.getElementById('bracketLoc'), { maxFontSize: rdSize, alignVert: true });
+								gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+							}
+						})};
+			
+						if (newValue.bracketInfo[1] != oldValue.bracketInfo[1]) {
+							gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+								bracketLen.innerHTML = newValue.bracketInfo[1];
+								textFit(document.getElementById('bracketLen'), { maxFontSize: rdSize, alignVert: true });
+								gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+							}
+						})};
+						break;
+					case ('SUPLEX'):
+						if (newValue.bracketInfo[0] != oldValue.bracketInfo[0]) {
+							gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+								bracketLoc.innerHTML = newValue.bracketInfo[0];
+								textFit(document.getElementById('bracketLoc'), { maxFontSize: rdSize, alignVert: true });
+								gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+							}
+						})};
+						break;
+					}};
 			
 			if (newValue.playerGrands[0] && newValue.playerGrands[1]) {
-				console.log(newValue.playerGrands[0]);
 				const p1G = newValue.playerGrands[0];
-				const p2G = newValue.playerGrands[1];	
+				const p2G = newValue.playerGrands[1];
+
+				const eventRep = nodecg.Replicant('misc') 
+				console.log(eventRep.value.eventGame[1])
+
+				let winners = ''
+				let losers = ''
+
+				if (eventRep.value.eventGame[1] === 'GGST' || eventRep.value.eventGame[1] === 'SF6') {
+					winners = 'W';
+					losers = 'L';
+				} else {
+					winners = 'Winners';
+					losers = 'Losers';
+				}
 
 				
 				switch (true) {
 					case (p1G === 'w' && p2G === 'l'):
 						console.log(p1G)
-						p1Grands.innerHTML = 'Winners';
-						p2Grands.innerHTML = 'Losers';
+						p1Grands.innerHTML = winners;
+						p2Grands.innerHTML = losers;
 						gsap.to("#grandsBG", { duration: scTime, opacity: 1, delay: scDelay});
 						break;
 					case (p1G === 'l' && p2G === 'w'):
 						console.log(p2G)
-						p1Grands.innerHTML = 'Losers';
-						p2Grands.innerHTML = 'Winners';
+						p1Grands.innerHTML = losers;
+						p2Grands.innerHTML = winners;
 						gsap.to("#grandsBG", { duration: scTime, opacity: 1, delay: scDelay});
 						break;
 					case (p1G === 'w' && p2G === 'w') || (p1G === 'l'&& p2G === 'l'):	
-						p1Grands.innerHTML = 'Losers';
-						p2Grands.innerHTML = 'Losers';
+						p1Grands.innerHTML = losers;
+						p2Grands.innerHTML = losers;
 						gsap.to("#grandsBG", { duration: scTime, opacity: 1, delay: scDelay});
 						break;
 					}; 
@@ -146,6 +315,7 @@ function init(){
 				gsap.to("#grandsBG", { duration: scTime, opacity: 0, delay: scDelay});
 				};
 		});
+	
 	}
 }
 

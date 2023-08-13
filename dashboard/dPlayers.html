@@ -19,6 +19,34 @@
 	<option>Grand Finals</option>
 </datalist>
 
+<datalist id="meleeCharacters">
+	<option>Mario</option>
+	<option>Bowser</option>
+	<option>cfalcon</option>
+	<option>dk</option>
+	<option>drmario</option>	
+	<option>falco</option>
+	<option>fox</option>
+	<option>ganon</option>
+	<option>gnw</option>
+	<option>ics</option>
+	<option>jigglypuff</option>
+	<option>kirby</option>
+	<option>link</option>
+	<option>marth</option>
+	<option>Mewtwo</option>
+	<option>ness</option>
+	<option>peach</option>
+	<option>pichu</option>
+	<option>pikachu</option>
+	<option>roy</option>
+	<option>samus</option>
+	<option>sheik</option>
+	<option>yoshi</option>
+	<option>younglink</option>
+	<option>zelda</option>
+</datalist>
+
 <button id="submitButton">
 	<i class="fa-solid fa-floppy-disk"> SAVE</i>
 </button>
@@ -61,6 +89,26 @@
 			<input id="player2Score" type="number" value="0" size="2" max="2"></input>
 		</td>
 	</tr>
+	</table>
+	<br>
+	<div>MELEE CHARACTERS</div>
+	<table>
+	<tr>
+		<td>
+			<input id="leftChar" type="text" placeholder="Left Character" size="14" list="meleeCharacters"></input>
+		</td>
+		<!-- <td>
+			<input id="leftColor" type="text" placeholder="Left Color" size="8"></input>
+		</td> -->
+	</tr>
+	<tr>
+		<td>
+			<input id="rightChar" type="text" placeholder="Right Character" size="14" list="meleeCharacters"></input>
+		</td>
+		<!-- <td>
+			<input id="rightColor" type="text" placeholder="Right Color" size="8"></input>
+		</td> -->
+	</tr>
 </table>
 <br>
 <table>
@@ -73,43 +121,12 @@
 			autocomplete="off"></input>
 		</td>
 		<td>
-			<select name="BoX" id="bracketLen">
-				<option value="Best of 3">Bo3</option>
-				<option value="Best of 5">Bo5</option>
-			</select>
+			<input id="bracketLen"
+			type="text"
+			placeholder="Best of..."></input>
 		</td>
 	</tr>
 </table>
-<br>
-<div>DOUBLES (INDEV)</div>
-<table>
-	<tr>
-		<td>
-			<input id="player3Team" type="text" placeholder="Partner1 Team" size="6"></input>
-		</td>
-		<td>
-			<input id="player3Tag" type="text" placeholder="Partner1 Tag"></input>
-		</td>
-		<td rowspan="2">
-			<button id="swapButton">
-				<i class="fa-solid fa-rotate"> SWAP</i>
-			</button>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input id="player4Team" type="text" placeholder="Partner2 Team" size="6"></input>
-		</td>
-		<td>
-			<input id="player4Tag" type="text" placeholder="Partner2 Tag"></input>
-		</td>
-	</tr>
-</table>
-<br>
-<div>Queue</div>
-<div>Note from Chase, add StartGG queue soon</div>
-
-	
 </body>
-<script src="js/players.js" defer></script>
+<script src="js/players.js"></script>
 </html>
