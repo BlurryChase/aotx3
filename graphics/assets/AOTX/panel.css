@@ -61,7 +61,26 @@ body {
   
     line-height: 160px;
     text-align: center;
-    font-size: 34px;
+    font-size: 120px;
+  
+    opacity: 0;
+  
+    /* background-color: aqua; */
+  }
+
+  #panelTimer {
+    padding: 0px;
+    margin: 0px;
+  
+    position: absolute;
+    width: 1310px;
+    height: 160px;
+    top: 620px;
+    left: 305px;
+  
+    line-height: 160px;
+    text-align: center;
+    font-size: 120px;
   
     opacity: 0;
   

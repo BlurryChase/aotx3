@@ -3,6 +3,8 @@ const l3rdsBottom = document.querySelector('#l3rdsBottom');
 
 const panelTop = document.querySelector('#panelTop');
 const panelBottom = document.querySelector('#panelBottom');
+const panelTimer = document.querySelector('#panelTimer');
+
 
 // Bracket Location & Best of
 
@@ -17,6 +19,8 @@ infoRep.on('change', newValue => {
 
   panelTop.value = newValue.brbPanel[0];
   panelBottom.value = newValue.brbPanel[1];
+  panelTimer.value = newValue.brbPanel[2];
+
 })
 
 // Replicant Changes
@@ -36,6 +40,8 @@ submitButton.onclick = () => {
   // fill array
   infoRep.value.brbPanel.push(panelTop.value);
   infoRep.value.brbPanel.push(panelBottom.value);
+  infoRep.value.brbPanel.push(String(panelTimer.value));
+  
 }
 
 const clearL3rdButton = document.querySelector('#clearL3rdButton');
