@@ -51,10 +51,9 @@ function init(){
 			suplexOverlay.innerHTML = '';
 			suplexHTML +=
 			`<video loop preload mute id="suplexVideo" width="1920" height="1080">
-			<source src="assets/SUPLEX/img/${thisGame}.webm" type="video/webm">
+			<source src="assets/${thisEvent}/img/${thisGame}.webm" type="video/webm">
 			</video>`;
 			suplexOverlay.innerHTML = suplexHTML;
-			gsap.to("#bracketLen", {opacity: 0});
 			var bgVid = document.getElementById("suplexVideo");
 			console.log(bgVid)
 			
@@ -122,6 +121,9 @@ function init(){
 				
 				p2Score.innerHTML = matchRep.value.playerScore[1];
 				
+				var char1 = matchRep.value.playerCharacters[0];
+				var char2 = matchRep.value.playerCharacters[1];
+
 				textFit(document.getElementsByClassName('wrappers'), { maxFontSize: nameSize, alignVert: true });
 				gsap.to("#p1Wrapper", { x: 0, startAt: { x: p1Move }, duration: nameTime, opacity: 1, delay: 0 });
 				gsap.to("#p2Wrapper", { x: 0, startAt: { x: p2Move }, duration: nameTime, opacity: 1, delay: 0 });
@@ -137,11 +139,9 @@ function init(){
 						break;
 					case ('MNM'):
 
-						var char1 = matchRep.value.playerCharacters[0];
-						var char2 = matchRep.value.playerCharacters[1];
 		
-						document.getElementById("seat1Character").setAttribute("src", "assets/MNM/img/chars/LeftSide/" + char1 + ".png");
-						document.getElementById("seat2Character").setAttribute("src", "assets/MNM/img/chars/RightSide/" + char2 + ".png");
+						document.getElementById("seat1Character").setAttribute("src", `assets/MNM/img/chars/LeftSide/${char1}.png`);
+						document.getElementById("seat2Character").setAttribute("src", `assets/MNM/img/chars/RightSide/${char2}.png`);
 
 						gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
 						gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});
@@ -166,6 +166,15 @@ function init(){
 						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
 						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
 
+						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+					case ('AOTX'):
+						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
+						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
+
+						textFit(document.getElementsByClassName('rounds'), { maxFontSize: rdSize, alignVert: true });
+
+	
 						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
 						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
 				}
@@ -228,7 +237,7 @@ function init(){
 						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
 						}});
 						break;
-					case ('MNM'):
+					default:
 						if (newValue.bracketInfo[0] != oldValue.bracketInfo[0]) {
 							gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
 								bracketLoc.innerHTML = newValue.bracketInfo[0];
@@ -242,32 +251,6 @@ function init(){
 								bracketLen.innerHTML = newValue.bracketInfo[1];
 								textFit(document.getElementById('bracketLen'), { maxFontSize: rdSize, alignVert: true });
 								gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
-							}
-						})};
-						break;
-					case ('SSO'):
-						if (newValue.bracketInfo[0] != oldValue.bracketInfo[0]) {
-							gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
-								bracketLoc.innerHTML = newValue.bracketInfo[0];
-								textFit(document.getElementById('bracketLoc'), { maxFontSize: rdSize, alignVert: true });
-								gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
-							}
-						})};
-			
-						if (newValue.bracketInfo[1] != oldValue.bracketInfo[1]) {
-							gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
-								bracketLen.innerHTML = newValue.bracketInfo[1];
-								textFit(document.getElementById('bracketLen'), { maxFontSize: rdSize, alignVert: true });
-								gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
-							}
-						})};
-						break;
-					case ('SUPLEX'):
-						if (newValue.bracketInfo[0] != oldValue.bracketInfo[0]) {
-							gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
-								bracketLoc.innerHTML = newValue.bracketInfo[0];
-								textFit(document.getElementById('bracketLoc'), { maxFontSize: rdSize, alignVert: true });
-								gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
 							}
 						})};
 						break;

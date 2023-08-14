@@ -1,0 +1,69 @@
+@font-face {
+	font-family: MainFont;
+	src: url('../fonts/Orbitron-Black.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: transparent;
+    color: white;
+    font-family:  MainFont;
+    text-transform: uppercase;
+    
+}
+
+#l3rdBG {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    background: url(img/l3rd.png) no-repeat;
+  }
+
+#l3rdsTop {
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    width: 460px;
+    height: 86px;
+    top: 900px;
+    left: 20px;
+
+    line-height: 86px;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+
+    /* background-color: aqua; */
+
+
+    opacity: 0;
+}
+
+#l3rdsBottom {
+    padding: 0px;
+    margin: 0px;
+  
+    position: absolute;
+    width: 460px;
+    height: 33px;
+    top: 989px;
+    left: 20px;
+  
+    line-height: 33px;
+    text-align: center;
+    font-size: 34px;
+  
+    opacity: 0;
+  
+    /* background-color: aqua; */
+  }

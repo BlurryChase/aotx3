@@ -11,13 +11,13 @@
       "description": "lower thirds",
       "default": ["Winners Bracket", "FX Game & Console Repair, Plano TX"]
     },
-    "eventGame": {
+    "brbPanel": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "lower thirds",
-      "default": ["USW", "SSBU"]
+      "description": "brb panel",
+      "default": ["Starting Soon!", "Coming up next: Street Fighter 6 Pools!"]
     }
   },
 
