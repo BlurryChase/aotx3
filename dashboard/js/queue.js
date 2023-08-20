@@ -75,7 +75,7 @@ async function startGGPull() {
     
     if (responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"] != null) {
       let qRound = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["fullRoundText"]) // full round name
-      let qPhase = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["phaseGroup"]["phase"]["name"]) // bracket name
+      // let qPhase = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["phaseGroup"]["phase"]["name"]) // bracket name
       
       let qP1Tag = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"]["participants"][0]["gamerTag"]) // gamertag
       let qP1Team = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"]["participants"][0]["prefix"]) // perfix
@@ -118,7 +118,7 @@ async function startGGPull() {
       <tr>
       <td>
       <input id="queueBracketPhase"
-          type="text" value="${qPhase}"></input>
+          type="text" value="${qRound}"></input>
           </td>
           <td>
           <div>To Lower Thirds Dash</div>

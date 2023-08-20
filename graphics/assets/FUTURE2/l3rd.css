@@ -1,0 +1,94 @@
+@font-face {
+  font-family: MainFont;
+  src: url('../fonts/HelveticaXBC/FreeSansBoldOblique.ttf');
+}
+
+@font-face{
+	font-family: UnderFont;
+	src: url('../fonts/HelveticaXBC/FreeSansOblique.ttf');	
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: transparent;
+  color: white;
+  font-family: MainFont;
+  text-transform: uppercase;
+
+
+  
+}
+
+#l3rdBG {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  background: url(img/l3rd.png) no-repeat;
+
+	/* margin-top: -800px; */
+
+}
+
+#l3rdsTop {
+  padding: 0px;
+  margin: 0px;
+
+  position: absolute;
+  width: 350px;
+  height: 45px;
+  top: 956px;
+  left: 15px;
+
+  line-height: 45px;
+  text-align: center;
+  font-size: 32px;
+
+	-webkit-text-stroke-color: #678fc9;
+	-webkit-text-stroke-width: 2px;
+
+  opacity: 0;
+
+	/* margin-top: -800px;
+  background-color: rebeccapurple; */
+
+
+
+
+
+}
+
+#l3rdsBottom {
+  padding: 0px;
+  margin: 0px;
+
+  position: absolute;
+  width: 200px;
+  height: 25px;
+  top: 1012px;
+  left: 242px;
+
+  font-family: UnderFont;
+
+  line-height:25px;
+  text-align: center;
+  font-size: 24px;
+
+  opacity: 0;
+
+	/* margin-top: -800px;
+  background-color: rebeccapurple; */
+
+
+
+
+}
+

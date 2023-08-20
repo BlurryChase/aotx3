@@ -13,7 +13,7 @@ function init(){
   var startup = true;
 
   // top text
-  var topTextSize = 200;
+  var topTextSize = 300;
   var topTextMove = '-128px';
   var topTextTime = 0.3;
   var topTextDelay = 0.3;

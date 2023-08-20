@@ -60,17 +60,17 @@ function init(){
 		}
 		
 		
-		nameSize = params[thisEvent]["nameSize"];
-		console.log(nameSize)
-		p1Move = params[thisEvent]["p1Move"];
-		p2Move = params[thisEvent]["p2Move"];
-		nameTime = params[thisEvent]["nameTime"];
+		nameSize = params[thisEvent]["nameSize"]; // name size
+		nameTime = params[thisEvent]["nameTime"]; // name time
+
+		p1Move = params[thisEvent]["p1Move"]; // px move for p1
+		p2Move = params[thisEvent]["p2Move"]; // px move for p2
 		
-		rdSize = params[thisEvent]["rdSize"];
-		rdTime = params[thisEvent]["rdTime"];
+		rdSize = params[thisEvent]["rdSize"]; // round size
+		rdTime = params[thisEvent]["rdTime"]; // round time
 		
-		scTime = params[thisEvent]["scTime"];
-		scDelay = params[thisEvent]["scDelay"];
+		scTime = params[thisEvent]["scTime"]; // score timer
+		scDelay = params[thisEvent]["scDelay"]; // delay for score timer
 		
 		bgVid.play()
 		
@@ -108,8 +108,7 @@ function init(){
 
 		if (startup == true) {
 
-			
-			
+			// Load match replicant
 			NodeCG.waitForReplicants(matchRep).then(() => {
 				p1Tag.innerHTML = matchRep.value.player1Info[0];
         p1Team.innerHTML = matchRep.value.player1Info[1];
@@ -137,62 +136,37 @@ function init(){
 						textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
 						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
 						break;
-					case ('MNM'):
-
-		
+					case ('MNM'):		
 						document.getElementById("seat1Character").setAttribute("src", `assets/MNM/img/chars/LeftSide/${char1}.png`);
 						document.getElementById("seat2Character").setAttribute("src", `assets/MNM/img/chars/RightSide/${char2}.png`);
 
 						gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
 						gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});
-
+					default:
 						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
 						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
-
-						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
-						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
-
-						break;
-					case ('SUPLEX'):
-						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
-						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
-
-						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
-						gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0 });
-
-
-						break;
-					case ('SSO'):
-						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
-						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
-
-						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
-						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
-					case ('AOTX'):
-						bracketLoc.innerHTML = matchRep.value.bracketInfo[0];
-						bracketLen.innerHTML = matchRep.value.bracketInfo[1];
-
+						
 						textFit(document.getElementsByClassName('rounds'), { maxFontSize: rdSize, alignVert: true });
-
-	
+						textFit(document.getElementsByClassName('formats'), { maxFontSize: rdSize, alignVert: true });
+						
 						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
 						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+						
+						break;
+					}	
+								
+					startup = false;
+								
+					});
+							
 				}
+						
+						
+			matchRep.on('change', (newValue, oldValue) => {
 
-				startup = false;
-				
-				
-      });
-			
-		}
-			
-			
-			
-			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			
-		matchRep.on('change', (newValue, oldValue) => {
+			// Player 1
 
-			
+			// team + name
 
 			if (newValue.player1Info[0] != oldValue.player1Info[0] || newValue.player1Info[1] != oldValue.player1Info[1]) {
 				gsap.to("#p1Wrapper", {x:p1Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
@@ -203,12 +177,28 @@ function init(){
 				}});
 			};
 
+			// score
+
 			if (newValue.playerScore[0] != oldValue.playerScore[0]) {
 				gsap.to("#p1Score", {duration: scTime, opacity: 0, delay: 0, onComplete: function () {
 					p1Score.innerHTML = newValue.playerScore[0];
 					gsap.to("#p1Score", { duration: scTime, opacity: 1, delay: 0 });
 				}
 			})};
+
+			// MELEE ONLY - player 1 Character
+
+			if (newValue.playerCharacters[0] != oldValue.playerCharacters[0]) {
+				gsap.to("#seat1Character", {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
+					char1 = newValue.playerCharacters[0];
+					document.getElementById("seat1Character").setAttribute("src", `assets/MNM/img/chars/LeftSide/${char1}.png`);
+					gsap.to("#seat1Character", {duration: nameTime, opacity:1});
+				}
+			})};
+
+			// Player 2
+
+			// Team + Name
 
 			if (newValue.player2Info[0] != oldValue.player2Info[0] || newValue.player2Info[1] != oldValue.player2Info[1]) {
 				gsap.to("#p2Wrapper", {x:p2Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
@@ -218,6 +208,8 @@ function init(){
 					gsap.to("#p2Wrapper", {x:0, startAt:{x:p2Move}, duration:nameTime, opacity:1, delay:0});
 				}});
 			};
+
+			// Score
 			
 			if (newValue.playerScore[1] != oldValue.playerScore[1]) {
 				gsap.to("#p2Score", {duration: scTime, opacity: 0, delay: 0, onComplete: function () {
@@ -225,6 +217,18 @@ function init(){
 					gsap.to("#p2Score", { duration: scTime, opacity: 1, delay: 0 });
 				}
 			})};
+
+			// MELEE ONLY - player 2 Character
+
+			if (newValue.playerCharacters[1] != oldValue.playerCharacters[1]) {
+				gsap.to("#seat2Character", {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
+					char2 = newValue.playerCharacters[1];
+					document.getElementById("seat2Character").setAttribute("src", `assets/MNM/img/chars/RightSide/${char2}.png`);
+					gsap.to("#seat2Character", {duration: nameTime, opacity:1});
+				}
+			})};			
+
+			// Bracket Info
 			
 			if (newValue.bracketInfo[0] != oldValue.bracketInfo[0] || newValue.bracketInfo[1] != oldValue.bracketInfo[1]) {
 				switch (eventRep.value.eventGame[0]) {
@@ -255,12 +259,13 @@ function init(){
 						})};
 						break;
 					}};
+
+			// Grands Indicators
 			
 			if (newValue.playerGrands[0] && newValue.playerGrands[1]) {
 				const p1G = newValue.playerGrands[0];
 				const p2G = newValue.playerGrands[1];
-
-				const eventRep = nodecg.Replicant('misc') 
+				
 				console.log(eventRep.value.eventGame[1])
 
 				let winners = ''
