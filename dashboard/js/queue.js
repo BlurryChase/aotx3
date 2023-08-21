@@ -112,25 +112,25 @@ async function startGGPull() {
       type="text" value="${qRound}"></input>
       </td>
       <td>
-      <div>To Players Dash</div>
+      <div>To Score</div>
       </td>
       </tr>
       <tr>
       <td>
       <input id="queueBracketPhase"
-          type="text" value="${qRound}"></input>
-          </td>
-          <td>
-          <div>To Lower Thirds Dash</div>
-          </td>
-          </tr>
-          <tr>
-          <td id="btn${i}">
-          <button id="pushButton" onclick="testFunc(${i})">PUSH</button>
-          </td>
-          </tr>
-          </table>
-          <br>`
+      type="text" value="${qRound}"></input>
+      </td>
+      <td>
+      <div>To Lower Thirds</div>
+      </td>
+      </tr>
+      <tr>
+      <td id="btn${i}">
+      <button id="pushButton" onclick="testFunc(${i})">PUSH TO STREAM</button>
+      </td>
+      </tr>
+      </table>
+      <br>`
           
           
           
@@ -146,7 +146,6 @@ async function startGGPull() {
         // const matchRep = nodecg.Replicant('match');
         // var l3rdsRep = nodecg.Replicant('misc');
         
-        console.log(i)
         matchRep.value.player1Info = [];
         // fill array
         matchRep.value.player1Info.push(document.querySelectorAll("#queueP1Tag")[i].value);
@@ -165,7 +164,6 @@ async function startGGPull() {
         matchRep.value.bracketInfo = [];
         // fill array
         matchRep.value.bracketInfo.push(document.querySelectorAll("#queueBracketLoc")[i].value);
-        matchRep.value.bracketInfo.push("Best of 3");
 
         // l3rds
         l3rdsRep.value.l3rdInfo = [];
