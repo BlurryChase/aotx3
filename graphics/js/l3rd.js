@@ -13,13 +13,13 @@ function init(){
   var startup = true;
 
   // top text
-  var topTextSize = 40;
+  var topTextSize = 1;
   var topTextMove = '-128px';
   var topTextTime = 0.3;
   var topTextDelay = 0.3;
 
   // bottom text
-  var botTextSize = 20;
+  var botTextSize = 1;
   var botTextMove = '93px';
   var botTextTime = 0.3;
   var botTextDelay = 0.3;
