@@ -106,12 +106,15 @@ swapButton.onclick = () => {
   p1Array.push(p1Team.value);
   p1Array.push(p1Grands.value);
   p1Array.push(Number(p1Score.value));
+  p1Array.push(leftChar.value)
 
   // fill array
   p2Array.push(p2Tag.value);
   p2Array.push(p2Team.value);
   p2Array.push(p2Grands.value);
   p2Array.push(Number(p2Score.value));
+  p2Array.push(rightChar.value)
+
 
   // swap arrays
   var tmpArray = p1Array;
@@ -123,12 +126,15 @@ swapButton.onclick = () => {
   document.getElementById('player1Team').value = p1Array[1];
   document.getElementById('player1Grands').value = p1Array[2];
   document.getElementById('player1Score').value = p1Array[3];
+  document.getElementById('leftChar').value = p1Array[4];
   
   // Player 2   
   document.getElementById('player2Tag').value = p2Array[0];
   document.getElementById('player2Team').value = p2Array[1];
   document.getElementById('player2Grands').value = p2Array[2];
   document.getElementById('player2Score').value = p2Array[3];
+  document.getElementById('rightChar').value = p2Array[4];
+
 
 }
 
