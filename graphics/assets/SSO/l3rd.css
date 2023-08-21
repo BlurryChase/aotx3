@@ -45,3 +45,22 @@ body {
 
     opacity: 0;
 }
+
+#l3rdsBottom {
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    width: 400px;
+    height: 42px;
+    top: -100px;
+    left: 0px;
+
+    line-height: 42px;
+    text-align: center;
+    font-size: 28px;
+    font-family:  ItalicMainFont;
+    text-transform: uppercase;
+
+    opacity: 0;
+}
