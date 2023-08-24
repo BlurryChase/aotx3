@@ -19,7 +19,7 @@ function init(){
   var topTextDelay = 0.4;
 
   // Timer text
-  var botTextSize = 120;
+  var botTextSize = 90;
   var botTextMove = '-93px';
   var botTextTime = 0.3;
   var botTextDelay = 0.5;
@@ -66,41 +66,50 @@ function init(){
   setTimeout(casterl3rd,100);
   
   function getData(){
+
+    let timerReject = false;
+
     
     function timerBomb(timerInput) {
+      var statTimer = timerInput
       var timer = timerInput;
-      if (timer != timerInput) {
-        console.log("Time Changed!")
-        return;
-      }
-      console
-      console.log(timer)
       let future = moment().add(timer, 'm').toDate();
-      console.log(future);
+      console.log(statTimer)
+      startTimer()
       
-      var countDownTimer = setInterval(() => {
-        let now = moment();
-        console.log(now)
-        
-        let distance = future - now;
-        console.log(distance)
-        
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        console.log(seconds) 
-  
-        var fSeconds = (seconds < 10) ? "0"+seconds : seconds;
-        console.log(fSeconds) 
-  
-        
-        panelTimer.innerHTML = `${minutes}:${fSeconds}`;
-        
-        if (distance < 0) {
-          panelTimer.innerHTML = "0:00";
-          gsap.to("#panelTimer", {x:botTextMove, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, });
-          clearInterval(countDownTimer); 
-        }
-      }, 500);
+      function startTimer() {
+        var countDownTimer = setInterval(() => {
+          if (timerReject == true) {
+            console.log('timer changed')
+            clearInterval(startTimer)
+            timerReject = false;
+            timerBomb(statTimer)
+            return;
+          }
+          let now = moment();
+          
+          
+          
+          let distance = future - now;
+          
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+          var fSeconds = (seconds < 10) ? "0"+seconds : seconds;
+          
+          
+          panelTimer.innerHTML = `${minutes}:${fSeconds}`;
+          
+          if (distance < 0) {
+            panelTimer.innerHTML = "0:00";
+            gsap.to("#panelTimer", {x:0, duration:botTextTime, opacity:0, delay:0 })
+            clearInterval(countDownTimer);
+            
+          }
+        }, 500);
+
+      }
+      
   
     }
     
@@ -117,17 +126,9 @@ function init(){
         panelTop.innerHTML = panelRep.value.brbPanel[0];
         var timerInput = panelRep.value.brbPanel[2];
         panelTimer.innerHTML = timerInput + ":00";
-        
-        
         timerBomb(timerInput)
         textFit(document.getElementById('panelTimer'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
         gsap.to("#panelTimer", { x: 0, startAt: { x: botTextMove }, duration: botTextTime, opacity: 1, delay: botTextDelay });
-
-
-
-
-        
-        
         
         
         textFit(document.getElementById('panelTop'), { maxFontSize: topTextSize, alignVert: true });
@@ -150,9 +151,14 @@ function init(){
       
       if (newValue.brbPanel[2] != oldValue.brbPanel[2] || newValue.brbPanel[2] == oldValue.brbPanel[2]) {
         gsap.to("#panelTimer", {x:botTextMove, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, onComplete:function(){
+          timerReject = true; 
+          console.log('test')
+
+          
+
+
           var timerInput = newValue.brbPanel[2];
           panelTimer.innerHTML = timerInput + ":00";
-          console.log("Updated timer to: " + timerInput)
           timerBomb(timerInput)
           textFit(document.getElementById('panelTimer'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
           gsap.to("#panelTimer", {x:0, startAt:{x:botTextMove}, duration:botTextTime, opacity:1, delay:0});

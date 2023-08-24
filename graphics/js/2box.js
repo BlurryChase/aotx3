@@ -78,7 +78,7 @@ function init(){
       NodeCG.waitForReplicants(boxRep).then(() => {
         bracketLoc.innerHTML = boxRep.value.l3rdInfo[0];
 
-        textFit(document.getElementById('bracketLoc'), { maxFontSize: boxTextSize, alignVert: true });
+        textFit(document.getElementById('bracketLoc'), { maxFontSize: boxTextSize, alignVert: true, detectMultiLine: false});
         
         
         gsap.to("#bracketLoc", { x: 0, startAt: { x: boxTextMove }, duration: boxTextTime, opacity: 1, delay: boxTextDelay });
@@ -92,7 +92,7 @@ function init(){
       if (newValue.l3rdInfo[0] != oldValue.l3rdInfo[0]) {
         gsap.to("#bracketLoc", {x:boxTextMove, startAt:{x:0}, duration:boxTextTime, opacity:0, delay:0, onComplete:function(){
           bracketLoc.innerHTML = newValue.l3rdInfo[0];
-          textFit(document.getElementById('bracketLoc'), {maxFontSize:boxTextSize, alignVert:true});
+          textFit(document.getElementById('bracketLoc'), {maxFontSize:boxTextSize, alignVert:true, detectMultiLine: false});
           gsap.to("#bracketLoc", {x:0, startAt:{x:boxTextMove}, duration:boxTextTime, opacity:1, delay:0});
         }});
       };

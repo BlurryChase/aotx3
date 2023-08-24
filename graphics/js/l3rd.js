@@ -92,7 +92,7 @@ function init(){
         l3rdsTop.innerHTML = l3rdsRep.value.l3rdInfo[0];
         l3rdsBottom.innerHTML = l3rdsRep.value.l3rdInfo[1];
 
-        textFit(document.getElementById('l3rdsTop'), { maxFontSize: topTextSize, alignVert: true });
+        textFit(document.getElementById('l3rdsTop'), { maxFontSize: topTextSize, alignVert: true, detectMultiLine: false});
         textFit(document.getElementById('l3rdsBottom'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
         
         
@@ -107,7 +107,7 @@ function init(){
       if (newValue.l3rdInfo[0] != oldValue.l3rdInfo[0]) {
         gsap.to("#l3rdsTop", {x:topTextMove, startAt:{x:0}, duration:topTextTime, opacity:0, delay:0, onComplete:function(){
           l3rdsTop.innerHTML = newValue.l3rdInfo[0];
-          textFit(document.getElementById('l3rdsTop'), {maxFontSize:topTextSize, alignVert:true});
+          textFit(document.getElementById('l3rdsTop'), {maxFontSize:topTextSize, alignVert:true, detectMultiLine: false});
           gsap.to("#l3rdsTop", {x:0, startAt:{x:topTextMove}, duration:topTextTime, opacity:1, delay:0});
         }});
       };

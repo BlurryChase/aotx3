@@ -50,7 +50,7 @@ function init(){
 		if (thisGame === 'SF6' || thisGame === 'GGST' ) {
 			suplexOverlay.innerHTML = '';
 			suplexHTML +=
-			`<video loop preload mute id="suplexVideo" width="1920" height="1080">
+			`<video loop preload mute id="suplexVideo">
 			<source src="assets/${thisEvent}/img/${thisGame}.webm" type="video/webm">
 			</video>`;
 			suplexOverlay.innerHTML = suplexHTML;
@@ -186,15 +186,30 @@ function init(){
 				}
 			})};
 
-			// MELEE ONLY - player 1 Character
+			
+			if (eventRep.value.eventGame[1] == 'SSBM') {
+				
+				// MELEE ONLY - player 1 Character
+				
+				if (newValue.playerCharacters[0] != oldValue.playerCharacters[0]) {
+					gsap.to("#seat1Character", {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
+						char1 = newValue.playerCharacters[0];
+						document.getElementById("seat1Character").setAttribute("src", `assets/MNM/img/chars/LeftSide/${char1}.png`);
+						gsap.to("#seat1Character", {duration: nameTime, opacity:1});
+					}
+				})};
 
-			if (newValue.playerCharacters[0] != oldValue.playerCharacters[0]) {
-				gsap.to("#seat1Character", {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
-					char1 = newValue.playerCharacters[0];
-					document.getElementById("seat1Character").setAttribute("src", `assets/MNM/img/chars/LeftSide/${char1}.png`);
-					gsap.to("#seat1Character", {duration: nameTime, opacity:1});
-				}
-			})};
+				// MELEE ONLY - player 2 Character
+	
+				if (newValue.playerCharacters[1] != oldValue.playerCharacters[1]) {
+					gsap.to("#seat2Character", {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
+						char2 = newValue.playerCharacters[1];
+						document.getElementById("seat2Character").setAttribute("src", `assets/MNM/img/chars/RightSide/${char2}.png`);
+						gsap.to("#seat2Character", {duration: nameTime, opacity:1});
+					}
+				})};			
+
+			}
 
 			// Player 2
 
@@ -218,15 +233,6 @@ function init(){
 				}
 			})};
 
-			// MELEE ONLY - player 2 Character
-
-			if (newValue.playerCharacters[1] != oldValue.playerCharacters[1]) {
-				gsap.to("#seat2Character", {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
-					char2 = newValue.playerCharacters[1];
-					document.getElementById("seat2Character").setAttribute("src", `assets/MNM/img/chars/RightSide/${char2}.png`);
-					gsap.to("#seat2Character", {duration: nameTime, opacity:1});
-				}
-			})};			
 
 			// Bracket Info
 			
@@ -263,10 +269,13 @@ function init(){
 			// Grands Indicators
 			
 			if (newValue.playerGrands[0] && newValue.playerGrands[1]) {
-				const p1G = newValue.playerGrands[0];
-				const p2G = newValue.playerGrands[1];
+				let p1G = newValue.playerGrands[0];
+				let p2G = newValue.playerGrands[1];
 				
 				console.log(eventRep.value.eventGame[1])
+
+				p1G = p1G.toLowerCase();
+				p2G = p2G.toLowerCase();
 
 				let winners = ''
 				let losers = ''
@@ -281,7 +290,7 @@ function init(){
 
 				
 				switch (true) {
-					case (p1G === 'w' && p2G === 'l'):
+					case (p1G.toLowerCase() === 'w' && p2G.toLowerCase() === 'l'):
 						console.log(p1G)
 						p1Grands.innerHTML = winners;
 						p2Grands.innerHTML = losers;

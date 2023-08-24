@@ -79,55 +79,70 @@ async function startGGPull() {
       
       let qP1Tag = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"]["participants"][0]["gamerTag"]) // gamertag
       let qP1Team = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"]["participants"][0]["prefix"]) // perfix
+      if (qP1Team == 'null') {
+        qP1Team = '';
+      }
       
       let qP2Tag = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][1]["entrant"]["participants"][0]["gamerTag"]) // gamertag
       let qP2Team = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][1]["entrant"]["participants"][0]["prefix"]) // perfix
+      if (qP2Team == 'null') {
+        qP2Team = '';
+      }
+
       
       html +=
       `<table id="${i}">
       <tr>
-      <td>
-      <div>Result ${i+1}</div>
-      </td>
+        <td>
+          <div>Result ${i+1}</div>
+        </td>
       </tr>
       <tr>
-      <td>
-        <input id="queueP1Tag" type="text" value="${qP1Tag}"></input>
-      </td>
-      <td>
-        <input id="queueP1Team" type="text" size="6" value="${qP1Team}"></input>
-      </td>
+        <td>
+          <div>Players</div>
+        </td>
       </tr>
       <tr>
-      <td>
-      <input id="queueP2Tag" type="text" value="${qP2Tag}"></input>
-      </td>
-      <td>
-      <input id="queueP2Team" type="text" size="6" value="${qP2Team}"></input>
-      </td>
+        <td>
+          <input id="queueP1Tag" type="text" value="${qP1Tag}"></input>
+        </td>
+        <td>
+          <input id="queueP1Team" type="text" size="8" value="${qP1Team}"></input>
+        </td>
       </tr>
       <tr>
-      <td>
-      <input id="queueBracketLoc"
-      type="text" value="${qRound}"></input>
-      </td>
-      <td>
-      <div>To Score</div>
-      </td>
+        <td>
+          <input id="queueP2Tag" type="text" value="${qP2Tag}"></input>
+        </td>
+        <td>
+          <input id="queueP2Team" type="text" size="8" value="${qP2Team}"></input>
+        </td>
       </tr>
       <tr>
-      <td>
-      <input id="queueBracketPhase"
-      type="text" value="${qRound}"></input>
-      </td>
-      <td>
-      <div>To Lower Thirds</div>
-      </td>
+        <td>
+          <input id="queueBracketLoc"
+          type="text" value="${qRound}"></input>
+        </td>
+        <td>
+          <input id="queueBracketLen"
+          type="text" size="8" value="Best of "></input>
+        </td>
       </tr>
       <tr>
-      <td id="btn${i}">
-      <button id="pushButton" onclick="testFunc(${i})">PUSH TO STREAM</button>
-      </td>
+        <td>
+          <div>Lower Thirds</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input id="queueBracketPhase"
+          type="text" value="${qRound}"></input>
+        </td>
+      </tr>
+      <tr>
+        <td id="btn${i}">
+          <button id="pushButton" onclick="testFunc(${i})">PUSH TO STREAM</button>
+        </td>
       </tr>
       </table>
       <br>`
@@ -164,6 +179,8 @@ async function startGGPull() {
         matchRep.value.bracketInfo = [];
         // fill array
         matchRep.value.bracketInfo.push(document.querySelectorAll("#queueBracketLoc")[i].value);
+        matchRep.value.bracketInfo.push(document.querySelectorAll("#queueBracketLen")[i].value);
+
 
         // l3rds
         l3rdsRep.value.l3rdInfo = [];
