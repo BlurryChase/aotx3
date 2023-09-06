@@ -111,12 +111,30 @@ function init(){
 			// Load match replicant
 			NodeCG.waitForReplicants(matchRep).then(() => {
 				p1Tag.innerHTML = matchRep.value.player1Info[0];
-        p1Team.innerHTML = matchRep.value.player1Info[1];
+
+				if (eventRep.value.eventGame[0] == 'SUPLEX') {
+					if (matchRep.value.player1Info[1] === "") {
+						p1Team.innerHTML = matchRep.value.player1Info[1];
+					} else {
+						p1Team.innerHTML = matchRep.value.player1Info[1] + ' |';
+					}
+				} else {
+					p1Team.innerHTML = matchRep.value.player1Info[1];
+				}
 				
 				p1Score.innerHTML = matchRep.value.playerScore[0];
 				
         p2Tag.innerHTML = matchRep.value.player2Info[0];
-        p2Team.innerHTML = matchRep.value.player2Info[1];
+
+				if (eventRep.value.eventGame[0] == 'SUPLEX') {
+					if (matchRep.value.player2Info[1] === "") {
+						p2Team.innerHTML = matchRep.value.player2Info[1];
+					} else {
+						p2Team.innerHTML = matchRep.value.player2Info[1] + ' |';
+					}
+				} else {
+					p2Team.innerHTML = matchRep.value.player2Info[1];
+				}
 				
 				p2Score.innerHTML = matchRep.value.playerScore[1];
 				
@@ -152,7 +170,6 @@ function init(){
 						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
 						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
 						
-						break;
 					}	
 								
 					startup = false;
@@ -170,8 +187,18 @@ function init(){
 
 			if (newValue.player1Info[0] != oldValue.player1Info[0] || newValue.player1Info[1] != oldValue.player1Info[1]) {
 				gsap.to("#p1Wrapper", {x:p1Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
+
+					if (eventRep.value.eventGame[0] == 'SUPLEX') {
+						if (newValue.player1Info[1] === "") {
+							p1Team.innerHTML = newValue.player1Info[1];
+						} else {
+							p1Team.innerHTML = newValue.player1Info[1] + ' |';
+						}
+					} else {
+						p1Team.innerHTML = newValue.player1Info[1];
+					}
+
 					p1Tag.innerHTML = newValue.player1Info[0];
-					p1Team.innerHTML = newValue.player1Info[1];
 					textFit(document.getElementsByClassName('wrappers')[0], {maxFontSize:nameSize, alignVert:true});
 					gsap.to("#p1Wrapper", {x:0, startAt:{x:p1Move}, duration:nameTime, opacity:1, delay:0});
 				}});
@@ -217,8 +244,18 @@ function init(){
 
 			if (newValue.player2Info[0] != oldValue.player2Info[0] || newValue.player2Info[1] != oldValue.player2Info[1]) {
 				gsap.to("#p2Wrapper", {x:p2Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
+
+					if (eventRep.value.eventGame[0] == 'SUPLEX') {
+						if (newValue.player2Info[1] === "") {
+							p2Team.innerHTML = newValue.player2Info[1];
+						} else {
+							p2Team.innerHTML = newValue.player2Info[1] + ' |';
+						}
+					} else {
+						p2Team.innerHTML = newValue.player2Info[1];
+					}
+
 					p2Tag.innerHTML = newValue.player2Info[0];
-					p2Team.innerHTML = newValue.player2Info[1];
 					textFit(document.getElementsByClassName('wrappers')[1], {maxFontSize:nameSize, alignVert:true});
 					gsap.to("#p2Wrapper", {x:0, startAt:{x:p2Move}, duration:nameTime, opacity:1, delay:0});
 				}});

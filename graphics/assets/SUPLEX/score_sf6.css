@@ -53,20 +53,6 @@ body {
 	left: 1355px;
 }
 
-
-.teams{
-	/* opacity: 0.8; */
-	color: #000000;
-}
-
-/* #p1Team {
-	color: #eb2532;
-}
-
-#p2Team {
-	color: #0078dd;
-} */
-
 .scores {
 	position: absolute;
 	width: 32px;
@@ -89,12 +75,29 @@ body {
 	left: 1295px;
 }
 
-#bracketLoc {
+.rounds {
 	position: absolute;
 	width: 160px;
 	height: 46px;
 	left: 877px;
 	top: 130px;
+
+	color: white;
+	/* background-color: gray; */
+
+	line-height: 46px;
+	text-align: center;
+	font-size: 15px;
+
+	opacity: 0;
+}
+
+.formats {
+	position: absolute;
+	width: 160px;
+	height: 46px;
+	left: 877px;
+	top: -130px;
 
 	color: white;
 	/* background-color: gray; */

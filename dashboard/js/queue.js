@@ -21,33 +21,33 @@ NodeCG.waitForReplicants(l3rdsRep).then(() => {
   console.log('other reps loaded');
 })
 
-var query = `query QueueByStream($tourneySlug: String!) {
-  tournament(slug: $tourneySlug) {
-    streamQueue {
-      stream {
-        streamName
-      }
-      sets {
-				fullRoundText
-        phaseGroup {
-          phase {
-            name
-          }
+
+async function startGGPull() {
+  var query = `query QueueByStream($tourneySlug: String!) {
+    tournament(slug: $tourneySlug) {
+      streamQueue {
+        stream {
+          streamName
         }
-        slots {
-          entrant {
-            participants {
-              gamerTag
-              prefix
+        sets {
+          fullRoundText
+          phaseGroup {
+            phase {
+              name
+            }
+          }
+          slots {
+            entrant {
+              participants {
+                gamerTag
+                prefix
+              }
             }
           }
         }
       }
     }
-  }
-},`
-
-async function startGGPull() {
+  },`
   html = ''
   const response = await fetch(endpoint, {
     method: 'POST',

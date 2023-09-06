@@ -63,9 +63,11 @@ submitButton.onclick = () => {
   // A Replicant can be modified by modifying its `value`.
   // player 1 info
   matchRep.value.player1Info = [];
+
   // fill array
   matchRep.value.player1Info.push(p1Tag.value);
   matchRep.value.player1Info.push(p1Team.value);
+  console.log(matchRep.value.player1Info);
   // player 2 info
   matchRep.value.player2Info = [];
   // fill array

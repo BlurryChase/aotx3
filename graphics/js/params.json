@@ -33,7 +33,14 @@
     "twitter1Move" : "-87px",
     "twitter2Move" : "87px",
     "twitterTime" : 0.3,
-    "twitterDelay" : 0.1
+    "twitterDelay" : 0.1,
+
+    "sponsors": [
+      "BBC",
+      "FX",
+      "tloc",
+      "SPIF"
+    ]
   },
   "MNM": {
     "nameSize" : 60,
@@ -69,7 +76,14 @@
     "twitter1Move" : "-87px",
     "twitter2Move" : "87px",
     "twitterTime" : 0.3,
-    "twitterDelay" : 0.1
+    "twitterDelay" : 0.1,
+
+    "sponsors": [
+      "BBC",
+      "FX",
+      "tloc",
+      "SPIF"
+    ]
   },
   "SUPLEX" :{
     "nameSize" : 40,
@@ -105,7 +119,13 @@
     "twitter1Move" : "-87px",
     "twitter2Move" : "87px",
     "twitterTime" : 0.3,
-    "twitterDelay" : 0.1
+    "twitterDelay" : 0.1,
+
+    "sponsors": [
+      "FX",
+      "tlocsuplex",
+      "SPIF"
+    ]
   },
   "SSO": {
     "nameSize" : 30,

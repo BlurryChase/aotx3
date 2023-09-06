@@ -90,12 +90,10 @@ body {
     height: 86px;
     top: 10px;
     left: 360px;
-
-	  text-transform: capitalize;
     
     line-height: 86px;
     text-align: center;
-    font-size: 90px;
+    font-size: 80px;
     
     letter-spacing: -0.2rem;
     text-shadow: 0px 0px 18px white;

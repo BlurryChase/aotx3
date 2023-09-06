@@ -2,13 +2,13 @@ window.onload = init;
 
 var params = {}
 fetch("js/params.json")
-	.then((res) => res.json())
-	.then((data) => {
-		params = data;
-	})
+.then((res) => res.json())
+.then((data) => {
+  params = data;
+})
+
 
 function init(){
-
   // general init variables
   var startup = true;
 
@@ -41,8 +41,25 @@ function init(){
     boxTextMove = '-128px';
     boxTextTime = 0.3;
     boxTextDelay = 0.3;
-		
+
+    let suplex2box = document.querySelector("#suplexBG")
+		let suplexHTML = ''
+    suplex2box.innerHTML = '';
+    suplexHTML +=
+    `<video loop preload mute id="suplexVideo">
+    <source src="assets/${thisEvent}/img/bg.webm" type="video/webm">
+    </video>`;
+    suplex2box.innerHTML = suplexHTML;
+    var bgVid = document.getElementById("suplexVideo");
+
+		bgVid.play()
+
 	})
+
+
+  
+  
+
 	
 	
 	eventRep.on('change', (newValue, oldValue) => { 
@@ -98,5 +115,25 @@ function init(){
       };
     
     });
+
+    // load the images for 2 box
+
+    var images = params[eventRep.value.eventGame[0]]["sponsors"];
+
+    function loadImages(imgArr){
+      for(var i=0; i< imgArr.length; i++) {
+          console.log(imgArr[i]);
+          var newDiv = document.createElement("div");
+          var img = new Image();
+              img.src = `assets/sponsors/${imgArr[i]}.png`;
+          newDiv.appendChild(img)
+          document.getElementById('sponsorBox').appendChild(newDiv);
+        }
+      }
+  
+    loadImages(images)
+
+
+
   }
 }

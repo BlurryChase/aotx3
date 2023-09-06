@@ -28,6 +28,7 @@ body {
   bottom: 0px;
   top: 0px;
   background: url(img/2box_empty.png) no-repeat;
+  z-index: 0;
 	/* margin-top: -800px; */
 
 }
@@ -39,7 +40,7 @@ body {
   position: absolute;
   width: 700px;
   height: 86px;
-  top: 10px;
+  top: -400px;
   left: 360px;
 
   letter-spacing: -0.2rem;
@@ -49,13 +50,36 @@ body {
   text-align: center;
   font-size: 32px;
 
-	-webkit-text-stroke-color: #678fc9;
-	-webkit-text-stroke-width: 2px;
-
   opacity: 0;
 
 	/* margin-top: -800px; */
   /* background-color: rebeccapurple; */
 
+}
+
+#sponsorBox {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  width: 1840px;
+  height: 250px;
+  padding: 40px;
+  margin-top: -155px;
+
+}
+
+#sponsorBox > div {
+  z-index: 1;
+  width: 15%;
+  height: 70%;
+  margin: 10px;
+}
+
+#sponsorBox > div > img {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 

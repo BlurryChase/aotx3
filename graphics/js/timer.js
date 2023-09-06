@@ -67,51 +67,31 @@ function init(){
   
   function getData(){
 
-    let timerReject = false;
+    var timer;
+    function timerBomb(duration) {
+      timer = duration;
+      var minutes, seconds;
 
-    
-    function timerBomb(timerInput) {
-      var statTimer = timerInput
-      var timer = timerInput;
-      let future = moment().add(timer, 'm').toDate();
-      console.log(statTimer)
-      startTimer()
-      
-      function startTimer() {
-        var countDownTimer = setInterval(() => {
-          if (timerReject == true) {
-            console.log('timer changed')
-            clearInterval(startTimer)
-            timerReject = false;
-            timerBomb(statTimer)
-            return;
-          }
-          let now = moment();
-          
-          
-          
-          let distance = future - now;
-          
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          
-          var fSeconds = (seconds < 10) ? "0"+seconds : seconds;
-          
-          
-          panelTimer.innerHTML = `${minutes}:${fSeconds}`;
-          
-          if (distance < 0) {
-            panelTimer.innerHTML = "0:00";
+      setInterval(function () {
+          minutes = parseInt(timer / 60, 10)
+          seconds = parseInt(timer % 60, 10);
+
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+
+          panelTimer.innerHTML = minutes + ":" + seconds;
+
+          if (--timer < 0) {
             gsap.to("#panelTimer", {x:0, duration:botTextTime, opacity:0, delay:0 })
-            clearInterval(countDownTimer);
-            
           }
-        }, 500);
-
+        }, 1000);
       }
+
+    function resetTimer(newVal) {
+      timer = newVal;
+    }
       
   
-    }
     
     const panelRep = nodecg.Replicant('misc');
     
@@ -124,10 +104,10 @@ function init(){
       NodeCG.waitForReplicants(panelRep).then(() => {
         
         panelTop.innerHTML = panelRep.value.brbPanel[0];
-        var timerInput = panelRep.value.brbPanel[2];
-        panelTimer.innerHTML = timerInput + ":00";
+        
+        var timerInput = panelRep.value.brbPanel[2] * 60;
+        panelTimer.innerHTML = panelRep.value.brbPanel[2] + ":00";
         timerBomb(timerInput)
-        textFit(document.getElementById('panelTimer'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
         gsap.to("#panelTimer", { x: 0, startAt: { x: botTextMove }, duration: botTextTime, opacity: 1, delay: botTextDelay });
         
         
@@ -151,16 +131,12 @@ function init(){
       
       if (newValue.brbPanel[2] != oldValue.brbPanel[2] || newValue.brbPanel[2] == oldValue.brbPanel[2]) {
         gsap.to("#panelTimer", {x:botTextMove, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, onComplete:function(){
-          timerReject = true; 
-          console.log('test')
-
           
 
 
-          var timerInput = newValue.brbPanel[2];
-          panelTimer.innerHTML = timerInput + ":00";
-          timerBomb(timerInput)
-          textFit(document.getElementById('panelTimer'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
+          var timerInput = newValue.brbPanel[2] * 60;
+          panelTimer.innerHTML = newValue.brbPanel[2] + ":00";
+          resetTimer(timerInput)
           gsap.to("#panelTimer", {x:0, startAt:{x:botTextMove}, duration:botTextTime, opacity:1, delay:0});
         }});
       }});
