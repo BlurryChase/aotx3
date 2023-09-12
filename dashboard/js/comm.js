@@ -1,4 +1,3 @@
-// COMMENTARY
 
 // Commentary 1 const
 const c1Team = document.querySelector('#c1Team');
@@ -11,6 +10,40 @@ const c2Tag = document.querySelector('#c2Tag');
 const c2Twitter = document.querySelector('#c2Twitter');
 
 
+var datalistTags = document.querySelector('#csvPlayerTags');
+var datalistTeams = document.querySelector('#csvPlayerTeams');
+var datalistTwitters = document.querySelector('#csvPlayerTwitters');
+
+var tagList = '';
+var teamList = '';
+var twitterList = '';
+
+
+var data;
+
+Papa.parse('csv/filtered.csv', {
+  download: true,
+  header: true,
+  dynamicTyping: true,
+  skipEmptyLines: true,
+  complete: function(results) {
+    data = results.data;
+    console.log(data.length);
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      tagList += `<option>${data[i]["GamerTag"]}</option>`;
+      teamList += `<option>${data[i]["Sponsor"]}</option>`;
+      twitterList += `<option>${data[i]["Twitter"]}</option>`;
+
+
+    }
+    datalistTags.innerHTML = tagList;
+    datalistTeams.innerHTML = teamList;
+    datalistTwitters.innerHTML = twitterList;
+
+  }
+});
+
 // Rep func
 
 const commRep = nodecg.Replicant('comm');
@@ -22,11 +55,11 @@ commRep.on('change', newValue => {
   c1Tag.value = newValue.comm1Info[0];
   c1Team.value = newValue.comm1Info[1];
   c1Twitter.value = newValue.comm1Info[2];
-
+  
   c2Tag.value = newValue.comm2Info[0];
   c2Team.value = newValue.comm2Info[1];
   c2Twitter.value = newValue.comm2Info[2];
-
+  
 });
 
 // Button Function
@@ -35,7 +68,7 @@ const submitButton = document.querySelector('#submitButton');
 submitButton.onclick = () => {
   // A Replicant can be modified by modifying its `value`.
   // Centary
-
+  
   // comm 1 info
   commRep.value.comm1Info = [];
   // fill array
@@ -48,35 +81,34 @@ submitButton.onclick = () => {
   commRep.value.comm2Info.push(c2Tag.value);
   commRep.value.comm2Info.push(c2Team.value);
   commRep.value.comm2Info.push(c2Twitter.value);
-
-  console.log(commRep)
   
+  console.log(commRep)
 };
 
 // Swap Button
 const swapButton = document.querySelector('#swapButton');
 
 swapButton.onclick = () => {
-
+  
   var c1Array = [];
   var c2Array = [];
-
+  
   // fill arrays
   c1Array.push(c1Tag.value);
   c1Array.push(c1Team.value);
   c1Array.push(c1Twitter.value);
-
+  
   // fill array
   c2Array.push(c2Tag.value);
   c2Array.push(c2Team.value);
   c2Array.push(c2Twitter.value);
-
+  
   // swap arrays
   var tmpArray = c1Array;
   c1Array = c2Array;
   c2Array = tmpArray;
-
-
+  
+  
   document.getElementById('c1Tag').value = c1Array[0];
   document.getElementById('c1Team').value = c1Array[1];
   document.getElementById('c1Twitter').value = c1Array[2];
@@ -85,7 +117,7 @@ swapButton.onclick = () => {
   document.getElementById('c2Tag').value = c2Array[0];
   document.getElementById('c2Team').value = c2Array[1];
   document.getElementById('c2Twitter').value = c2Array[2];
-
+  
 }
 
 const clearButton = document.querySelector('#clearButton');
@@ -100,3 +132,4 @@ clearButton.onclick = () => {
   document.getElementById('c2Team').value = "";
   document.getElementById('c2Twitter').value = "";
 }
+

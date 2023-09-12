@@ -5,6 +5,10 @@
 	<script src="https://kit.fontawesome.com/2fe116318a.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	
+	
+	
+	
 	<button id="submitButton">
 		<i class="fa-solid fa-floppy-disk"> SAVE</i>
 	</button>
@@ -16,13 +20,13 @@
 	<table>
 		<tr>
 			<td>
-				<input id="c1Team" type="text" placeholder="Team" size="6"></input>
+				<input id="c1Team" type="text" placeholder="Team" size="6" list="csvPlayerTeams"></input>
 			</td>
 			<td>
-				<input id="c1Tag" type="text" placeholder="Tag"></input>
+				<input id="c1Tag" type="text" placeholder="Tag" list="csvPlayerTags"></input>
 			</td>
 			<td>
-				<div><input id="c1Twitter" type="text" placeholder="Twitter" size="15"></input></div>
+				<div><input id="c1Twitter" type="text" placeholder="Twitter" size="15" list="csvPlayerTwitters"></input></div>
 			</td>		
 			<td rowspan="2">
 				<button id="swapButton">
@@ -42,8 +46,15 @@
 			</td>
 		</tr>
 	</table>
+	
+	<!-- data list for players -->
+	<datalist id="csvPlayerTags"></datalist>
+	<datalist id="csvPlayerTeams"></datalist>
+	<datalist id="csvPlayerTwitters"></datalist>
+
 
 	
 </body>
+<script src="js/csv/papaparse.min.js"></script>
 <script src="js/comm.js"></script>
 </html>

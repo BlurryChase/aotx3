@@ -81,6 +81,7 @@ function init(){
 
 		if (newValue.eventGame[0] != oldValue.eventGame[0] || newValue.eventGame[1] != oldValue.eventGame[1]) {
 			location.reload()
+			startup = true;
 		}
 
 	});
@@ -107,6 +108,8 @@ function init(){
 		const matchRep = nodecg.Replicant('match')
 
 		if (startup == true) {
+
+			gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
 
 			// Load match replicant
 			NodeCG.waitForReplicants(matchRep).then(() => {
@@ -142,8 +145,8 @@ function init(){
 				var char2 = matchRep.value.playerCharacters[1];
 
 				textFit(document.getElementsByClassName('wrappers'), { maxFontSize: nameSize, alignVert: true });
-				gsap.to("#p1Wrapper", { x: 0, startAt: { x: p1Move }, duration: nameTime, opacity: 1, delay: 0 });
-				gsap.to("#p2Wrapper", { x: 0, startAt: { x: p2Move }, duration: nameTime, opacity: 1, delay: 0 });
+				gsap.to("#p1Wrapper", { x: 0, startAt: { x: p1Move }, duration: nameTime, opacity: 1, delay: 0.3 });
+				gsap.to("#p2Wrapper", { x: 0, startAt: { x: p2Move }, duration: nameTime, opacity: 1, delay: 0.3 });
 				gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
 
 				switch (eventRep.value.eventGame[0]) {
@@ -152,7 +155,7 @@ function init(){
 						bracketLen.innerHTML = ` - ${matchRep.value.bracketInfo[1]}`;
 						
 						textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
-						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
+						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
 						break;
 					case ('MNM'):		
 						document.getElementById("seat1Character").setAttribute("src", `assets/MNM/img/chars/LeftSide/${char1}.png`);
@@ -167,8 +170,8 @@ function init(){
 						textFit(document.getElementsByClassName('rounds'), { maxFontSize: rdSize, alignVert: true });
 						textFit(document.getElementsByClassName('formats'), { maxFontSize: rdSize, alignVert: true });
 						
-						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
-						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+						gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0.3 });
+						gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0.3 });
 						
 					}	
 								

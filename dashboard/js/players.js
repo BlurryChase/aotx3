@@ -4,14 +4,14 @@
 const p1Team = document.querySelector('#player1Team');
 const p1Tag = document.querySelector('#player1Tag');
 const p1Grands = document.querySelector('#player1Grands');
-const p1Score = document.querySelector('#player1Score');
+var p1Score = document.querySelector('#player1Score');
 
 
 // Player 2 const
 const p2Team = document.querySelector('#player2Team');
 const p2Tag = document.querySelector('#player2Tag');
 const p2Grands = document.querySelector('#player2Grands');
-const p2Score = document.querySelector('#player2Score');
+var p2Score = document.querySelector('#player2Score');
 
 const leftChar = document.querySelector('#leftChar');
 const rightChar = document.querySelector('#rightChar');
