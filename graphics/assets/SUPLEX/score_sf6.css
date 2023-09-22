@@ -20,6 +20,10 @@ body {
 	/* background-color: plum; */
 }
 
+#scoreBG {
+	opacity: 0;
+}
+
 #grandsBG {
 	position: absolute;
 	left: 0px;

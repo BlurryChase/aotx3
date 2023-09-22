@@ -1,5 +1,9 @@
 // Scoreboard
 
+nodecg.socket.on("connect", () => {
+	console.log("Socket connected!");
+});
+
 // Player 1 const
 const p1Team = document.querySelector('#player1Team');
 const p1Tag = document.querySelector('#player1Tag');
@@ -51,6 +55,7 @@ matchRep.on('change', newValue => {
 
   leftChar.value = newValue.playerCharacters[0];
   rightChar.value = newValue.playerCharacters[1];
+
 });
 
 
@@ -155,3 +160,19 @@ clearButton.onclick = () => {
   document.getElementById('player2Score').value = "";
 }
 
+const visibleButton = document.getElementById('visibleButton');
+
+visibleButton.onclick = () => {
+  switch(matchRep.value.isVisible) {
+    case true:
+      matchRep.value.isVisible = false;
+      document.getElementById('visibleButton').innerText = "VISIBLE: OFF";
+      console.log('off');
+      break;
+    case false:
+      matchRep.value.isVisible = true;
+      document.getElementById('visibleButton').innerText = "VISIBLE: ON";
+      console.log('on');
+      break;
+  }
+}

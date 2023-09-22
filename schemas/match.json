@@ -51,6 +51,10 @@
       },
       "default": ["Winners Bracket","Bo3"],
       "description": "bracket location/length"
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
     }
   },
 

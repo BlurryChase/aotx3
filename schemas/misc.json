@@ -11,6 +11,10 @@
       "description": "lower thirds",
       "default": ["Winners Bracket", "FX Game & Console Repair, Plano TX"]
     },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
+    },
     "brbPanel": {
       "type": "array",
       "items": {

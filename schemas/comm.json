@@ -18,6 +18,10 @@
       },
       "description": "comm 2",
       "default": ["Em", ""]
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
     }
   },
 

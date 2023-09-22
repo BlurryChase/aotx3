@@ -74,12 +74,15 @@ async function startGGPull() {
   var setLen;
   var l3rdTop;
 
+  var queueLen = Object.keys(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"]).length;
+
+
   
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < queueLen; i++) {
 
     
     
-    if (responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"] != null) {
+    if (responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"] != null && responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][1]["entrant"] != null ) {
       
       let qP1Tag = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"]["participants"][0]["gamerTag"]) // gamertag
       let qP1Team = String(responded["data"]["tournament"]["streamQueue"][streamName.value]["sets"][i]["slots"][0]["entrant"]["participants"][0]["prefix"]) // perfix
@@ -114,6 +117,7 @@ async function startGGPull() {
           } else {
             qRound = "Winners Quarters";
           }
+          break;
         case (qRound == "Winners Semi-Final"):
           l3rdTop = "Winners Semifinal";
           setLen = "Best of 5";

@@ -5,12 +5,16 @@ fetch("js/params.json")
 	.then((res) => res.json())
 	.then((data) => {
 		params = data;
+		console.log(data);
 	})
 
 function init(){
+
+	var thisEvent;
+	var thisGame;
 	
 	var startup = true;
-	var animated = false;
+	var isVisible = false;
 	
 	var nameSize = 40;
 	var p1Move = '-60px';
@@ -35,9 +39,9 @@ function init(){
 	
 	NodeCG.waitForReplicants(eventRep).then(() => {
 		// load replicants
-		let thisEvent = eventRep.value.eventGame[0];
+		thisEvent = eventRep.value.eventGame[0];
 		console.log(thisEvent)
-		let thisGame = eventRep.value.eventGame[1];
+		thisGame = eventRep.value.eventGame[1];
 		console.log(thisGame)
 		
 		
@@ -74,8 +78,37 @@ function init(){
 		
 		bgVid.play()
 		
+		console.log(images);
+		
 	})
+
+	nodecg.readReplicant('events', 'tlocCG', value => {
+		console.log(value.eventGame[0]);
+
+		var images = params[value.eventGame[0]]["gameRotator"];
+		var rotatorBug = document.getElementById("rotatorBug");
+		var rotateVar = 0;
+		gsap.to("#rotatorBug", {opacity:0, duration: 0.3, onComplete: function(){
+			rotatorBug.src = `assets/${value.eventGame[0]}/img/rotator/${images[rotateVar]}.png`;
+			gsap.to("#rotatorBug", {opacity:1, duration: 0.3, delay: 0.5})
+		}})
+
+		
+		setInterval(function() {
+			gsap.to("#rotatorBug", {opacity:0, duration: 0.3, onComplete: function(){
+				rotatorBug.src = `assets/${value.eventGame[0]}/img/rotator/${images[rotateVar]}.png`;
+				gsap.to("#rotatorBug", {opacity:1, duration: 0.3, delay: 0.3})
+
+			}})
+			rotateVar += 1;
+			if (rotateVar == 3) {
+				rotateVar = 0;
+			};
 	
+		}, 5000);
+
+	}) 
+
 	
 	eventRep.on('change', (newValue, oldValue) => { 
 
@@ -85,6 +118,7 @@ function init(){
 		}
 
 	});
+
 	
 	
 	
@@ -111,8 +145,14 @@ function init(){
 
 			gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
 
+
+			var isVisible;
 			// Load match replicant
 			NodeCG.waitForReplicants(matchRep).then(() => {
+				matchRep.value.isVisible = true;
+				isVisible = matchRep.value.isVisible;
+				
+
 				p1Tag.innerHTML = matchRep.value.player1Info[0];
 
 				if (eventRep.value.eventGame[0] == 'SUPLEX') {
@@ -183,6 +223,33 @@ function init(){
 						
 						
 			matchRep.on('change', (newValue, oldValue) => {
+
+
+				if (newValue.isVisible != oldValue.isVisible) {
+					switch (isVisible) {
+						case true:
+							gsap.to("#body", { duration: 0.3, opacity: 0, delay: 0 })
+							gsap.to("#scoreBG", { duration: 0.3, opacity: 0, delay: 0 })
+							gsap.to("#p1Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to("#p2Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to(".scores", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to("#rdWrapper", {duration: 0.3, opacity: 0, delay: 0 });
+							isVisible = false;
+							matchRep.value.isVisible = false;
+							break;
+						case false:
+							gsap.to("#body", { duration: 0.2, opacity: 1, delay: 0 })
+							gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
+							gsap.to("#p1Wrapper", { x: 0, startAt: { x: p1Move }, duration: nameTime, opacity: 1, delay: 0.3 });
+							gsap.to("#p2Wrapper", { x: 0, startAt: { x: p2Move }, duration: nameTime, opacity: 1, delay: 0.3 });
+							gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+							isVisible = true;
+							matchRep.value.isVisible = true;
+							break;
+					}
+
+				}
 
 			// Player 1
 
@@ -352,7 +419,35 @@ function init(){
 				gsap.to("#grandsBG", { duration: scTime, opacity: 0, delay: scDelay});
 				};
 		});
-	
 	}
+
+
+
+
+
+// hotkeys('ctrl+alt+a', function(){
+// 	switch (isVisible) {
+// 		case true:
+// 			gsap.to("body", { duration: 0.3, opacity: 0, delay: 0 })
+// 			isVisible = false;
+// 			break;
+// 		case false:
+// 			gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
+// 			gsap.to("#p1Wrapper", { x: 0, startAt: { x: p1Move }, duration: nameTime, opacity: 1, delay: 0.3 });
+// 			gsap.to("#p2Wrapper", { x: 0, startAt: { x: p2Move }, duration: nameTime, opacity: 1, delay: 0.3 });
+// 			gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
+// 			isVisible = true;
+// 			break;
+// 	}
+// })
+
+hotkeys.setScope('all'); // default scope is 'all'
+
+
+
+
 }
+
+
+
 

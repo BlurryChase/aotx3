@@ -20,7 +20,8 @@ function init(){
 
   // Timer text
   var botTextSize = 90;
-  var botTextMove = '-93px';
+  var botTextMove1 = '-93px';
+  var botTextMove2 = '93px';
   var botTextTime = 0.3;
   var botTextDelay = 0.5;
 
@@ -68,27 +69,40 @@ function init(){
   function getData(){
 
     var timer;
+    var future;
     function timerBomb(duration) {
       timer = duration;
       var minutes, seconds;
 
-      setInterval(function () {
-          minutes = parseInt(timer / 60, 10)
-          seconds = parseInt(timer % 60, 10);
+      future = moment().add(timer, 's').toDate();
 
-          minutes = minutes < 10 ? "0" + minutes : minutes;
-          seconds = seconds < 10 ? "0" + seconds : seconds;
+        setInterval(function() {
+          let now = moment();
+          
+          let distance = future - now;
+          console.log(distance)
+          
+          minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          panelTimer.innerHTML = minutes + ":" + seconds;
-
-          if (--timer < 0) {
-            gsap.to("#panelTimer", {x:0, duration:botTextTime, opacity:0, delay:0 })
+          // var fMinutes = (minutes < 10) ? "0"+minutes : minutes;
+          var fSeconds = (seconds < 10) ? "0"+seconds : seconds;
+    
+          
+          panelTimer.innerHTML = `${minutes}:${fSeconds}`;
+          
+          if (distance < 0) {
+            panelTimer.innerHTML = "0:00";
+            gsap.to("#panelTimer", {x:botTextMove2, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, });
+            clearInterval(countDownTimer); 
           }
         }, 1000);
+    
       }
 
     function resetTimer(newVal) {
       timer = newVal;
+      timerBomb(timer);
     }
       
   
@@ -105,10 +119,10 @@ function init(){
         
         panelTop.innerHTML = panelRep.value.brbPanel[0];
         
-        var timerInput = panelRep.value.brbPanel[2] * 60;
+        var timerInput = panelRep.value.brbPanel[2] * 60 + 1;
         panelTimer.innerHTML = panelRep.value.brbPanel[2] + ":00";
         timerBomb(timerInput)
-        gsap.to("#panelTimer", { x: 0, startAt: { x: botTextMove }, duration: botTextTime, opacity: 1, delay: botTextDelay });
+        gsap.to("#panelTimer", { x: 0, startAt: { x: botTextMove1 }, duration: botTextTime, opacity: 1, delay: botTextDelay });
         
         
         textFit(document.getElementById('panelTop'), { maxFontSize: topTextSize, alignVert: true });
@@ -130,14 +144,11 @@ function init(){
       };
       
       if (newValue.brbPanel[2] != oldValue.brbPanel[2] || newValue.brbPanel[2] == oldValue.brbPanel[2]) {
-        gsap.to("#panelTimer", {x:botTextMove, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, onComplete:function(){
-          
-
-
-          var timerInput = newValue.brbPanel[2] * 60;
+        gsap.to("#panelTimer", {x:botTextMove2, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, onComplete:function(){
+          var timerInput = newValue.brbPanel[2] * 60 + 1;
           panelTimer.innerHTML = newValue.brbPanel[2] + ":00";
           resetTimer(timerInput)
-          gsap.to("#panelTimer", {x:0, startAt:{x:botTextMove}, duration:botTextTime, opacity:1, delay:0});
+          gsap.to("#panelTimer", {x:0, startAt:{x:botTextMove1}, duration:botTextTime, opacity:1, delay:0});
         }});
       }});
     
