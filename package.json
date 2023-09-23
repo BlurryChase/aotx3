@@ -17,7 +17,7 @@
     "nodecg-bundle"
   ],
   "nodecg": {
-    "compatibleRange": "2.1.8",
+    "compatibleRange": "^2.1.8",
     "dashboardPanels": [
       {
         "name": "players",
@@ -57,7 +57,12 @@
     ],
     "graphics": [
       {
-        "file": "score.html",
+        "file": "scoreMain.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "scoreAlt.html",
         "width": 1920,
         "height": 1080
       },
