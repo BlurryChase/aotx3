@@ -1,0 +1,97 @@
+{
+  "name": "tlocCG",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Chase Kowalski",
+    "email": "chase@tourneylocator.com",
+    "url": "twitter.com/BlurryChase_"
+  },
+  "files": [
+    "dashboard",
+    "graphics"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^2.1.8",
+    "dashboardPanels": [
+      {
+        "name": "players",
+        "title": "Players",
+        "width": 3,
+        "file": "dPlayers.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "commentary",
+        "title": "Commentary",
+        "width": 4,
+        "file": "dCommentary.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "l3rds",
+        "title": "Lower Thirds",
+        "width": 3,
+        "file": "dL3rds.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "queue",
+        "title": "Stream Queue",
+        "width": 3,
+        "file": "dQueue.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "event & game",
+        "title": "Event & Game",
+        "width": 2,
+        "file": "dEventGame.html",
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "scoreMain.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "scoreAlt.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "comm.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "l3rd.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "2box.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "panel.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "timer.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "license": "Apache-2.0"
+}

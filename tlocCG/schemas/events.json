@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eventGame": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "lower thirds",
+      "default": ["USW", "SSBU"]
+    }
+  },
+
+  "required": ["eventGame"]
+}

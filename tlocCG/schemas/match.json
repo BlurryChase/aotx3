@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "player1Info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "player 1",
+      "default": ["Chase", "TLOC"]
+    },
+    "player2Info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "player 2",
+      "default": ["Em", ""]
+      
+    },
+    "playerGrands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": ["",""],
+      "description": "player grands indicators"
+    },
+    "playerScore": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "player scores",
+      "default": [0,0]
+    },
+    "playerCharacters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": ["",""],
+      "description": "player character and colors"
+    },
+    "bracketInfo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": ["Winners Bracket","Bo3"],
+      "description": "bracket location/length"
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+
+  "required": ["player1Info", "player2Info", "playerScore", "bracketInfo"]
+}

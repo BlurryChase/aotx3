@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "comm1Info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "comm 1",
+      "default": ["Chase", "TLOC", ""]
+    },
+    "comm2Info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "comm 2",
+      "default": ["Em", ""]
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+
+  "required": ["comm1Info", "comm2Info"]
+}

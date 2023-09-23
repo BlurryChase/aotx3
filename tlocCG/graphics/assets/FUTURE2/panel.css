@@ -1,0 +1,107 @@
+@font-face {
+	font-family: MainFont;
+	src: url('../fonts/HelveticaXBC/FreeSansBoldOblique.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: transparent;
+    color: white;
+    font-family:  MainFont;
+    text-transform: uppercase;
+    
+}
+
+#panelBG {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    background: url(img/panel.png) no-repeat;
+  }
+
+#panelTop {
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    width: 1510px;
+    height: 600px;
+    top: 300px;
+    left: 180px;
+
+    line-height: 250px;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+
+    letter-spacing: -0.5rem;
+    text-shadow: 0px 0px 18px white;
+    
+    -webkit-text-stroke-color: #678fc9;
+    -webkit-text-stroke-width: 5px;
+
+    /* background-color: aqua; */
+
+
+    opacity: 0;
+}
+
+#panelBottom {
+  padding: 0px;
+  margin: 0px;
+
+  position: absolute;
+  width: 700px;
+  height: 86px;
+  top: 10px;
+  left: 360px;
+
+  
+  line-height: 86px;
+  text-align: center;
+  font-size: 32px;
+  
+  letter-spacing: -0.2rem;
+  text-shadow: 0px 0px 18px white;
+
+	-webkit-text-stroke-color: #678fc9;
+	-webkit-text-stroke-width: 2px;
+
+  opacity: 0;
+  
+    /* background-color: aqua; */
+  }
+
+  #panelTimer {
+    padding: 0px;
+    margin: 0px;
+  
+    position: absolute;
+    width: 700px;
+    height: 86px;
+    top: 10px;
+    left: 360px;
+    
+    line-height: 86px;
+    text-align: center;
+    font-size: 80px;
+    
+    letter-spacing: -0.2rem;
+    text-shadow: 0px 0px 18px white;
+  
+    -webkit-text-stroke-color: #678fc9;
+    -webkit-text-stroke-width: 2px;
+  
+    opacity: 0;
+  
+    /* background-color: aqua; */
+  }

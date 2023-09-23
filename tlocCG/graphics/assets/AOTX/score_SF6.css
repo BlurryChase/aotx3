@@ -1,0 +1,161 @@
+@font-face {
+	font-family: MainFont;
+	src: url('../fonts/Orbitron-Black.ttf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	width: 1920px;
+	height: 1080px;
+	overflow: hidden;
+	background: transparent;
+	color: white;
+	font-family: MainFont;
+	text-transform: uppercase;
+}
+
+#scoreBG {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background: url(img/score.png) no-repeat;
+}
+
+#grandsBG {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	opacity: 0;
+}
+
+.wrappers {
+	padding: 0px;
+	margin: 0px;
+
+	position: absolute;
+	width: 409px;
+	height: 52px;
+	top: 5px;
+
+	line-height: 52px;
+	text-align: center;
+	font-size: 24px;
+	opacity: 0;
+	text-transform: uppercase;
+
+	/* background-color: aqua; */
+}
+
+#p1Wrapper {
+	left: 275px;
+}
+
+#p2Wrapper {
+	left: 1235px;
+
+}
+
+
+.teams{
+	opacity: 0.7;
+}
+
+/* #p1Team {
+	color: #eb2532;
+}
+
+#p2Team {
+	color: #0078dd;
+} */
+
+.scores {
+	position: absolute;
+	width: 42px;
+	height: 42px;
+
+	line-height: 42px;
+	text-align: center;
+	font-size: 40px;
+	top: 5px;
+	opacity: 0;
+	
+
+	/* background-color: green; */
+
+}
+
+#p1Score {
+	left: 847px;
+}
+
+#p2Score {
+	left: 1031px;
+}
+
+.rounds {
+	position: absolute;
+	width: 130px;
+	height: 21px;
+	left: 895px;
+	top: 10px;
+
+	line-height: 21px;
+	text-align: center;
+	font-size: 12px;
+	opacity: 0;
+	text-transform: uppercase;
+
+	/* background-color: aqua; */
+
+}
+
+.formats {
+	position: absolute;
+	width: 107px;
+	height: 14px;
+	left: 907px;
+	top: 33px;
+
+	line-height: 14px;
+	text-align: center;
+	font-size: 12px;
+	opacity: 0;
+	text-transform: uppercase;
+
+	/* background-color: aqua; */
+
+}
+
+#gameHold {
+	display: none;
+}
+
+.indicator {
+	position: absolute;
+	width: 92px;
+	height: 20px;
+	top: 54px;	
+
+	line-height: 20px;
+	text-transform: uppercase;
+	font-size: 15px;
+	text-align: center;
+}
+
+#p1Grands{
+	left: 2398px;
+
+}
+
+#p2Grands{
+	left: 2396px;
+
+}

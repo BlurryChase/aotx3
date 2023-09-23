@@ -1,0 +1,88 @@
+@font-face {
+	font-family: MainFont;
+	src: url('../fonts/FootlightMTLight.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: transparent;
+    color: white;
+    font-family:  MainFont;
+    text-transform: uppercase;
+    
+}
+
+#panelBG {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    background: url(img/fullbleed_blank.png) no-repeat;
+  }
+
+#panelTop {
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    width: 1510px;
+    height: 200px;
+    top: 400px;
+    left: 205px;
+
+    line-height: 200px;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+
+    /* background-color: aqua; */
+
+
+    opacity: 0;
+}
+
+#panelBottom {
+    padding: 0px;
+    margin: 0px;
+  
+    position: absolute;
+    width: 1310px;
+    height: 160px;
+    top: 620px;
+    left: 305px;
+  
+    line-height: 160px;
+    text-align: center;
+    font-size: 120px;
+  
+    opacity: 0;
+  
+    /* background-color: aqua; */
+  }
+
+  #panelTimer {
+    padding: 0px;
+    margin: 0px;
+  
+    position: absolute;
+    width: 1310px;
+    height: 160px;
+    top: 620px;
+    left: 305px;
+  
+    line-height: 160px;
+    text-align: center;
+    font-size: 120px;
+  
+    opacity: 0;
+  
+    /* background-color: aqua; */
+  }

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "l3rdInfo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "lower thirds",
+      "default": ["Winners Bracket", "FX Game & Console Repair, Plano TX"]
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
+    },
+    "brbPanel": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "brb panel",
+      "default": ["Starting Soon!", "Coming up next: Street Fighter 6 Pools!"]
+    }
+  },
+
+  "required": ["l3rdInfo"]
+}
