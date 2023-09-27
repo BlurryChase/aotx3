@@ -34,7 +34,7 @@ NodeCG.waitForReplicants(eventRep).then(() => {
     console.log(thisGame)
     
     
-    link.href = `assets/${thisEvent}/score_${thisGame}_main.css`;
+    link.href = `assets/${thisEvent}/score_${thisGame}.css`;
     
     head.appendChild(link);
     

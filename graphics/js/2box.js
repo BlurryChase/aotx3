@@ -84,37 +84,37 @@ function init(){
   function getData(){
     
     
-    const boxRep = nodecg.Replicant('misc');
+  //   const boxRep = nodecg.Replicant('misc');
 
     
     
-    // Change will be called when the Replicant loads too, so we can use it to set the initial value.
+  //   // Change will be called when the Replicant loads too, so we can use it to set the initial value.
     
     
-    if (startup == true) {
-      NodeCG.waitForReplicants(boxRep).then(() => {
-        bracketLoc.innerHTML = boxRep.value.l3rdInfo[0];
+  //   if (startup == true) {
+  //     NodeCG.waitForReplicants(boxRep).then(() => {
+  //       bracketLoc.innerHTML = boxRep.value.l3rdInfo[0];
 
-        textFit(document.getElementById('bracketLoc'), { maxFontSize: boxTextSize, alignVert: true, detectMultiLine: false});
+  //       textFit(document.getElementById('bracketLoc'), { maxFontSize: boxTextSize, alignVert: true, detectMultiLine: false});
         
         
-        gsap.to("#bracketLoc", { x: 0, startAt: { x: boxTextMove }, duration: boxTextTime, opacity: 1, delay: boxTextDelay });
-      startup = false;
-    })
-    startup = false;
-  }
+  //       gsap.to("#bracketLoc", { x: 0, startAt: { x: boxTextMove }, duration: boxTextTime, opacity: 1, delay: boxTextDelay });
+  //     startup = false;
+  //   })
+  //   startup = false;
+  // }
     
     
-    boxRep.on('change', (newValue, oldValue) => {
-      if (newValue.l3rdInfo[0] != oldValue.l3rdInfo[0]) {
-        gsap.to("#bracketLoc", {x:boxTextMove, startAt:{x:0}, duration:boxTextTime, opacity:0, delay:0, onComplete:function(){
-          bracketLoc.innerHTML = newValue.l3rdInfo[0];
-          textFit(document.getElementById('bracketLoc'), {maxFontSize:boxTextSize, alignVert:true, detectMultiLine: false});
-          gsap.to("#bracketLoc", {x:0, startAt:{x:boxTextMove}, duration:boxTextTime, opacity:1, delay:0});
-        }});
-      };
+  //   boxRep.on('change', (newValue, oldValue) => {
+  //     if (newValue.l3rdInfo[0] != oldValue.l3rdInfo[0]) {
+  //       gsap.to("#bracketLoc", {x:boxTextMove, startAt:{x:0}, duration:boxTextTime, opacity:0, delay:0, onComplete:function(){
+  //         bracketLoc.innerHTML = newValue.l3rdInfo[0];
+  //         textFit(document.getElementById('bracketLoc'), {maxFontSize:boxTextSize, alignVert:true, detectMultiLine: false});
+  //         gsap.to("#bracketLoc", {x:0, startAt:{x:boxTextMove}, duration:boxTextTime, opacity:1, delay:0});
+  //       }});
+  //     };
     
-    });
+  //   });
 
     // load the images for 2 box
 

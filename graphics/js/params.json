@@ -36,10 +36,9 @@
     "twitterDelay" : 0.1,
 
     "sponsors": [
-      "BBC",
-      "FX",
-      "tloc",
-      "SPIF"
+      "fx_test",
+      "tloc1",
+      "teleperformance/white_solid"
     ]
   },
   "MNM": {
@@ -79,10 +78,9 @@
     "twitterDelay" : 0.1,
 
     "sponsors": [
-      "BBC",
-      "FX",
-      "tloc",
-      "SPIF"
+      "fx_test",
+      "tloc1",
+      "teleperformance/white_solid"
     ]
   },
   "SUPLEX" :{
