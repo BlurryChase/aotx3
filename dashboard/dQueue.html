@@ -11,13 +11,14 @@
 <div><b>Event Slug Input</b></div>
 <input id="eventSlug" type="text" value="tournament/" size="50">
 <br><br>
+<button id="streamsBtn">PULL STREAMS</button>
+
 <div><b>Stream Name</b></div>
 <select name="stream" id="streamName">
-	<option value="0">TourneyLocator</option>
-	<!-- <option value="1">TourneyLocator2</option> -->
+
 </select>
 <br><br>
-<button id="submitButton">PULL FROM STARTGG</button>
+<button id="queueSetsBtn">PULL SETS</button>
 <br><br>
 <div><b>Results</b></div>
 <div id="queueOutput"
@@ -73,5 +74,6 @@ height: 400px;">
 
 	
 </body>
-<script src="js/queue.js"></script>
+<script src="js/pullStreams.js"></script>
+<script src="js/pullStreamQueue.js"></script>
 </html>
