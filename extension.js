@@ -1,6 +1,11 @@
 module.exports = function (nodecg) {
   
-  const server = nodecg.getSocketIOServer();
+  const nodeServer = nodecg.getSocketIOServer();
 
-  console.log(server)
+  nodeServer.on('connection', () => {
+    console.log('hello');
+  })
+
+
+  console.log(nodeServer.sockets)
 }

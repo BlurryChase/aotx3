@@ -120,9 +120,9 @@
     "twitterDelay" : 0.1,
 
     "sponsors": [
-      "FX",
-      "tlocsuplex",
-      "SPIF"
+      "FXSuplex2",
+      "TLOCSuplex",
+      "teleperformance/white_solid"
     ]
   },
   "SSO": {

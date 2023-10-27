@@ -23,12 +23,12 @@ body {
 
 #twoBoxBG {
   position: absolute;
+  width: inherit;
+  height: inherit;
   left: 0px;
-  right: 0px;
-  bottom: 0px;
   top: 0px;
-  background: url(img/2box.png) no-repeat;
-  z-index: 0;
+  background: url(img/2Box.png) no-repeat;
+  z-index: 1;
 	/* margin-top: -800px; */
 
 }
@@ -71,7 +71,7 @@ body {
 
 #sponsorBox > div {
   z-index: 1;
-  width: 15%;
+  width: 24%;
   height: 70%;
   margin: 10px;
 }

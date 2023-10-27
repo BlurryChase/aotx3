@@ -69,12 +69,17 @@ async function startGGPull() {
       
           let qP1Tag = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["slots"][0]["entrant"]["participants"][0]["gamerTag"]) // gamertag
           let qP1Team = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["slots"][0]["entrant"]["participants"][0]["prefix"]) // perfix
+          
+          qP1Team = qP1Team.replace(/\|/g, '')
           if (qP1Team == 'null') {
             qP1Team = '';
           }
           
           let qP2Tag = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["slots"][1]["entrant"]["participants"][0]["gamerTag"]) // gamertag
           let qP2Team = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["slots"][1]["entrant"]["participants"][0]["prefix"]) // perfix
+          qP2Team = qP2Team.replace(/\|/g, '')
+          
+          
           if (qP2Team == 'null') {
             qP2Team = '';
           }

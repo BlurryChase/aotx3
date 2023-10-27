@@ -44,6 +44,12 @@ async function pullStreams() {
     }),
   });
 
+
+  console.log(elStreamName.length);
+  for (let x = 0; x < elStreamName.length;) {
+    elStreamName.options.remove(x);
+  };
+
   const pullResponse = await response.json();
 
   console.log(pullResponse);
