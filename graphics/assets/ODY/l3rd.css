@@ -1,0 +1,66 @@
+@font-face {
+	font-family: ItalicMainFont;
+	src: url('./img/NiseSegaSaturnU.TTF');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: transparent;
+    color: white;
+    font-family:  MainFont;;
+    
+}
+
+#l3rdBG {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    background: url(img/l3rd.png) no-repeat;
+  }
+
+#l3rdsTop {
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    width: 400px;
+    height: 42px;
+    top: 901px;
+    left: 0px;
+
+    line-height: 42px;
+    text-align: center;
+    font-size: 28px;
+    font-family:  ItalicMainFont;
+    text-transform: uppercase;
+
+    opacity: 0;
+}
+
+#l3rdsBottom {
+    padding: 0px;
+    margin: 0px;
+
+    position: absolute;
+    width: 400px;
+    height: 42px;
+    top: -100px;
+    left: 0px;
+
+    line-height: 42px;
+    text-align: center;
+    font-size: 28px;
+    font-family:  ItalicMainFont;
+    text-transform: uppercase;
+
+    opacity: 0;
+}
