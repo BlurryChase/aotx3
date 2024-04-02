@@ -9,21 +9,17 @@ fetch("js/params.json")
 
 function init(){
 
-  // general init variables
-  var startup = true;
-  var animate = false;  
+  // general init variables 
   var nameSize = 50;
 
   // var for GSAP & Textfit, Player Team & Name
-  var c1Move = '-144px';
-  var c2Move = '144px';
+  var commMove = ['-144px', '144px'];
   var nameTime = 0.3;
   var nameDelay = 0.1;
   
   // var for GSAP & Textfit, Player Team & Name 
   var twitterSize = 20;
-  var twitter1Move = '-87px';
-  var twitter2Move = '87px';
+  var twitterMove = ['-87px','87px'];
   var twitterTime = 0.3;
   var twitterDelay = 0.1;
 
@@ -39,8 +35,7 @@ function init(){
 
 	NodeCG.waitForReplicants(eventRep).then(() => {
 		// load replicants
-		let thisEvent = eventRep.value.eventGame[0];
-		console.log(thisEvent)
+		let thisEvent = eventRep.value.event;
 		
 		link.href = `assets/${thisEvent}/comm.css`;
 		
@@ -49,15 +44,13 @@ function init(){
 		nameSize = params[thisEvent]["commNameSize"];
 
 		// var for GSAP & Textfit, Player Team & Name
-		c1Move = params[thisEvent]["c1Move"];
-		c2Move = params[thisEvent]["c2Move"];
+		commMove = params[thisEvent]["commMove"];
 		nameTime = params[thisEvent]["nameTime"];
 		nameDelay = params[thisEvent]["nameDelay"];
 		
 		// var for GSAP & Textfit, Player Team & Name 
 		twitterSize = params[thisEvent]["twitterSize"];
-		twitter1Move = params[thisEvent]["twitter1Move"];
-		twitter2Move = params[thisEvent]["twitter2Move"];
+		twitterMove = params[thisEvent]["twitterMove"];
 		twitterTime = params[thisEvent]["twitterTime"];
 		twitterDelay = params[thisEvent]["twitterDelay"];
 
@@ -65,96 +58,121 @@ function init(){
 
 	eventRep.on('change', (newValue, oldValue) => { 
 
-		if (newValue.eventGame[0] != oldValue.eventGame[0]) {
+		if (newValue.event != oldValue.event) {
 			location.reload()
 		}
 	});
   
   
   function casterl3rd (){
-    if(startup == true){
       getData();
-      startup = false;
-      animate = true;
-    }
-    else{
-      getData();
-    }
+    
   }
   
   setTimeout(casterl3rd,300);
   
   
   function getData(){
+
+	function updateInfoInvisible ( doodle ) {
+
+		for ( let i = 0; i < 2; i++ ) {
+
+			document.querySelectorAll(".name")[i].innerHTML = doodle.caster[i].name;
+			document.querySelectorAll(".team")[i].innerHTML = doodle.caster[i].team;
+			document.querySelectorAll(".twitters")[i].innerHTML = doodle.caster[i].twitter;			
+
+		}
+
+	}
+
+	function updateInfoVisible (newShit, oldShit) {
+		console.log('ping')
+
+		for (let i = 0; i < 2; i++) {
+
+
+			if (newShit.caster[i].name != oldShit.caster[i].name || newShit.caster[i].team != oldShit.caster[i].team) {
+				gsap.to(document.querySelectorAll(".wrappers")[i], {x:commMove[i], startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
+					document.querySelectorAll(".name")[i].innerHTML = newShit.caster[i].name;
+					document.querySelectorAll(".team")[i].innerHTML = newShit.caster[i].team;
+					textFit(document.querySelectorAll(".wrappers")[i], {maxFontSize:nameSize, alignVert:true});
+					gsap.to(document.querySelectorAll(".wrappers")[i], {x:0, startAt:{x:commMove[i]}, duration:nameTime, opacity:1, delay:0});
+				}});
+			};
+
+	  
+			if (newShit.caster[i].twitter != oldShit.caster[i].twitter) {
+				gsap.to(document.querySelectorAll(".twitters")[i], {x:twitterMove[i], startAt:{x:0}, duration:twitterTime, opacity:0, delay:0, onComplete:function(){
+					document.querySelectorAll(".twitters")[i].innerHTML = newShit.caster[i].twitter;
+					textFit(document.querySelectorAll('.twitters')[i], {maxFontSize:twitterSize, alignVert:true});
+					gsap.to(document.querySelectorAll(".twitters")[i], {x:0, startAt:{x:twitterMove[i]}, duration:twitterTime, opacity:1, delay:0});
+				}});
+			};
+		}
+	}
     // var
 
     const commRep = nodecg.Replicant('comm');
 		
 		
-		if (startup == true) {
 			NodeCG.waitForReplicants(commRep).then(() => {
-        c1Tag.innerHTML = commRep.value.comm1Info[0];
-        c1Team.innerHTML = commRep.value.comm1Info[1];
-        c1Twitter.innerHTML = commRep.value.comm1Info[2];
-
-				c2Tag.innerHTML = commRep.value.comm2Info[0];
-        c2Team.innerHTML = commRep.value.comm2Info[1];
-        c2Twitter.innerHTML = commRep.value.comm2Info[2];
+				updateInfoInvisible (commRep.value);
 
 				textFit(document.getElementsByClassName('wrappers'), {maxFontSize:nameSize, alignVert:true});
 				textFit(document.getElementsByClassName('twitters'), {maxFontSize:twitterSize, alignVert:true});
 
 
-				gsap.to("#c1Wrapper", {x:0, startAt:{x:c1Move}, duration:nameTime, opacity:1, delay:nameDelay});
-				gsap.to("#c2Wrapper", {x:0, startAt:{x:c2Move}, duration:nameTime, opacity:1, delay:nameDelay});
-				gsap.to("#c1Twitter", {x:0, startAt:{x:twitter1Move}, duration:twitterTime, opacity:1, delay:twitterDelay});
-				gsap.to("#c2Twitter", {x:0, startAt:{x:twitter2Move}, duration:twitterTime, opacity:1, delay:twitterDelay});
-
-				startup = false;
+				gsap.to("#c1Wrapper", {x:0, startAt:{x:commMove[0]}, duration:nameTime, opacity:1, delay:nameDelay});
+				gsap.to("#c2Wrapper", {x:0, startAt:{x:commMove[1]}, duration:nameTime, opacity:1, delay:nameDelay});
+				gsap.to("#c1Twitter", {x:0, startAt:{x:twitterMove[0]}, duration:twitterTime, opacity:1, delay:twitterDelay});
+				gsap.to("#c2Twitter", {x:0, startAt:{x:twitterMove[1]}, duration:twitterTime, opacity:1, delay:twitterDelay});
       });
-		}
+		
 
 		// Change will be called when the Replicant loads too, so we can use it to set the initial value.
 		
-		commRep.on('change', (newValue, oldValue) => {
-      console.log(newValue.comm1Info[0])
-      // comm 1 tag / team
-			if (newValue.comm1Info[0] != oldValue.comm1Info[0] || newValue.comm1Info[1] != oldValue.comm1Info[1]) {
-				gsap.to("#c1Wrapper", {x:c1Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
-					c1Tag.innerHTML = newValue.comm1Info[0];
-					c1Team.innerHTML = newValue.comm1Info[1];
-					textFit(document.getElementsByClassName('wrappers')[0], {maxFontSize:nameSize, alignVert:true});
-					gsap.to("#c1Wrapper", {x:0, startAt:{x:c1Move}, duration:nameTime, opacity:1, delay:0});
-				}});
-			};
+	commRep.on('change', (newValue, oldValue) => {
 
-      
-      // comm 1 twitter      
-			if (newValue.comm1Info[2] != oldValue.comm1Info[2]) {
-				gsap.to("#c1Twitter", {x:twitter1Move, startAt:{x:0}, duration:twitterTime, opacity:0, delay:0, onComplete:function(){
-					c1Twitter.innerHTML = newValue.comm1Info[2];
-					textFit(document.getElementsByClassName('twitters')[0], {maxFontSize:twitterSize, alignVert:true});
-					gsap.to("#c1Twitter", {x:0, startAt:{x:twitter1Move}, duration:twitterTime, opacity:1, delay:0});
-				}});
-			};
+		console.log('change event fired');
+		console.log(newValue.isVisible)
 
-      // comm 2 tag / team
-			if (newValue.comm2Info[0] != oldValue.comm2Info[0] || newValue.comm2Info[1] != oldValue.comm2Info[1]) {
-				gsap.to("#c2Wrapper", {x:c2Move, startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
-					c2Tag.innerHTML = newValue.comm2Info[0];
-					c2Team.innerHTML = newValue.comm2Info[1];
-					textFit(document.getElementsByClassName('wrappers')[1], {maxFontSize:nameSize, alignVert:true});
-					gsap.to("#c2Wrapper", {x:0, startAt:{x:c2Move}, duration:nameTime, opacity:1, delay:0});
-				}});
-			};
 
-			if (newValue.comm2Info[2] != oldValue.comm2Info[2]) {
-				gsap.to("#c2Twitter", {x:twitter2Move, startAt:{x:0}, duration:twitterTime, opacity:0, delay:0, onComplete:function(){
-					c2Twitter.innerHTML = newValue.comm2Info[2];
-					textFit(document.getElementsByClassName('twitters')[1], {maxFontSize:twitterSize, alignVert:true});
-					gsap.to("#c2Twitter", {x:0, startAt:{x:twitter2Move}, duration:twitterTime, opacity:1, delay:0});
-				}});
-			};
+
+	  if (newValue.isVisible != oldValue.isVisible) {
+		switch (newValue.isVisible) {
+			case false:
+
+				gsap.to("#commBG", { duration: 0.3, opacity: 0, delay: 0 })
+				gsap.to("#comm", { duration: 0.3, opacity: 0, delay: 0 });
+				gsap.to("#c1Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
+				gsap.to("#c2Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
+				gsap.to("#c1Twitter", { duration: 0.3, opacity: 0, delay: 0 });
+				gsap.to("#c2Twitter", { duration: 0.3, opacity: 0, delay: 0 });
+				updateInfoInvisible (newValue);
+				break;
+			case true:
+				console.log(newValue.isVisible)
+				gsap.to("#commBG", { duration: 0.3, opacity: 1, delay: 0 })
+				gsap.to("#comm", { duration: 0.3, opacity: 1, delay: 0 });
+				gsap.to("#c1Wrapper", { x: 0, startAt: { x: commMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+				gsap.to("#c2Wrapper", { x: 0, startAt: { x: commMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
+				gsap.to("#c1Twitter", { x: 0, startAt: { x: twitterMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+				gsap.to("#c2Twitter", { x: 0, startAt: { x: twitterMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
+				updateInfoVisible (newValue, oldValue)
+				break;
+			}; 
+		} else {
+			switch (newValue.isVisible) {
+				case true:
+					updateInfoVisible (newValue, oldValue);
+					break;
+				case false:
+					updateInfo (newValue);
+			
+		}
+
+	}
     });
       
   }

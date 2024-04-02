@@ -3,27 +3,30 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "l3rdInfo": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "lower thirds",
-      "default": ["Winners Bracket", "FX Game & Console Repair, Plano TX"]
+    "l3rdTop" : {
+      "type" : "string",
+      "default" : "Winners Bracket"
+    },
+    "l3rdBottom" : {
+      "type" : "string",
+      "default" : "FX Games & Console Repair"
+    },
+    "brbTop" : {
+      "type" : "string",
+      "default" : "Starting Soon!"
+    },
+    "brbBottom" : {
+      "type" : "string",
+      "default" : "Up Next: Street Fighter 6 Pools!"
+    },
+    "brbTimer" : {
+      "type": "string"
     },
     "isVisible": {
       "type": "boolean",
       "default": false
-    },
-    "brbPanel": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "brb panel",
-      "default": ["Starting Soon!", "Coming up next: Street Fighter 6 Pools!"]
     }
   },
 
-  "required": ["l3rdInfo"]
+  "required": ["l3rdTop", "l3rdBottom"]
 }

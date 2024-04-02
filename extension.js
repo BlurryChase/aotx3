@@ -1,11 +1,17 @@
 module.exports = function (nodecg) {
   
-  const nodeServer = nodecg.getSocketIOServer();
+  const matchRep = nodecg.Replicant('match');
+  const commRep = nodecg.Replicant('comm');
+  const miscRep = nodecg.Replicant('misc');
+  const eventRep = nodecg.Replicant('events');
 
-  nodeServer.on('connection', () => {
-    console.log('hello');
-  })
+
+  
+  console.log(matchRep.value);
+  console.log(commRep.value);
+  console.log(miscRep.value);
+  console.log(eventRep.value);
 
 
-  console.log(nodeServer.sockets)
+
 }

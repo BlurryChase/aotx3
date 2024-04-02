@@ -28,9 +28,9 @@ link.type = 'text/css';
 
 NodeCG.waitForReplicants(eventRep).then(() => {
     // load replicants
-    thisEvent = eventRep.value.eventGame[0];
+    thisEvent = eventRep.value.event;
     console.log(thisEvent)
-    thisGame = eventRep.value.eventGame[1];
+    thisGame = eventRep.value.game;
     console.log(thisGame)
     
     
@@ -56,8 +56,7 @@ NodeCG.waitForReplicants(eventRep).then(() => {
     nameSize = params[thisEvent]["nameSize"]; // name size
     nameTime = params[thisEvent]["nameTime"]; // name time
 
-    p1Move = params[thisEvent]["p1Move"]; // px move for p1
-    p2Move = params[thisEvent]["p2Move"]; // px move for p2
+    nameMove = params[thisEvent]["nameMove"]; // px move for players
     
     rdSize = params[thisEvent]["rdSize"]; // round size
     rdTime = params[thisEvent]["rdTime"]; // round time
@@ -74,7 +73,7 @@ NodeCG.waitForReplicants(eventRep).then(() => {
 
 eventRep.on('change', (newValue, oldValue) => { 
 
-    if (newValue.eventGame[0] != oldValue.eventGame[0] || newValue.eventGame[1] != oldValue.eventGame[1]) {
+    if (newValue.event != oldValue.event || newValue.game != oldValue.game) {
         location.reload()
         startup = true;
     }

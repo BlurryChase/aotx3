@@ -3,15 +3,17 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "eventGame": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "lower thirds",
-      "default": ["USW", "SSBU"]
+    "event" : {
+      "type": "string",
+      "description": "event name",
+      "default" : "USW"
+    },
+    "game" : {
+      "type": "string",
+      "description": "game name",
+      "default" : "SSBU"
     }
   },
 
-  "required": ["eventGame"]
+  "required": ["event", "game"]
 }

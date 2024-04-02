@@ -1,9 +1,5 @@
 // Scoreboard
 
-nodecg.socket.on("connect", () => {
-	console.log("Socket connected!");
-});
-
 // Player 1 const
 const p1Team = document.querySelector('#player1Team');
 const p1Tag = document.querySelector('#player1Tag');
@@ -17,8 +13,8 @@ const p2Tag = document.querySelector('#player2Tag');
 const p2Grands = document.querySelector('#player2Grands');
 var p2Score = document.querySelector('#player2Score');
 
-const leftChar = document.querySelector('#leftChar');
-const rightChar = document.querySelector('#rightChar');
+const p1Char = document.querySelector('#leftChar');
+const p2Char = document.querySelector('#rightChar');
 
 
 // Bracket Location & Length
@@ -32,29 +28,29 @@ const bracketLen = document.querySelector('#bracketLen');
 
 const matchRep = nodecg.Replicant('match');
 
+
 // proper on.changes
 
 matchRep.on('change', newValue => {
   // The value of the Replicant has changed somewhere in NodeCG,
   // this could be another dashboard panel, a server initiated change,
   // or the doing of another user accessing your dashboard panel.
-  p1Tag.value = newValue.player1Info[0];
-  p1Team.value = newValue.player1Info[1];
-  
-  p2Tag.value = newValue.player2Info[0];
-  p2Team.value = newValue.player2Info[1];
-  
-  p1Grands.value = newValue.playerGrands[0];
-  p2Grands.value = newValue.playerGrands[1];
-  
-  p1Score.value = newValue.playerScore[0];
-  p2Score.value = newValue.playerScore[1];
 
-  bracketLoc.value = newValue.bracketInfo[0];
-  bracketLen.value = newValue.bracketInfo[1];
 
-  leftChar.value = newValue.playerCharacters[0];
-  rightChar.value = newValue.playerCharacters[1];
+  p1Tag.value = newValue.players[0].tag;
+  p1Team.value = newValue.players[0].team;
+  p1Grands.value = newValue.players[0].grandsIndicator;
+  p1Score.value = newValue.players[0].score;
+  p1Char.value = newValue.players[0].character;
+  
+  p2Tag.value = newValue.players[1].tag;
+  p2Team.value = newValue.players[1].team;
+  p2Grands.value = newValue.players[1].grandsIndicator;
+  p2Score.value = newValue.players[1].score;
+  p2Char.value = newValue.players[1].character;
+
+  bracketLoc.value = newValue.bracketLoc
+  bracketLen.value = newValue.bracketLen;
 
 });
 
@@ -65,39 +61,34 @@ matchRep.on('change', newValue => {
 const submitButton = document.querySelector('#submitButton');
 
 submitButton.onclick = () => {
+  
   // A Replicant can be modified by modifying its `value`.
-  // player 1 info
-  matchRep.value.player1Info = [];
+  
+  matchRep.value.players = []
 
-  // fill array
-  matchRep.value.player1Info.push(p1Tag.value);
-  matchRep.value.player1Info.push(p1Team.value);
-  console.log(matchRep.value.player1Info);
-  // player 2 info
-  matchRep.value.player2Info = [];
-  // fill array
-  matchRep.value.player2Info.push(p2Tag.value);
-  matchRep.value.player2Info.push(p2Team.value);
-  // player grands info
-  matchRep.value.playerGrands = [];
-  // fill array
-  matchRep.value.playerGrands.push(p1Grands.value);
-  matchRep.value.playerGrands.push(p2Grands.value);
-  // player 2 info
-  matchRep.value.playerScore = [];
-  // fill array
-  matchRep.value.playerScore.push(Number(p1Score.value));
-  matchRep.value.playerScore.push(Number(p2Score.value));
-  // player character info
-  matchRep.value.playerCharacters = [];
-  // fill array
-  matchRep.value.playerCharacters.push(leftChar.value);
-  matchRep.value.playerCharacters.push(rightChar.value);
-  // match info
-  matchRep.value.bracketInfo = [];
-  // fill array
-  matchRep.value.bracketInfo.push(bracketLoc.value);
-  matchRep.value.bracketInfo.push(bracketLen.value);
+  let p1Obj = {
+    "tag": p1Tag.value,
+    "team": p1Team.value,
+    "score": p1Score.value,
+    "grandsIndicator": p1Grands.value,
+    "character": p1Char.value,
+  }
+
+  let p2Obj = {
+    "tag": p2Tag.value,
+    "team": p2Team.value,
+    "score": p2Score.value,
+    "grandsIndicator": p2Grands.value,
+    "character": p2Char.value,
+  }
+
+  matchRep.value.players.push(p1Obj)
+  matchRep.value.players.push(p2Obj)
+
+  console.log(matchRep.value.players[0].tag)
+
+  matchRep.value.bracketLoc = bracketLoc.value
+  matchRep.value.bracketLen = bracketLen.value
 };
 
 // Swap Button
@@ -113,14 +104,14 @@ swapButton.onclick = () => {
   p1Array.push(p1Team.value);
   p1Array.push(p1Grands.value);
   p1Array.push(Number(p1Score.value));
-  p1Array.push(leftChar.value)
+  p1Array.push(p1Char.value)
 
   // fill array
   p2Array.push(p2Tag.value);
   p2Array.push(p2Team.value);
   p2Array.push(p2Grands.value);
   p2Array.push(Number(p2Score.value));
-  p2Array.push(rightChar.value)
+  p2Array.push(p2Char.value)
 
 
   // swap arrays
@@ -151,28 +142,11 @@ clearButton.onclick = () => {
   document.getElementById('player1Tag').value = "";
   document.getElementById('player1Team').value = "";
   document.getElementById('player1Grands').value = "";
-  document.getElementById('player1Score').value = "";
+  document.getElementById('player1Score').value = 0;
   
   // Player 2   
   document.getElementById('player2Tag').value = "";
   document.getElementById('player2Team').value = "";
   document.getElementById('player2Grands').value = "";
-  document.getElementById('player2Score').value = "";
-}
-
-const visibleButton = document.getElementById('visibleButton');
-
-visibleButton.onclick = () => {
-  switch(matchRep.value.isVisible) {
-    case true:
-      matchRep.value.isVisible = false;
-      document.getElementById('visibleButton').innerText = "VISIBLE: OFF";
-      console.log('off');
-      break;
-    case false:
-      matchRep.value.isVisible = true;
-      document.getElementById('visibleButton').innerText = "VISIBLE: ON";
-      console.log('on');
-      break;
-  }
+  document.getElementById('player2Score').value = 0;
 }

@@ -138,3 +138,8 @@ body {
 #p2Grands{
 	left: 1659px;
 }
+
+.characters {
+	position: absolute;
+	top: -300px;
+}
