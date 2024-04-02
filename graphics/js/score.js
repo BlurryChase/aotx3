@@ -127,6 +127,8 @@ eventRep.on('change', (newValue, oldValue) => {
 				let winners;
 				let losers;
 
+
+				console.log(eventRep.value.game);
 				if (eventRep.value.game === 'GGST' || eventRep.value.game === 'SF6') {
 					winners = 'W';
 					losers = 'L';
@@ -140,17 +142,17 @@ eventRep.on('change', (newValue, oldValue) => {
 				switch (true) {
 					case (p1G === 'w' && p2G === 'l'):
 						console.log(p1G)
-						p1Grands.innerHTML = 'winners';
-						p2Grands.innerHTML = 'losers';
+						p1Grands.innerHTML = winners;
+						p2Grands.innerHTML = losers;
 						break;
 					case (p1G === 'l' && p2G === 'w'):
 						console.log(p2G)
-						p1Grands.innerHTML = 'losers';
-						p2Grands.innerHTML = 'winners';
+						p1Grands.innerHTML = losers;
+						p2Grands.innerHTML = winners;
 						break;
 					case (p1G === 'w' && p2G === 'w') || (p1G === 'l'&& p2G === 'l'):	
-						p1Grands.innerHTML = 'losers';
-						p2Grands.innerHTML = 'losers';
+						p1Grands.innerHTML = losers;
+						p2Grands.innerHTML = losers;
 						break;
 					default:
 						gsap.to("#grandsBG", { duration: scTime, opacity: 0, delay: scDelay});
@@ -174,6 +176,9 @@ eventRep.on('change', (newValue, oldValue) => {
 				} else {
 					document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team;
 				}
+
+				textFit(document.querySelectorAll('.wrappers')[i], { maxFontSize: nameSize, alignVert: true });
+
 				
 				document.querySelectorAll(".scores")[i].innerHTML = doodle.players[i].score;
 
@@ -315,7 +320,6 @@ eventRep.on('change', (newValue, oldValue) => {
 							
 						};
 
-						textFit(document.getElementsByClassName('wrappers'), { maxFontSize: nameSize, alignVert: true });
 						gsap.to("#p1Wrapper", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
 						gsap.to("#p2Wrapper", { x: 0, startAt: { x: nameMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
 						gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });

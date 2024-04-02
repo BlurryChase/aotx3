@@ -74,7 +74,7 @@ function init(){
   
   function getData(){
 
-	function updateInfoInvisible ( doodle ) {
+	function updateInfo ( doodle ) {
 
 		for ( let i = 0; i < 2; i++ ) {
 
@@ -111,22 +111,26 @@ function init(){
 			};
 		}
 	}
-    // var
+    
+
 
     const commRep = nodecg.Replicant('comm');
-		
-		
-			NodeCG.waitForReplicants(commRep).then(() => {
-				updateInfoInvisible (commRep.value);
 
-				textFit(document.getElementsByClassName('wrappers'), {maxFontSize:nameSize, alignVert:true});
-				textFit(document.getElementsByClassName('twitters'), {maxFontSize:twitterSize, alignVert:true});
+	gsap.to("#commBG", {duration: 0.3, opacity: 1, delay: 0});
+	
+	NodeCG.waitForReplicants(commRep).then(() => {
+		commRep.value.isVisible = true;
+
+		updateInfo (commRep.value);
+
+		textFit(document.getElementsByClassName('wrappers'), {maxFontSize:nameSize, alignVert:true});
+		textFit(document.getElementsByClassName('twitters'), {maxFontSize:twitterSize, alignVert:true});
 
 
-				gsap.to("#c1Wrapper", {x:0, startAt:{x:commMove[0]}, duration:nameTime, opacity:1, delay:nameDelay});
-				gsap.to("#c2Wrapper", {x:0, startAt:{x:commMove[1]}, duration:nameTime, opacity:1, delay:nameDelay});
-				gsap.to("#c1Twitter", {x:0, startAt:{x:twitterMove[0]}, duration:twitterTime, opacity:1, delay:twitterDelay});
-				gsap.to("#c2Twitter", {x:0, startAt:{x:twitterMove[1]}, duration:twitterTime, opacity:1, delay:twitterDelay});
+		gsap.to("#c1Wrapper", {x:0, startAt:{x:commMove[0]}, duration:nameTime, opacity:1, delay:nameDelay});
+		gsap.to("#c2Wrapper", {x:0, startAt:{x:commMove[1]}, duration:nameTime, opacity:1, delay:nameDelay});
+		gsap.to("#c1Twitter", {x:0, startAt:{x:twitterMove[0]}, duration:twitterTime, opacity:1, delay:twitterDelay});
+		gsap.to("#c2Twitter", {x:0, startAt:{x:twitterMove[1]}, duration:twitterTime, opacity:1, delay:twitterDelay});
       });
 		
 
@@ -149,7 +153,6 @@ function init(){
 				gsap.to("#c2Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
 				gsap.to("#c1Twitter", { duration: 0.3, opacity: 0, delay: 0 });
 				gsap.to("#c2Twitter", { duration: 0.3, opacity: 0, delay: 0 });
-				updateInfoInvisible (newValue);
 				break;
 			case true:
 				console.log(newValue.isVisible)
@@ -159,16 +162,19 @@ function init(){
 				gsap.to("#c2Wrapper", { x: 0, startAt: { x: commMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
 				gsap.to("#c1Twitter", { x: 0, startAt: { x: twitterMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
 				gsap.to("#c2Twitter", { x: 0, startAt: { x: twitterMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
-				updateInfoVisible (newValue, oldValue)
 				break;
 			}; 
 		} else {
 			switch (newValue.isVisible) {
 				case true:
+					console.log('visible change')
 					updateInfoVisible (newValue, oldValue);
 					break;
 				case false:
+					console.log('invisible change')
 					updateInfo (newValue);
+					console.log(newValue.caster[0].name)
+					break;
 			
 		}
 
