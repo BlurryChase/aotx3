@@ -8,7 +8,7 @@ let html = '';
 
 const endpoint = 'https://api.start.gg/gql/alpha';
 
-let api_t = "cea32593e025bf06fb5319f11c31022e";
+let api_t = "589a52610def4d17adf9ae258d182669";
 
 const matchRep = nodecg.Replicant('match');
 var l3rdsRep = nodecg.Replicant('misc');

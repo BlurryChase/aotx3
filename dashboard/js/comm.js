@@ -52,13 +52,13 @@ commRep.on('change', newValue => {
   // The value of the Replicant has changed somewhere in NodeCG,
   // this could be another dashboard panel, a server initiated change,
   // or the doing of another user accessing your dashboard panel.
-  c1Tag.value = newValue.comm1Info[0];
-  c1Team.value = newValue.comm1Info[1];
-  c1Twitter.value = newValue.comm1Info[2];
+  c1Tag.value = newValue.caster[0].name;
+  c1Team.value = newValue.caster[0].team;
+  c1Twitter.value = newValue.caster[0].twitter;
   
-  c2Tag.value = newValue.comm2Info[0];
-  c2Team.value = newValue.comm2Info[1];
-  c2Twitter.value = newValue.comm2Info[2];
+  c2Tag.value = newValue.caster[1].name;
+  c2Team.value = newValue.caster[1].team;
+  c2Twitter.value = newValue.caster[1].twitter;
   
 });
 
@@ -69,20 +69,22 @@ submitButton.onclick = () => {
   // A Replicant can be modified by modifying its `value`.
   // Centary
   
-  // comm 1 info
-  commRep.value.comm1Info = [];
-  // fill array
-  commRep.value.comm1Info.push(c1Tag.value);
-  commRep.value.comm1Info.push(c1Team.value);
-  commRep.value.comm1Info.push(c1Twitter.value);
-  // comm 2 info
-  commRep.value.comm2Info = [];
-  // fill array
-  commRep.value.comm2Info.push(c2Tag.value);
-  commRep.value.comm2Info.push(c2Team.value);
-  commRep.value.comm2Info.push(c2Twitter.value);
-  
-  console.log(commRep)
+  commRep.value.caster = []
+
+  let comm1Obj = {
+    "name": c1Tag.value,
+    "team": c1Team.value,
+    "twitter": c1Twitter.value,
+  }
+
+  let comm2Obj = {
+    "name": c2Tag.value,
+    "team": c2Team.value,
+    "twitter": c2Twitter.value,
+  }
+
+  commRep.value.caster.push(comm1Obj)
+  commRep.value.caster.push(comm2Obj)
 };
 
 // Swap Button

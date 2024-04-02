@@ -13,13 +13,13 @@ function init(){
   var startup = true;
 
   // top text
-  var topTextSize = 1;
+  var topTextSize = 60;
   var topTextMove = '-128px';
   var topTextTime = 0.3;
   var topTextDelay = 0.3;
 
   // bottom text
-  var botTextSize = 1;
+  var botTextSize = 60;
   var botTextMove = '93px';
   var botTextTime = 0.3;
   var botTextDelay = 0.3;
@@ -36,7 +36,7 @@ function init(){
 
 	NodeCG.waitForReplicants(eventRep).then(() => {
 		// load replicants
-		let thisEvent = eventRep.value.eventGame[0];
+		let thisEvent = eventRep.value.event;
 		console.log(thisEvent)
 		
 		link.href = `assets/${thisEvent}/l3rd.css`;
@@ -60,7 +60,7 @@ function init(){
 	
 	eventRep.on('change', (newValue, oldValue) => { 
 
-		if (newValue.eventGame[0] != oldValue.eventGame[0]) {
+		if (newValue.event != oldValue.event) {
 			location.reload()
 		}
 	});
@@ -75,12 +75,39 @@ function init(){
     }
   }
   
-  setTimeout(casterl3rd,300);
+  setTimeout(casterl3rd,500);
   
   function getData(){
     
     
     const l3rdsRep = nodecg.Replicant('misc');
+
+    function updateInfo (varue) {
+      l3rdsTop.innerHTML = varue.l3rdTop;
+      l3rdsBottom.innerHTML = varue.l3rdBottom;
+
+      textFit(document.getElementById('l3rdsTop'), { maxFontSize: topTextSize, alignVert: true, detectMultiLine: false});
+      textFit(document.getElementById('l3rdsBottom'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
+      
+    }
+
+    function updateInfoVisible (newShit, oldShit) {
+      if (newShit.l3rdTop != oldShit.l3rdTop) {
+        gsap.to("#l3rdsTop", {x:topTextMove, startAt:{x:0}, duration:topTextTime, opacity:0, delay:0, onComplete:function(){
+          l3rdsTop.innerHTML = newShit.l3rdTop;
+          textFit(document.getElementById('l3rdsTop'), {maxFontSize:topTextSize, alignVert:true, detectMultiLine: false});
+          gsap.to("#l3rdsTop", {x:0, startAt:{x:topTextMove}, duration:topTextTime, opacity:1, delay:0});
+        }});
+      };
+      
+      if (newShit.l3rdBottom != oldShit.l3rdBottom) {
+        gsap.to("#l3rdsBottom", {x:botTextMove, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, onComplete:function(){
+          l3rdsBottom.innerHTML = newShit.l3rdBottom;
+          textFit(document.getElementById('l3rdsBottom'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
+          gsap.to("#l3rdsBottom", {x:0, startAt:{x:botTextMove}, duration:botTextTime, opacity:1, delay:0});
+        }});
+    }
+  }
 
     
     
@@ -88,13 +115,13 @@ function init(){
     
     
     if (startup == true) {
-      NodeCG.waitForReplicants(l3rdsRep).then(() => {
-        l3rdsTop.innerHTML = l3rdsRep.value.l3rdInfo[0];
-        l3rdsBottom.innerHTML = l3rdsRep.value.l3rdInfo[1];
 
-        textFit(document.getElementById('l3rdsTop'), { maxFontSize: topTextSize, alignVert: true, detectMultiLine: false});
-        textFit(document.getElementById('l3rdsBottom'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
-        
+      gsap.to("#l3rdBG", {duration: 0.3, opacity: 1, delay: 0});
+
+      NodeCG.waitForReplicants(l3rdsRep).then(() => {
+        l3rdsRep.value.isVisible = true;
+
+        updateInfo(l3rdsRep.value);
         
         gsap.to("#l3rdsTop", { x: 0, startAt: { x: topTextMove }, duration: topTextTime, opacity: 1, delay: topTextDelay });
         gsap.to("#l3rdsBottom", { x: 0, startAt: { x: botTextMove }, duration: botTextTime, opacity: 1, delay: botTextDelay });
@@ -104,22 +131,34 @@ function init(){
     
     
     l3rdsRep.on('change', (newValue, oldValue) => {
-      if (newValue.l3rdInfo[0] != oldValue.l3rdInfo[0]) {
-        gsap.to("#l3rdsTop", {x:topTextMove, startAt:{x:0}, duration:topTextTime, opacity:0, delay:0, onComplete:function(){
-          l3rdsTop.innerHTML = newValue.l3rdInfo[0];
-          textFit(document.getElementById('l3rdsTop'), {maxFontSize:topTextSize, alignVert:true, detectMultiLine: false});
-          gsap.to("#l3rdsTop", {x:0, startAt:{x:topTextMove}, duration:topTextTime, opacity:1, delay:0});
-        }});
-      };
-      
-      if (newValue.l3rdInfo[1] != oldValue.l3rdInfo[1]) {
-        gsap.to("#l3rdsBottom", {x:botTextMove, startAt:{x:0}, duration:botTextTime, opacity:0, delay:0, onComplete:function(){
-          l3rdsBottom.innerHTML = newValue.l3rdInfo[1];
-          textFit(document.getElementById('l3rdsBottom'), { maxFontSize: botTextSize, minFontSize: 5, detectMultiLine: false, alignVert: true });
-          gsap.to("#l3rdsBottom", {x:0, startAt:{x:botTextMove}, duration:botTextTime, opacity:1, delay:0});
-        }});
-      }});
+      if (newValue.isVisible != oldValue.isVisible) {
+        switch (newValue.isVisible) {
+          case false:
+            console.log(newValue.isVisible)
+            gsap.to("#l3rdBG", { duration: 0.3, opacity: 0, delay: 0 })
+            gsap.to("#l3rdsTop", { duration: 0.3, opacity: 0, delay: 0 });
+            gsap.to("#l3rdsBottom", { duration: 0.3, opacity: 0, delay: 0 });
+            updateInfo (newValue);
+            break;
+          case true:
+            console.log(newValue.isVisible)
+            gsap.to("#l3rdBG", { duration: 0.3, opacity: 1, delay: 0 })
+            gsap.to("#l3rdsTop", { x: 0, startAt: { x: topTextMove }, duration: topTextTime, opacity: 1, delay: topTextDelay });
+            gsap.to("#l3rdsBottom", { x: 0, startAt: { x: botTextMove }, duration: botTextTime, opacity: 1, delay: botTextDelay });
+            updateInfoVisible (newValue, oldValue);
+            break;
+        }
+
+      } else {
+        switch (newValue.isVisible) {
+          case true:
+            updateInfoVisible (newValue, oldValue);
+            break;
+          case false:
+            updateInfo (newValue);
+        }
+      }
+      });
     
     }
   }
-  

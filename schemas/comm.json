@@ -3,21 +3,14 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "comm1Info": {
-      "type": "array",
+    "caster" : {
+      "type" : "array",
       "items": {
-        "type": "string"
-      },
-      "description": "comm 1",
-      "default": ["Chase", "TLOC", ""]
-    },
-    "comm2Info": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "comm 2",
-      "default": ["Em", ""]
+          "type" : "object",
+          "name": { "type" : "string", "default" : "Chase" },
+          "team": { "type" : "string", "default" : "" },
+          "twitter" : { "type" : "string", "default" : "" }
+      }
     },
     "isVisible": {
       "type": "boolean",
@@ -25,5 +18,5 @@
     }
   },
 
-  "required": ["comm1Info", "comm2Info"]
+  "required": ["caster", "isVisible"]
 }

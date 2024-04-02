@@ -14,12 +14,12 @@ infoRep.on('change', newValue => {
   // The value of the Replicant has changed somewhere in NodeCG,
   // this could be another dashboard panel, a server initiated change,
   // or the doing of another user accessing your dashboard panel.
-  l3rdsTop.value = newValue.l3rdInfo[0];
-  l3rdsBottom.value = newValue.l3rdInfo[1];
+  l3rdsTop.value = newValue.l3rdTop;
+  l3rdsBottom.value = newValue.l3rdBottom;
 
-  panelTop.value = newValue.brbPanel[0];
-  panelBottom.value = newValue.brbPanel[1];
-  panelTimer.value = newValue.brbPanel[2];
+  panelTop.value = newValue.brbTop;
+  panelBottom.value = newValue.brbBottom;
+  panelTimer.value = newValue.brbTimer;
 
 })
 
@@ -31,16 +31,13 @@ submitButton.onclick = () => {
   // A Replicant can be modified by modifying its `value`.
   
   // l3rds
-  infoRep.value.l3rdInfo = [];
-  // fill array
-  infoRep.value.l3rdInfo.push(l3rdsTop.value);
-  infoRep.value.l3rdInfo.push(l3rdsBottom.value);
+  infoRep.value.l3rdTop = l3rdsTop.value;
+  infoRep.value.l3rdBottom = l3rdsBottom.value;
 
-  infoRep.value.brbPanel = [];
   // fill array
-  infoRep.value.brbPanel.push(panelTop.value);
-  infoRep.value.brbPanel.push(panelBottom.value);
-  infoRep.value.brbPanel.push(String(panelTimer.value));
+  infoRep.value.brbTop = panelTop.value;
+  infoRep.value.brbBottom = panelBottom.value;
+  infoRep.value.brbTimer = String(panelTimer.value);
   
 }
 

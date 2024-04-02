@@ -54,16 +54,21 @@ async function startGGPull() {
   var setLen;
   var l3rdTop;
 
-  console.log(streamLen);
+  let streamVal;
+  let queueVal
 
 
-  for (let streamVal = 0; streamVal < streamLen; streamVal++) {
+  for ( streamVal = 0; streamVal < streamLen; streamVal++) {
     queueLen += Object.keys(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"]).length;
+    console.log(responded.data.tournament.streamQueue[streamVal].sets)
 
-    for (let queueVal = 0; queueVal < queueLen; queueVal++) {
 
+    for ( queueVal = 0; queueVal < queueLen; queueVal++) {
+
+        console.log('start')
         console.log(elStreamName.value)
-        if (String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["stream"]["streamName"]).toUpperCase() === elStreamName.value.toUpperCase()) {
+        console.log(queueVal)
+        if (responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["stream"]["streamName"] === elStreamName.value) {
           console.log('true');
         if (responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["slots"][0]["entrant"] != null && responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["slots"][1]["entrant"] != null ) {
       
@@ -91,7 +96,7 @@ async function startGGPull() {
             case (qRound.substring(0,13) == "Winners Round"):
               l3rdTop = "Winners Bracket";
               setLen = "Best of 3";
-              if (eventRep.value.eventGame[0] == "USW") {
+              if (eventRep.value.event == "USW") {
                 qRound = "Winners";
               } else {
                 qRound = "Winners Bracket";
@@ -100,7 +105,7 @@ async function startGGPull() {
             case (qRound == "Winners Quarter-Final"):
               l3rdTop = "Winners Quarterfinal";
               setLen = "Best of 3";
-              if (eventRep.value.eventGame[0] == "USW") {
+              if (eventRep.value.event == "USW") {
                 qRound = "W. Quarters";
               } else {
                 qRound = "Winners Quarters";
@@ -109,7 +114,7 @@ async function startGGPull() {
             case (qRound == "Winners Semi-Final"):
               l3rdTop = "Winners Semifinal";
               setLen = "Best of 5";
-              if (eventRep.value.eventGame[0] == "USW") {
+              if (eventRep.value.event == "USW") {
                 qRound = "W. Semis";
               } else {
                 qRound = "Winners Semis";
@@ -123,7 +128,7 @@ async function startGGPull() {
             case (qRound.substring(0,12) == "Losers Round"):
               l3rdTop = "Losers Bracket";
               setLen = "Best of 3";
-              if (eventRep.value.eventGame[0] == "USW") {
+              if (eventRep.value.event == "USW") {
                 qRound = "Losers";
               } else {
                 qRound = "Losers Bracket";
@@ -132,7 +137,7 @@ async function startGGPull() {
             case (qRound == "Losers Quarter-Final"):
               l3rdTop = "Losers Quarterfinal";
               setLen = "Best of 5";
-              if (eventRep.value.eventGame[0] == "USW") {
+              if (eventRep.value.event == "USW") {
                 qRound = "L. Quarters";
               } else {
                 qRound = "Losers Quarters";
@@ -141,7 +146,7 @@ async function startGGPull() {
             case (qRound == "Losers Semi-Final"):
               l3rdTop = "Losers Semifinal";
               setLen = "Best of 5";
-              if (eventRep.value.eventGame[0] == "USW") {
+              if (eventRep.value.event == "USW") {
                 qRound = "L. Semis";
               } else {
                 qRound = "Losers Semi";
@@ -164,7 +169,7 @@ async function startGGPull() {
               break;
           }
     
-          if (eventRep.value.eventGame[1] == "GGST") {
+          if (eventRep.value.event == "GGST") {
             setLen = "Best of 5"
           };
             
@@ -232,47 +237,44 @@ async function startGGPull() {
       }
       }
     }
-
-
   }
+
+
       
       let testFunc = function(i) {
 
         // const matchRep = nodecg.Replicant('match');
         // var l3rdsRep = nodecg.Replicant('misc');
+
+        matchRep.value.players = []
+
+        let p1Obj = {
+          "tag": document.querySelectorAll("#queueP1Tag")[i].value,
+          "team": document.querySelectorAll("#queueP1Team")[i].value,
+          "score": 0,
+          "grandsIndicator": "",
+          "character": ""
+        }
+      
+        let p2Obj = {
+          "tag": document.querySelectorAll("#queueP2Tag")[i].value,
+          "team": document.querySelectorAll("#queueP2Team")[i].value,
+          "score": 0,
+          "grandsIndicator": "",
+          "character": ""
+        }
+      
+        matchRep.value.players.push(p1Obj)
+        matchRep.value.players.push(p2Obj)
+      
+        matchRep.value.bracketLoc = document.querySelectorAll("#queueBracketLoc")[i].value,
+        matchRep.value.bracketLen = document.querySelectorAll("#queueBracketLen")[i].value,
         
-        matchRep.value.player1Info = [];
-        // fill array
-        matchRep.value.player1Info.push(document.querySelectorAll("#queueP1Tag")[i].value);
-        matchRep.value.player1Info.push(document.querySelectorAll("#queueP1Team")[i].value);
-        // player 2 info
-        matchRep.value.player2Info = [];
-        // fill array
-        matchRep.value.player2Info.push(document.querySelectorAll("#queueP2Tag")[i].value);
-        matchRep.value.player2Info.push(document.querySelectorAll("#queueP2Team")[i].value);
-        // push score
-        matchRep.value.playerScore = [];
-        // fill array
-        matchRep.value.playerScore.push(0);
-        matchRep.value.playerScore.push(0);
-        // bracket info
-        matchRep.value.bracketInfo = [];
-        // fill array
-        matchRep.value.bracketInfo.push(document.querySelectorAll("#queueBracketLoc")[i].value);
-        matchRep.value.bracketInfo.push(document.querySelectorAll("#queueBracketLen")[i].value);
-
-
-        // l3rds
-        l3rdsRep.value.l3rdInfo = [];
-        // fill array
-        l3rdsRep.value.l3rdInfo.push(document.querySelectorAll("#queueBracketPhase")[i].value);
-        l3rdsRep.value.l3rdInfo.push("FX Game & Console Repair, Plano TX");
+        l3rdsRep.value.l3rdTop = document.querySelectorAll("#queueBracketPhase")[i].value;
+        l3rdsRep.value.l3rdBottom = "FX Game & Console Repair, Plano TX";
 
         let hideHTML = document.getElementById(i);
         hideHTML.style.display = 'none';
-
-
-
 
       }
 

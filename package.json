@@ -53,6 +53,13 @@
         "width": 2,
         "file": "dEventGame.html",
         "headerColor": "#525F78"
+      },
+      {
+        "name": "graphic control",
+        "title": "Graphic Control",
+        "width": 2,
+        "file": "dGraphicControl.html",
+        "headerColor": "#525F78"
       }
     ],
     "graphics": [
@@ -88,5 +95,8 @@
       }
     ]
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
 }
