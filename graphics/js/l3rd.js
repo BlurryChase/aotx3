@@ -135,14 +135,14 @@ function init(){
         switch (newValue.isVisible) {
           case false:
             console.log(newValue.isVisible)
-            gsap.to("#l3rdBG", { duration: 0.3, opacity: 0, delay: 0 })
+            gsap.to("#l3rdBG", { duration: 0.3, opacity: 1, delay: 0.3, ease: "power1.in", x: -1100 })
             gsap.to("#l3rdsTop", { duration: 0.3, opacity: 0, delay: 0 });
             gsap.to("#l3rdsBottom", { duration: 0.3, opacity: 0, delay: 0 });
             updateInfo (newValue);
             break;
           case true:
             console.log(newValue.isVisible)
-            gsap.to("#l3rdBG", { duration: 0.3, opacity: 1, delay: 0 })
+            gsap.to("#l3rdBG", { duration: 0.3, opacity: 1, delay: 0, ease: "power1.out", x: 0 })
             gsap.to("#l3rdsTop", { x: 0, startAt: { x: topTextMove }, duration: topTextTime, opacity: 1, delay: topTextDelay });
             gsap.to("#l3rdsBottom", { x: 0, startAt: { x: botTextMove }, duration: botTextTime, opacity: 1, delay: botTextDelay });
             updateInfoVisible (newValue, oldValue);
