@@ -30,7 +30,7 @@ function init(){
 
 	NodeCG.waitForReplicants(eventRep).then(() => {
 		// load replicants
-		let thisEvent = eventRep.value.eventGame[0];
+		let thisEvent = eventRep.value.event;
 		console.log(thisEvent)
 		
 		link.href = `assets/${thisEvent}/2box.css`;
@@ -64,7 +64,7 @@ function init(){
 	
 	eventRep.on('change', (newValue, oldValue) => { 
 
-		if (newValue.eventGame[0] != oldValue.eventGame[0]) {
+		if (newValue.event != oldValue.event) {
 			location.reload()
 		}
 	});
@@ -118,7 +118,7 @@ function init(){
 
     // load the images for 2 box
 
-    var images = params[eventRep.value.eventGame[0]]["sponsors"];
+    var images = params[eventRep.value.event]["sponsors"];
 
     function loadImages(imgArr){
       for(var i=0; i< imgArr.length; i++) {

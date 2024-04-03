@@ -147,7 +147,7 @@ function init(){
 		switch (newValue.isVisible) {
 			case false:
 
-				gsap.to("#commBG", { duration: 0.3, opacity: 0, delay: 0 })
+				gsap.to("#commBG", { duration: 0.3, opacity: 1, delay: 0.3, ease: "power1.in", y:500 })
 				gsap.to("#comm", { duration: 0.3, opacity: 0, delay: 0 });
 				gsap.to("#c1Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
 				gsap.to("#c2Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
@@ -156,7 +156,7 @@ function init(){
 				break;
 			case true:
 				console.log(newValue.isVisible)
-				gsap.to("#commBG", { duration: 0.3, opacity: 1, delay: 0 })
+				gsap.to("#commBG", { duration: 0.3, opacity: 1, delay: 0, ease: "power1.out", y:0 })
 				gsap.to("#comm", { duration: 0.3, opacity: 1, delay: 0 });
 				gsap.to("#c1Wrapper", { x: 0, startAt: { x: commMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
 				gsap.to("#c2Wrapper", { x: 0, startAt: { x: commMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
