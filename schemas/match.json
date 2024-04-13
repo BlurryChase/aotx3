@@ -12,8 +12,43 @@
               "team" : { "type" : ["string", "null"]},
               "score" : { "type" : "number"},
               "character": { "type" : ["string", "null"]},
+              "port": {"type": "string"},
               "grandsIndicator" : { "type" : ["string", "null"]}
-          }
+          },
+          "default" : [
+            {
+              "tag": "Chase",
+              "team": "TLOC",
+              "score": 0,
+              "character": "mario",
+              "port": "P1",
+              "grandsIndicator": ""
+            },
+            {
+              "tag": "Em",
+              "team": "",
+              "score": 0,
+              "character": "luigi",
+              "port": "P2",
+              "grandsIndicator": ""
+            },
+            {
+              "tag": "Studebacher Hoch",
+              "team": "",
+              "score": 0,
+              "character": "falco",
+              "port": "P3",
+              "grandsIndicator": ""
+            },
+            {
+              "tag": "Fury",
+              "team": "Me",
+              "score": 0,
+              "character": "fox",
+              "port": "P4",
+              "grandsIndicator": ""
+            }
+          ]
         },
         "bracketLoc": { 
           "type": "string",

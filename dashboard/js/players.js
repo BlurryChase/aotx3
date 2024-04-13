@@ -1,17 +1,19 @@
 // Scoreboard
 
 // Player 1 const
-const p1Team = document.querySelector('#player1Team');
-const p1Tag = document.querySelector('#player1Tag');
-const p1Grands = document.querySelector('#player1Grands');
-var p1Score = document.querySelector('#player1Score');
+const teams = document.querySelectorAll('.teams');
+const tags = document.querySelectorAll('.tags');
+const grands = document.querySelectorAll('.grands');
+var scores = document.querySelectorAll('.scores');
+const ports = document.querySelectorAll('.ports');
+const chars = document.querySelectorAll('.chars');
 
 
 // Player 2 const
-const p2Team = document.querySelector('#player2Team');
-const p2Tag = document.querySelector('#player2Tag');
-const p2Grands = document.querySelector('#player2Grands');
-var p2Score = document.querySelector('#player2Score');
+// const p2Team = document.querySelector('#player2Team');
+// const p2Tag = document.querySelector('#player2Tag');
+// const p2Grands = document.querySelector('#player2Grands');
+// var p2Score = document.querySelector('#player2Score');
 
 const p1Char = document.querySelector('#leftChar');
 const p2Char = document.querySelector('#rightChar');
@@ -36,18 +38,23 @@ matchRep.on('change', newValue => {
   // this could be another dashboard panel, a server initiated change,
   // or the doing of another user accessing your dashboard panel.
 
-
-  p1Tag.value = newValue.players[0].tag;
-  p1Team.value = newValue.players[0].team;
-  p1Grands.value = newValue.players[0].grandsIndicator;
-  p1Score.value = newValue.players[0].score;
-  p1Char.value = newValue.players[0].character;
+  for (let i = 0; i < 4; i++) {
+    tags[i].value = newValue.players[i].tag;
+    teams[i].value = newValue.players[i].team;
+    grands[i].value = newValue.players[i].grandsIndicator;
+    scores[i].value = newValue.players[i].score;
+    ports[i].value = newValue.players[i].port;
+    chars[i].value = newValue.players[i].character;
+    console.log(newValue.players[i])
+  }
   
-  p2Tag.value = newValue.players[1].tag;
-  p2Team.value = newValue.players[1].team;
-  p2Grands.value = newValue.players[1].grandsIndicator;
-  p2Score.value = newValue.players[1].score;
-  p2Char.value = newValue.players[1].character;
+  
+  
+  // p2Tag.value = newValue.players[1].tag;
+  // p2Team.value = newValue.players[1].team;
+  // p2Grands.value = newValue.players[1].grandsIndicator;
+  // p2Score.value = newValue.players[1].score;
+  // p2Char.value = newValue.players[1].character;
 
   bracketLoc.value = newValue.bracketLoc
   bracketLen.value = newValue.bracketLen;
@@ -66,26 +73,30 @@ submitButton.onclick = () => {
   
   matchRep.value.players = []
 
-  let p1Obj = {
-    "tag": p1Tag.value,
-    "team": p1Team.value,
-    "score": p1Score.value,
-    "grandsIndicator": p1Grands.value,
-    "character": p1Char.value,
+  for (let i = 0; i < 4; i++) {
+    let playerObj = {
+      "tag": tags[i].value,
+      "team": teams[i].value,
+      "score": scores[i].value,
+      "grandsIndicator": grands[i].value,
+      "port": ports[i].value,
+      "character": chars[i].value,
+    };
+    matchRep.value.players.push(playerObj)
   }
 
-  let p2Obj = {
-    "tag": p2Tag.value,
-    "team": p2Team.value,
-    "score": p2Score.value,
-    "grandsIndicator": p2Grands.value,
-    "character": p2Char.value,
-  }
 
-  matchRep.value.players.push(p1Obj)
-  matchRep.value.players.push(p2Obj)
+  // let p2Obj = {
+  //   "tag": p2Tag.value,
+  //   "team": p2Team.value,
+  //   "score": p2Score.value,
+  //   "grandsIndicator": p2Grands.value,
+  //   "character": p2Char.value,
+  // }
 
-  console.log(matchRep.value.players[0].tag)
+  // matchRep.value.players.push(p2Obj)
+
+  // console.log(matchRep.value.players[0].tag)
 
   matchRep.value.bracketLoc = bracketLoc.value
   matchRep.value.bracketLen = bracketLen.value

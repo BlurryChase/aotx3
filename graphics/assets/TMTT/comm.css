@@ -1,0 +1,77 @@
+@font-face{
+	font-family: MainFont;
+	src: url('../TMTT/font/NotoSans-Black.ttf');	
+}
+
+*{
+	padding:0;
+	margin:0;
+}
+
+body{
+	width: 1920px;
+	height: 1080px;
+	overflow: hidden;
+	background: transparent;
+	color: #eeeeee;
+	font-family: MainFont;
+	text-transform: uppercase;
+	text-shadow: 2px 2px black;
+
+} 
+
+#commBG{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  background: url(img/TT_commentary.png) no-repeat;
+ }
+
+.wrappers{
+	padding:0px;
+	margin:0px;
+
+	position: absolute;
+	width:	636px;
+	height: 120px;
+	top: 870px;
+
+	line-height: 120px;
+	text-align: center;	
+	font-size: 32px;
+	opacity: 0;
+
+	/* background-color: rebeccapurple; */
+}
+
+#c1Wrapper{
+	left: 164px;
+	/* background-color: rebeccapurple; */
+}
+
+#c2Wrapper{
+	right: 164px;
+	/* background-color: rebeccapurple; */
+
+}
+
+.team{
+	opacity: 0.8;
+}
+
+.twitters{
+	padding:0px;
+	margin:0px;
+
+	position: absolute;
+	width:	357px;
+	height: 30px;
+	top: -100px;
+
+	line-height: 30px;
+	text-align: center;	
+	font-size: 20px;
+	opacity: 0;
+}

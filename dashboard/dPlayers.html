@@ -59,16 +59,24 @@
 <table>
 	<tr>
 		<td>
-			<input id="player1Team" type="text" placeholder="P1 Team" size="6"></input>
+			<input id="player1Team" class="teams" type="text" placeholder="P1 Team" size="6"></input>
 		</td>
 		<td>
-			<input id="player1Tag" type="text" placeholder="P1 Tag"></input>
+			<input id="player1Tag" class="tags" type="text" placeholder="P1 Tag"></input>
 		</td>
 		<td>
-			<input id="player1Grands" type="text" placeholder="W/L" size="3"></input>	
+			<select id="player1Port" class="ports">
+				<option value="#F15959">P1</option>
+				<option value="#6565FE">P2</option>
+				<option value="#FEBE3F">P3</option>
+				<option value="#4CE44C">P4</option>
+			</select>
+		</td>
+		<td>
+			<input id="player1Grands" class="grands" type="text" placeholder="W/L" size="3"></input>	
 		</td>		
 		<td>
-			<input id="player1Score" type="number" value="0" size="4"></input>
+			<input id="player1Score" class="scores" type="number" value="0" size="4"></input>
 		</td>
 		<td rowspan="2">
 			<button id="swapButton" onclick="swapPlayers()">
@@ -78,40 +86,94 @@
 	</tr>
 	<tr>
 		<td>
-			<input id="player2Team" type="text" placeholder="P2 Team" size="6"></input>
+			<input id="player2Team" class="teams" type="text" placeholder="P1 Team" size="6"></input>
 		</td>
 		<td>
-			<input id="player2Tag" type="text" placeholder="P2 Tag"></input>
+			<input id="player2Tag" class="tags" type="text" placeholder="P1 Tag"></input>
 		</td>
 		<td>
-			<input id="player2Grands" type="text" placeholder="W/L" size="3"></input>
+			<select id="player2Port" class="ports">
+				<option value="#F15959">P1</option>
+				<option value="#6565FE">P2</option>
+				<option value="#FEBE3F">P3</option>
+				<option value="#4CE44C">P4</option>
+			</select>
+		</td>
+		<td>
+			<input id="player2Grands" class="grands" type="text" placeholder="W/L" size="3"></input>	
 		</td>		
 		<td>
-			<input id="player2Score" type="number" value="0" size="4"></input>
+			<input id="player2Score" class="scores" type="number" value="0" size="4"></input>
 		</td>
 	</tr>
 	</table>
-	<br>
-	<div>MELEE CHARACTERS</div>
+	<div>DOUBLES</div>
+	<table>
+		<tr>
+			<td>
+				<input id="player3Team" class="teams" type="text" placeholder="P3 Team" size="6"></input>
+			</td>
+			<td>
+				<input id="player3Tag" class="tags" type="text" placeholder="P3 Tag"></input>
+			</td>
+			<td>
+				<select id="player3Port" class="ports" disabled>
+					<option value="#F15959">P1</option>
+					<option value="#6565FE">P2</option>
+					<option value="#FEBE3F">P3</option>
+					<option value="#4CE44C">P4</option>
+				</select>
+			</td>
+			<td>
+				<input id="player3Grands" class="grands" type="text" placeholder="W/L" size="3" disabled></input>	
+			</td>		
+			<td>
+				<input id="player3Score" class="scores" type="number" value="0" size="4" disabled></input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input id="player4Team" class="teams" type="text" placeholder="P4 Team" size="6"></input>
+			</td>
+			<td>
+				<input id="player4Tag" class="tags" type="text" placeholder="P4 Tag"></input>
+			</td>
+			<td>
+				<select id="player4Port" class="ports" disabled>
+					<option value="#F15959">P1</option>
+					<option value="#6565FE">P2</option>
+					<option value="#FEBE3F">P3</option>
+					<option value="#4CE44C">P4</option>
+				</select>
+			</td>
+			<td>
+				<input id="player4Grands" class="grands" type="text" placeholder="W/L" size="3" disabled></input>	
+			</td>		
+			<td>
+				<input id="player4Score" class="scores" type="number" value="0" size="4" disabled></input>
+			</td>
+		</tr>
+		</table>
+	<div>MELEE/P+ CHARACTERS (SINGLES ONLY)</div>
 	<table>
 	<tr>
 		<td>
-			<input id="leftChar" type="text" placeholder="Left Character" size="14" list="meleeCharacters"></input>
+			<input id="leftChar" class="chars" type="text" placeholder="P1 Character" size="8" list="meleeCharacters"></input>
 		</td>
-		<!-- <td>
-			<input id="leftColor" type="text" placeholder="Left Color" size="8"></input>
-		</td> -->
+		<td>
+			<input id="leftColor" class="chars" type="text" placeholder="P2 Color" size="8" list="meleeCharacters"></input>
+		</td>
 	</tr>
 	<tr>
 		<td>
-			<input id="rightChar" type="text" placeholder="Right Character" size="14" list="meleeCharacters"></input>
+			<input id="rightChar" class="chars" type="text" placeholder="P3 Character" size="8" disabled></input>
 		</td>
-		<!-- <td>
-			<input id="rightColor" type="text" placeholder="Right Color" size="8"></input>
-		</td> -->
+		<td>
+			<input id="rightColor" class="chars" type="text" placeholder="P4 Character" size="8" disabled></input>
+		</td>
 	</tr>
 </table>
-<br>
+<div>BRACKET INFO</div>
 <table>
 	<tr>
 		<td>
