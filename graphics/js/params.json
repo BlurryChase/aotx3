@@ -115,6 +115,39 @@
       "TLOCSuplex",
       "teleperformance/white_solid"
     ]
+  },
+  "TMTT" :{
+    "nameSize" : 40,
+    "nameMove" : [ "-60px", "60px"],
+    "nameTime" : 0.3,
+  
+    "rdSize" : 40,
+    "rdTime" : 0.2,
+  
+    "scTime" : 0.3,
+    "scDelay" : 0,
+
+
+    "topTextSize" : 32,
+    "topTextMove" : "-100px",
+    "topTextTime" : 0.3,
+    "topTextDelay" : 0.3,
+
+    "botTextSize" : 24,
+    "botTextMove" : "100px",
+    "botTextTime" : 0.3,
+    "botTextDelay" : 0.3,
+  
+    
+    "commNameSize" : 42,
+    "commMove" : ["-144px", "144px"],
+    "commNameTime" : 0.3,
+    "commnameDelay" : 0.1,
+
+    "twitterSize" : 20,
+    "twitterMove" : ["-87px", "87px"],
+    "twitterTime" : 0.3,
+    "twitterDelay" : 0.1
   }
   
 

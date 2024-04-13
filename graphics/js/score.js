@@ -128,7 +128,7 @@ eventRep.on('change', (newValue, oldValue) => {
 				let losers;
 
 
-				console.log(eventRep.value.game);
+				// console.log(eventRep.value.game);
 				if (eventRep.value.game === 'GGST' || eventRep.value.game === 'SF6') {
 					winners = 'W';
 					losers = 'L';
@@ -184,13 +184,14 @@ eventRep.on('change', (newValue, oldValue) => {
 
 				document.querySelectorAll(".characters")[i].setAttribute("src", `assets/MNM/img/chars/${sideVal[i]}/${doodle.players[i].character.toLowerCase()}.png`);
 
-				bracketLoc.innerHTML = doodle.bracketLoc;
-				bracketLen.innerHTML = doodle.bracketLen;
-
-				grandsStuff ( doodle );
+				document.querySelectorAll(".ports")[i].style.backgroundColor = matchRep.value.players[i].port;
 				
-
+				
 			}
+			bracketLoc.innerHTML = doodle.bracketLoc;
+			bracketLen.innerHTML = doodle.bracketLen;
+
+			grandsStuff ( doodle );
 
 		}
 
@@ -245,15 +246,20 @@ eventRep.on('change', (newValue, oldValue) => {
 							gsap.to(document.querySelectorAll(".characters")[x], {duration: nameTime, opacity:1});
 						}
 					})};
-
-
-				}
+				};
+				
+				// check if PORT changed 
+				
+				if (newShit.players[x].port != oldShit.players[x].port) {
+					document.querySelectorAll(".ports")[x].style.backgroundColor = matchRep.value.players[x].port;
+				};
 
 				// check if BRACKET changed
 
 				if (newShit.bracketLoc != oldShit.bracketLoc || newShit.bracketLen != oldShit.bracketLen) {
 					switch (eventRep.value.event) {
 						case ('USW'):
+						case ('TMTT'):
 							gsap.to("#rdWrapper", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
 							bracketLoc.innerHTML = matchRep.value.bracketLoc;
 							bracketLen.innerHTML = matchRep.value.bracketLen;
@@ -307,9 +313,16 @@ eventRep.on('change', (newValue, oldValue) => {
 							textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
 							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
 						break;
-						case ('MNM'):
+						case ('TMTT'):
+							spacer.innerHTML = " - "
+							textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
 							gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
 							gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});
+							break;
+						case ('MNM'):
+							gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
+							gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});						
 						default:
 							spacer.innerHTML = ""
 							textFit(document.getElementsByClassName('rounds'), { maxFontSize: rdSize, alignVert: true });
