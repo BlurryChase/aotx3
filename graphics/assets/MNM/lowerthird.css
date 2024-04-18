@@ -1,0 +1,73 @@
+@font-face {
+  font-family: MainFont;
+  src: url('../fonts/Tungsten/Tungsten-Bold.ttf');
+}
+@font-face {
+  font-family: SecondaryFont;
+  src: url('../fonts/Tungsten/Tungsten-Medium.ttf');
+
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: transparent;
+  color: #d5d9e1;
+  font-family: MainFont;
+  text-transform: uppercase;
+}
+
+#l3rdBG {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  background: url(img/l3rd.png) no-repeat;
+}
+
+#l3rdsTop {
+  padding: 0px;
+  margin: 0px;
+
+  position: absolute;
+  width: 457px;
+  height: 100px;
+  top: 859px;
+  left: 254px;
+
+  line-height: 60px;
+  text-align: left;
+  font-size: 74px;
+
+  opacity: 0;
+
+  /* background-color: aqua; */
+}
+
+#l3rdsBottom {
+  padding: 0px;
+  margin: 0px;
+
+  position: absolute;
+  width: 457px;
+  height: 80px;
+  top: 909px;
+  left: 254px;
+
+  line-height: 60px;
+  text-align: left;
+  font-size: 34px;
+
+  opacity: 0;
+  font-family: SecondaryFont;
+
+  /* background-color: aqua; */
+}
+

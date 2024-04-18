@@ -90,6 +90,7 @@ async function startGGPull() {
           }
           
           let qRound = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["fullRoundText"]) // full round name
+          let l3rdBottom = "";
           // let qPhase = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["phaseGroup"]["phase"]["name"]) // bracket name
     
           switch (true) {
@@ -224,6 +225,12 @@ async function startGGPull() {
             </td>
           </tr>
           <tr>
+            <td>
+              <input id="queueLowerThirdBottom"
+              type="text" value="${l3rdBottom}"></input>
+            </td>
+          </tr>
+          <tr>
             <td id="btn${correctedNum}">
               <button id="pushButton" onclick="testFunc(${correctedNum})">PUSH TO STREAM</button>
             </td>
@@ -271,7 +278,7 @@ async function startGGPull() {
         matchRep.value.bracketLen = document.querySelectorAll("#queueBracketLen")[i].value,
         
         l3rdsRep.value.l3rdTop = document.querySelectorAll("#queueBracketPhase")[i].value;
-        l3rdsRep.value.l3rdBottom = "FX Game & Console Repair, Plano TX";
+        l3rdsRep.value.l3rdBottom = document.querySelectorAll("#queueLowerThirdBottom")[i].value;
 
         let hideHTML = document.getElementById(i);
         hideHTML.style.display = 'none';

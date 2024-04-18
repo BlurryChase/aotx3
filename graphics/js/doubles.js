@@ -14,8 +14,6 @@ function init(){
 var thisGame;
 
 var startup = true;
-var isVisible = false;
-
 var nameSize = 40;
 var nameMove = ['-60px', '-60px', '-60px', '-60px'];
 var nameTime = 0.3;
@@ -25,6 +23,48 @@ var rdTime = 0.2;
 
 var scTime = 0.3;
 var scDelay = 0;
+
+const eventRep = nodecg.Replicant('events') 
+// create the link for the html page
+let head = document.getElementsByTagName('HEAD')[0];
+
+let link = document.createElement('link');
+
+link.rel = 'stylesheet';
+
+link.type = 'text/css';
+
+
+NodeCG.waitForReplicants(eventRep).then(() => {
+    // load replicants
+    thisEvent = eventRep.value.event;
+    thisGame = eventRep.value.game;
+    
+    link.href = `assets/${thisEvent}/doubles_${thisGame}.css`;
+    
+    head.appendChild(link);
+
+    nameSize = params[thisEvent]["nameSize"]; // name size
+    nameTime = params[thisEvent]["nameTime"]; // name time
+
+    nameMove = params[thisEvent]["nameMove"]; // px move for players
+    
+    rdSize = params[thisEvent]["rdSize"]; // round size
+    rdTime = params[thisEvent]["rdTime"]; // round time
+    
+    scTime = params[thisEvent]["scTime"]; // score timer
+    scDelay = params[thisEvent]["scDelay"]; // delay for score timer
+
+	});
+
+eventRep.on('change', (newValue, oldValue) => { 
+
+    if (newValue.event != oldValue.event || newValue.game != oldValue.game) {
+        location.reload()
+        startup = true;
+    }
+
+});
 
 
 	// create the link for the html page
@@ -89,41 +129,24 @@ var scDelay = 0;
 			for ( let i = 0; i < 4; i++ ) {
 
 				document.querySelectorAll(".names")[i].innerHTML = doodle.players[i].tag;
-
-
 				document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team;
-
 				textFit(document.querySelectorAll('.wrappers')[i], { maxFontSize: nameSize, alignVert: true });
-
-				
-				document.querySelectorAll(".scores")[i].innerHTML = doodle.players[i].score;
-
-				document.querySelectorAll(".ports")[i].style.backgroundColor = matchRep.value.players[i].port;
-				
-				
+				document.querySelectorAll(".scores")[i].innerHTML = doodle.players[i].score;				
 			}
 			bracketLoc.innerHTML = doodle.bracketLoc;
 			bracketLen.innerHTML = doodle.bracketLen;
-
 			grandsStuff ( doodle );
-
 		}
 
 		function updateInfoVisible ( newShit , oldShit ) {
 
 			for (let x = 0; x < 4; x++) {
 
-
 				// check if either TAG or TEAM changed
 				if (newShit.players[x].tag != oldShit.players[x].tag || newShit.players[x].team != oldShit.players[x].team) {
 					gsap.to(document.querySelectorAll(".wrappers")[x], {x:nameMove[x], startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
-		
 						document.querySelectorAll(".names")[x].innerHTML = newShit.players[x].tag;
-						console.log(document.querySelectorAll(".names")[x].innerHTML)
-
 						document.querySelectorAll(".teams")[x].innerHTML = newShit.players[x].team;
-						
-
 						textFit(document.querySelectorAll(".wrappers")[x], {maxFontSize:nameSize, alignVert:true});
 						gsap.to(document.querySelectorAll(".wrappers")[x], {x:0, startAt:{x:nameMove[x]}, duration:nameTime, opacity:1, delay:0});
 					}});
@@ -139,10 +162,10 @@ var scDelay = 0;
 					}
 				})};
 
-				// check if PORT changed 
-				if (newShit.players[x].port != oldShit.players[x].port) {
-					document.querySelectorAll(".ports")[x].style.backgroundColor = matchRep.value.players[x].port;
-			};
+			// 	// check if PORT changed 
+			// 	if (newShit.players[x].port != oldShit.players[x].port) {
+			// 		document.querySelectorAll(".ports")[x].style.backgroundColor = matchRep.value.players[x].port;
+			// };
 
 				// check if BRACKET changed
 
@@ -167,7 +190,6 @@ var scDelay = 0;
 									gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
 								}
 							})};
-				
 							if (newShit.bracketLen != oldShit.bracketLen) {
 								gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
 									bracketLen.innerHTML = newShit.bracketLen;
@@ -192,20 +214,15 @@ var scDelay = 0;
 			// Load match replicant
 			NodeCG.waitForReplicants(matchRep).then(() => {
 				matchRep.value.isVisible = true;
-
 				updateInfo (matchRep.value);
-
-				
-						spacer.innerHTML = " - "
-						textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
-						gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
-
-						gsap.to(".wrappers", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
-						gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
-								
-					});
+				spacer.innerHTML = " - "
+				textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+				gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+				gsap.to(".wrappers", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+				gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
+			});
 					
-				}
+		};
 						
 						
 			matchRep.on('change', (newValue, oldValue) => {
@@ -241,8 +258,6 @@ var scDelay = 0;
 							updateInfo (newValue);
 					}
 				}
-
-
 		});
 	}
 }

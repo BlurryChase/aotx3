@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src="https://kit.fontawesome.com/2fe116318a.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+
   <meta charset="UTF-8">
 </head>
 <body>
@@ -55,7 +56,7 @@
 	<i class="fa-solid fa-x"> CLEAR</i>
 </button>
 <br><br>
-<div>SINGLES</div>
+<div>SINGLES / TEAM 1</div>
 <table>
 	<tr>
 		<td>
@@ -64,7 +65,7 @@
 		<td>
 			<input id="player1Tag" class="tags" type="text" placeholder="P1 Tag"></input>
 		</td>
-		<td>
+		<td style="display: none;">
 			<select id="player1Port" class="ports">
 				<option value="#F15959">P1</option>
 				<option value="#6565FE">P2</option>
@@ -79,7 +80,7 @@
 			<input id="player1Score" class="scores" type="number" value="0" size="4"></input>
 		</td>
 		<td rowspan="2">
-			<button id="swapButton" onclick="swapPlayers()">
+			<button id="swapButton" onclick="swapNames(0)">
 				<i class="fa-solid fa-rotate"> SWAP</i>
 			</button>
 		</td>
@@ -91,7 +92,7 @@
 		<td>
 			<input id="player2Tag" class="tags" type="text" placeholder="P1 Tag"></input>
 		</td>
-		<td>
+		<td  style="display: none;">
 			<select id="player2Port" class="ports">
 				<option value="#F15959">P1</option>
 				<option value="#6565FE">P2</option>
@@ -107,7 +108,7 @@
 		</td>
 	</tr>
 	</table>
-	<div>DOUBLES</div>
+	<div>DOUBLES / TEAM 2</div>
 	<table>
 		<tr>
 			<td>
@@ -116,7 +117,7 @@
 			<td>
 				<input id="player3Tag" class="tags" type="text" placeholder="P3 Tag"></input>
 			</td>
-			<td>
+			<td style="display: none;">
 				<select id="player3Port" class="ports" disabled>
 					<option value="#F15959">P1</option>
 					<option value="#6565FE">P2</option>
@@ -124,11 +125,16 @@
 					<option value="#4CE44C">P4</option>
 				</select>
 			</td>
-			<td>
+			<td style="display: none;">
 				<input id="player3Grands" class="grands" type="text" placeholder="W/L" size="3" disabled></input>	
 			</td>		
-			<td>
+			<td style="display: none;">
 				<input id="player3Score" class="scores" type="number" value="0" size="4" disabled></input>
+			</td>
+			<td rowspan="2">
+				<button id="swapButton" onclick="swapNames(2)">
+					<i class="fa-solid fa-rotate"> SWAP</i>
+				</button>
 			</td>
 		</tr>
 		<tr>
@@ -138,7 +144,7 @@
 			<td>
 				<input id="player4Tag" class="tags" type="text" placeholder="P4 Tag"></input>
 			</td>
-			<td>
+			<td style="display: none;">
 				<select id="player4Port" class="ports" disabled>
 					<option value="#F15959">P1</option>
 					<option value="#6565FE">P2</option>
@@ -146,30 +152,30 @@
 					<option value="#4CE44C">P4</option>
 				</select>
 			</td>
-			<td>
+			<td style="display: none;">
 				<input id="player4Grands" class="grands" type="text" placeholder="W/L" size="3" disabled></input>	
 			</td>		
-			<td>
+			<td style="display: none;">
 				<input id="player4Score" class="scores" type="number" value="0" size="4" disabled></input>
 			</td>
 		</tr>
 		</table>
-	<div>MELEE/P+ CHARACTERS (SINGLES ONLY)</div>
+	<div>MELEE</div>
 	<table>
 	<tr>
 		<td>
-			<input id="leftChar" class="chars" type="text" placeholder="P1 Character" size="8" list="meleeCharacters"></input>
+			<input id="p1Char" class="chars" type="text" placeholder="P1 Character" size="8" list="meleeCharacters"></input>
 		</td>
 		<td>
-			<input id="leftColor" class="chars" type="text" placeholder="P2 Color" size="8" list="meleeCharacters"></input>
+			<input id="p2Char" class="chars" type="text" placeholder="P2 Character" size="8" list="meleeCharacters"></input>
 		</td>
 	</tr>
-	<tr>
+	<tr style="display: none;">
 		<td>
-			<input id="rightChar" class="chars" type="text" placeholder="P3 Character" size="8" disabled></input>
+			<input id="p3Char" class="chars" type="text" placeholder="P3 Character" size="8" disabled></input>
 		</td>
 		<td>
-			<input id="rightColor" class="chars" type="text" placeholder="P4 Character" size="8" disabled></input>
+			<input id="p4Char" class="chars" type="text" placeholder="P4 Character" size="8" disabled></input>
 		</td>
 	</tr>
 </table>
