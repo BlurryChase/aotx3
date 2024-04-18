@@ -9,16 +9,6 @@ const ports = document.querySelectorAll('.ports');
 const chars = document.querySelectorAll('.chars');
 
 
-// Player 2 const
-// const p2Team = document.querySelector('#player2Team');
-// const p2Tag = document.querySelector('#player2Tag');
-// const p2Grands = document.querySelector('#player2Grands');
-// var p2Score = document.querySelector('#player2Score');
-
-const p1Char = document.querySelector('#leftChar');
-const p2Char = document.querySelector('#rightChar');
-
-
 // Bracket Location & Length
 const bracketLoc = document.querySelector('#bracketLoc');
 const bracketLen = document.querySelector('#bracketLen');
@@ -85,79 +75,67 @@ submitButton.onclick = () => {
     matchRep.value.players.push(playerObj)
   }
 
-
-  // let p2Obj = {
-  //   "tag": p2Tag.value,
-  //   "team": p2Team.value,
-  //   "score": p2Score.value,
-  //   "grandsIndicator": p2Grands.value,
-  //   "character": p2Char.value,
-  // }
-
-  // matchRep.value.players.push(p2Obj)
-
-  // console.log(matchRep.value.players[0].tag)
-
   matchRep.value.bracketLoc = bracketLoc.value
   matchRep.value.bracketLen = bracketLen.value
 };
 
 // Swap Button
-const swapButton = document.querySelector('#swapButton');
-
-swapButton.onclick = () => {
-
-  var p1Array = [];
-  var p2Array = [];
-
-  // fill arrays
-  p1Array.push(p1Tag.value);
-  p1Array.push(p1Team.value);
-  p1Array.push(p1Grands.value);
-  p1Array.push(Number(p1Score.value));
-  p1Array.push(p1Char.value)
-
-  // fill array
-  p2Array.push(p2Tag.value);
-  p2Array.push(p2Team.value);
-  p2Array.push(p2Grands.value);
-  p2Array.push(Number(p2Score.value));
-  p2Array.push(p2Char.value)
-
-
-  // swap arrays
-  var tmpArray = p1Array;
-  p1Array = p2Array;
-  p2Array = tmpArray;
-
-
-  document.getElementById('player1Tag').value = p1Array[0];
-  document.getElementById('player1Team').value = p1Array[1];
-  document.getElementById('player1Grands').value = p1Array[2];
-  document.getElementById('player1Score').value = p1Array[3];
-  document.getElementById('leftChar').value = p1Array[4];
+  function swapNames (vari) {
+    
+    var swapArray = [];
+    
+    for (let i = vari; i < vari + 2; i++) {
+      
+      let swapPlayerObj = {
+        "tag": tags[i].value,
+        "team": teams[i].value,
+        "score": scores[i].value,
+        "grandsIndicator": grands[i].value,
+        "port": ports[i].value,
+        "character": chars[i].value,
+      };
+      swapArray.push(swapPlayerObj);
+    };
   
-  // Player 2   
-  document.getElementById('player2Tag').value = p2Array[0];
-  document.getElementById('player2Team').value = p2Array[1];
-  document.getElementById('player2Grands').value = p2Array[2];
-  document.getElementById('player2Score').value = p2Array[3];
-  document.getElementById('rightChar').value = p2Array[4];
-
-
-}
+  
+    // swap arrays
+    var tmpArray = swapArray[0];
+    swapArray[0] = swapArray[1];
+    swapArray[1] = tmpArray;
+  
+    for (let x = 0; x < 2; x++) {
+      tags[x + vari].value = swapArray[x].tag;
+      teams[x + vari].value = swapArray[x].team;
+      scores[x + vari].value = swapArray[x].score;
+      grands[x + vari].value = swapArray[x].grandsIndicator;
+      ports[x + vari].value = swapArray[x].port;
+      chars[x + vari].value = swapArray[x].character
+      
+    };
+};
 
 const clearButton = document.querySelector('#clearButton');
 
 clearButton.onclick = () => {
-  document.getElementById('player1Tag').value = "";
-  document.getElementById('player1Team').value = "";
-  document.getElementById('player1Grands').value = "";
-  document.getElementById('player1Score').value = 0;
+
+  for (let i = 0; i < 4; i++) {
+    tags[i].value = "";
+    teams[i].value = "";
+    grands[i].value = "";
+    scores[i].value = 0;
+    ports[i].value = "";
+    chars[i].value = "";
+  }
+
+
+  // document.getElementById('player1Tag').value = "";
+  // document.getElementById('player1Team').value = "";
+  // document.getElementById('player1Grands').value = "";
+  // document.getElementById('player1Score').value = 0;
   
-  // Player 2   
-  document.getElementById('player2Tag').value = "";
-  document.getElementById('player2Team').value = "";
-  document.getElementById('player2Grands').value = "";
-  document.getElementById('player2Score').value = 0;
+  // // Player 2   
+  // document.getElementById('player2Tag').value = "";
+  // document.getElementById('player2Team').value = "";
+  // document.getElementById('player2Grands').value = "";
+  // document.getElementById('player2Score').value = 0;
 }
