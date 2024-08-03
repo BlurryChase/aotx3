@@ -34,8 +34,7 @@
 
     "sponsors": [
       "fx_test",
-      "tloc1",
-      "teleperformance/white_solid"
+      "tloc1"
     ]
   },
   "MNM": {
@@ -73,8 +72,7 @@
 
     "sponsors": [
       "fx_test",
-      "tloc1",
-      "teleperformance/white_solid"
+      "tloc1"
     ]
   },
   "SUPLEX" :{
@@ -112,8 +110,7 @@
 
     "sponsors": [
       "FXSuplex2",
-      "TLOCSuplex",
-      "teleperformance/white_solid"
+      "TLOCSuplex"
     ]
   },
   "TMTT" :{
