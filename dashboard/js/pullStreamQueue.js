@@ -9,6 +9,14 @@ async function startGGPull() {
             streamName
           }
           fullRoundText
+          event {
+            tournament {
+              name
+            }
+            videogame {
+              name
+            }
+          }
           phaseGroup {
             phase {
               name
@@ -90,83 +98,59 @@ async function startGGPull() {
           }
           
           let qRound = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["fullRoundText"]) // full round name
-          let l3rdBottom = "";
-          // let qPhase = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["phaseGroup"]["phase"]["name"]) // bracket name
+          // let l3rdBottom = "FX Games & Console Repair";
+          let l3rdBottom = String(responded["data"]["tournament"]["streamQueue"][streamVal]["sets"][queueVal]["event"]["tournament"]["name"]) // bracket name
     
           switch (true) {
             case (qRound.substring(0,13) == "Winners Round"):
               l3rdTop = "Winners Bracket";
               setLen = "Best of 3";
-              if (eventRep.value.event == "USW") {
-                qRound = "Winners";
-              } else {
-                qRound = "Winners Bracket";
-              }
+              qRound = "Winners Bracket";
               break;
             case (qRound == "Winners Quarter-Final"):
-              l3rdTop = "Winners Quarterfinal";
+              l3rdTop = "Winners Quarterfinals";
               setLen = "Best of 3";
-              if (eventRep.value.event == "USW") {
-                qRound = "W. Quarters";
-              } else {
-                qRound = "Winners Quarters";
-              }
+              qRound = "Winners Quarters";
               break;
             case (qRound == "Winners Semi-Final"):
               l3rdTop = "Winners Semifinal";
               setLen = "Best of 5";
-              if (eventRep.value.event == "USW") {
-                qRound = "W. Semis";
-              } else {
-                qRound = "Winners Semis";
-              }
+              qRound = "Winners Semis";
               break;
             case (qRound == "Winners Final"):
-              l3rdTop = "Winners Final";
+              l3rdTop = "Winners Finals";
               setLen = "Best of 5";
-              qRound = "Winners Final";
+              qRound = "Winners Finals";
               break;
             case (qRound.substring(0,12) == "Losers Round"):
               l3rdTop = "Losers Bracket";
               setLen = "Best of 3";
-              if (eventRep.value.event == "USW") {
-                qRound = "Losers";
-              } else {
-                qRound = "Losers Bracket";
-              }
+              qRound = "Losers Bracket";
               break;
             case (qRound == "Losers Quarter-Final"):
-              l3rdTop = "Losers Quarterfinal";
+              l3rdTop = "Losers Quarterfinals";
               setLen = "Best of 5";
-              if (eventRep.value.event == "USW") {
-                qRound = "L. Quarters";
-              } else {
-                qRound = "Losers Quarters";
-              }
+              qRound = "Losers Quarters";
               break;     
             case (qRound == "Losers Semi-Final"):
-              l3rdTop = "Losers Semifinal";
+              l3rdTop = "Losers Semifinals";
               setLen = "Best of 5";
-              if (eventRep.value.event == "USW") {
-                qRound = "L. Semis";
-              } else {
-                qRound = "Losers Semi";
-              }
+              qRound = "Losers Semis";
               break;
             case (qRound == "Losers Final"):
-              l3rdTop = "Losers Final";
+              l3rdTop = "Losers Finals";
               setLen = "Best of 5";
-              qRound = "Losers Final";
+              qRound = "Losers Finals";
               break;
             case (qRound == "Grand Final"):
-              l3rdTop = "Grand Final";
+              l3rdTop = "Grand Finals";
               setLen = "Best of 5";
-              qRound = "Grand Final";
+              qRound = "Grand Finals";
               break;
             case (qRound == "Grand Final Reset"):
-              l3rdTop = "True Final";
+              l3rdTop = "True Finals";
               setLen = "Best of 5";
-              qRound = "True Final";
+              qRound = "True Finals";
               break;
           }
     
@@ -253,32 +237,43 @@ async function startGGPull() {
         // const matchRep = nodecg.Replicant('match');
         // var l3rdsRep = nodecg.Replicant('misc');
 
-        matchRep.value.players = []
+        if (keepPlayers.checked === true){
+          matchRep.value.players = []
 
-        let p1Obj = {
-          "tag": document.querySelectorAll("#queueP1Tag")[i].value,
-          "team": document.querySelectorAll("#queueP1Team")[i].value,
-          "score": 0,
-          "grandsIndicator": "",
-          "character": ""
-        }
-      
-        let p2Obj = {
-          "tag": document.querySelectorAll("#queueP2Tag")[i].value,
-          "team": document.querySelectorAll("#queueP2Team")[i].value,
-          "score": 0,
-          "grandsIndicator": "",
-          "character": ""
-        }
-      
-        matchRep.value.players.push(p1Obj)
-        matchRep.value.players.push(p2Obj)
-      
-        matchRep.value.bracketLoc = document.querySelectorAll("#queueBracketLoc")[i].value,
-        matchRep.value.bracketLen = document.querySelectorAll("#queueBracketLen")[i].value,
+          let p1Obj = {
+            "tag": document.querySelectorAll("#queueP1Tag")[i].value,
+            "team": document.querySelectorAll("#queueP1Team")[i].value,
+            "score": 0,
+            "grandsIndicator": "",
+            "character": ""
+          }
+  
         
-        l3rdsRep.value.l3rdTop = document.querySelectorAll("#queueBracketPhase")[i].value;
-        l3rdsRep.value.l3rdBottom = document.querySelectorAll("#queueLowerThirdBottom")[i].value;
+          let p2Obj = {
+            "tag": document.querySelectorAll("#queueP2Tag")[i].value,
+            "team": document.querySelectorAll("#queueP2Team")[i].value,
+            "score": 0,
+            "grandsIndicator": "",
+            "character": ""
+          }
+        
+          matchRep.value.players.push(p1Obj)
+          matchRep.value.players.push(p2Obj)
+        }
+
+        if (keepBracket.checked === true) {
+          matchRep.value.bracketLoc = document.querySelectorAll("#queueBracketLoc")[i].value;
+          matchRep.value.bracketLen = document.querySelectorAll("#queueBracketLen")[i].value;
+        }
+
+        if (keepLowerThirdsTop.checked === true) {
+          l3rdsRep.value.l3rdTop = document.querySelectorAll("#queueBracketPhase")[i].value;
+        }
+        
+        if (keepLowerThirdsBottom.checked === true) {
+          l3rdsRep.value.l3rdBottom = document.querySelectorAll("#queueLowerThirdBottom")[i].value;
+        }
+        
 
         let hideHTML = document.getElementById(i);
         hideHTML.style.display = 'none';
@@ -290,4 +285,3 @@ async function startGGPull() {
       queueSetsBtn.onclick = () => {
         startGGPull();
       };
-

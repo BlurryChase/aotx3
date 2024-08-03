@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/streamqueue.css">
   <meta charset="UTF-8">
 </head>
 <body>
@@ -9,17 +10,41 @@
 <input id="apiKey" type="password" size="50">
 <br><br> -->
 <div><b>Event Slug Input</b></div>
-<input id="eventSlug" type="text" value="tournament/chase-testourney" size="40">
+<input id="eventSlug" type="text" value="tournament/low-tide-city-2024-6" size="40">
 <br><br>
 <button id="streamsBtn">PULL STREAMS</button>
 
-<div><b>Stream Name</b></div>
-<select name="stream" id="streamName">
-
-</select>
-<br><br>
-<button id="queueSetsBtn">PULL SETS</button>
-<br><br>
+<div id="container">
+	<div id="StreamInfo">
+		<div><b>Stream Name</b></div>
+		<select name="stream" id="streamName">
+		
+		</select>
+		<br><br>
+		<button id="queueSetsBtn">PULL SETS</button>
+		<br><br>
+	</div>
+	<div id="infoParams">
+		<table id="infoTable">
+			<tr>
+				<th>Players</th>
+				<td><input type="checkbox" id="keepPlayers" checked="checked"></td>
+			</tr>
+			<tr>
+				<th>Bracket</th>
+				<td><input type="checkbox" id="keepBracket"></td>
+			</tr>
+			<tr>
+				<th>Lower Thirds Top</th>
+				<td><input type="checkbox" id="keepLowerThirdsTop"></td>
+			</tr>
+			<tr>
+				<th>Lower Thirds Bottom</th>
+				<td><input type="checkbox" id="keepLowerThirdsBottom"></td>
+			</tr>
+		</table>
+	</div>
+</div>
 <div><b>Results</b></div>
 <div id="queueOutput"
 style="overflow: auto;

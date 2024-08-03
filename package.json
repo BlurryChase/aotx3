@@ -10,11 +10,12 @@
   },
   "files": [
     "dashboard",
-    "graphics"
+    "graphics",
+    "extension"
   ],
   "keywords": [
     "",
-    "nodecg-bundle"
+    "nodeFGC"
   ],
   "nodecg": {
     "compatibleRange": "^2.1.8",
@@ -102,6 +103,6 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "ws": "^8.16.0"
+    "ws": "^8.18.0"
   }
 }
