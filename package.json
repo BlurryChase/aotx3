@@ -22,7 +22,7 @@
       {
         "name": "players",
         "title": "Players",
-        "width": 3,
+        "width": 4,
         "file": "dPlayers.html",
         "headerColor": "#525F78"
       },
@@ -35,7 +35,7 @@
       },
       {
         "name": "l3rds",
-        "title": "Lower Thirds",
+        "title": "Lower Thirds & Downtime",
         "width": 3,
         "file": "dL3rds.html",
         "headerColor": "#525F78"
@@ -64,7 +64,12 @@
     ],
     "graphics": [
       {
-        "file": "score.html",
+        "file": "singles.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "doubles.html",
         "width": 1920,
         "height": 1080
       },
@@ -74,7 +79,7 @@
         "height": 1080
       },
       {
-        "file": "l3rd.html",
+        "file": "lowerthird.html",
         "width": 1920,
         "height": 1080
       },

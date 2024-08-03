@@ -1,0 +1,145 @@
+@font-face {
+	font-family: MainFont;
+	src: url('../fonts/FranklinGothicHeavyRegular.ttf');	
+
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	width: 1920px;
+	height: 1080px;
+	overflow: hidden;
+	background: transparent;
+	color: white;
+	font-family: MainFont;
+	text-transform: uppercase;
+}
+
+#scoreBG {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background: url(img/singles.png) no-repeat;
+	opacity: 0;
+}
+
+#grandsBG {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background: url(img/grands.png) no-repeat;
+	opacity: 0;
+}
+
+.wrappers {
+	padding: 0px;
+	margin: 0px;
+
+	position: absolute;
+	width: 400px;
+	height: 56px;
+	top: 13px;
+
+	line-height: 56px;
+	text-align: center;
+	font-size: 40px;
+	opacity: 0;
+
+	/* background-color: brown; */
+}
+
+#p1Wrapper {
+	left: 410px;
+}
+
+#p2Wrapper {
+	left: 1110px;
+}
+
+
+.teams{
+	/* opacity: 0.8; */
+	color: #00d6ff;
+}
+
+/* #p1Team {
+	color: #eb2532;
+}
+
+#p2Team {
+	color: #0078dd;
+} */
+
+.scores {
+	position: absolute;
+	width: 54px;
+	height: 48px;
+
+	line-height: 48px;
+	text-align: center;
+	font-size: 40px;
+	top: 17px;
+	opacity: 0;
+}
+
+#p1Score {
+	left: 839px;
+}
+
+#p2Score {
+	left: 1028px;
+}
+
+#rdWrapper {
+	position: absolute;
+	width: 229px;
+	height: 46px;
+	left: 32px;
+	top: 51px;
+
+	line-height: 46px;
+	text-align: center;
+	font-size: 15px;
+
+	opacity: 0;
+}
+
+#gameHold {
+	display: none;
+}
+
+.indicator {
+	position: absolute;
+	width: 95px;
+	height: 23px;
+	top: 840px;	
+
+	line-height: 23px;
+	text-transform: uppercase;
+	font-size: 15px;
+	text-align: center;
+
+	/* background-color: red; */
+	
+}
+
+#p1Grands{
+	left: 143px;
+}
+
+#p2Grands{
+	left: 1659px;
+}
+
+.characters {
+	position: absolute;
+	top: -300px;
+}

@@ -1,0 +1,267 @@
+window.onload = init;
+
+var params = {}
+fetch("js/params.json")
+	.then((res) => res.json())
+	.then((data) => {
+		params = data;
+		console.log(data);
+	})
+
+function init(){
+
+	var thisEvent;
+var thisGame;
+
+var startup = true;
+var nameSize = 40;
+var nameMove = ['-60px', '-60px', '-60px', '-60px'];
+var nameTime = 0.3;
+
+var rdSize = 40;
+var rdTime = 0.2;
+
+var scTime = 0.3;
+var scDelay = 0;
+
+const eventRep = nodecg.Replicant('events') 
+// create the link for the html page
+let head = document.getElementsByTagName('HEAD')[0];
+
+let link = document.createElement('link');
+
+link.rel = 'stylesheet';
+
+link.type = 'text/css';
+
+
+NodeCG.waitForReplicants(eventRep).then(() => {
+    // load replicants
+    thisEvent = eventRep.value.event;
+    thisGame = eventRep.value.game;
+    
+    link.href = `assets/${thisEvent}/doubles_${thisGame}.css`;
+    
+    head.appendChild(link);
+
+    nameSize = params[thisEvent]["nameSize"]; // name size
+    nameTime = params[thisEvent]["nameTime"]; // name time
+
+    nameMove = params[thisEvent]["nameMove"]; // px move for players
+    
+    rdSize = params[thisEvent]["rdSize"]; // round size
+    rdTime = params[thisEvent]["rdTime"]; // round time
+    
+    scTime = params[thisEvent]["scTime"]; // score timer
+    scDelay = params[thisEvent]["scDelay"]; // delay for score timer
+
+	});
+
+eventRep.on('change', (newValue, oldValue) => { 
+
+    if (newValue.event != oldValue.event || newValue.game != oldValue.game) {
+        location.reload()
+        startup = true;
+    }
+
+});
+
+
+	// create the link for the html page
+	
+	function scoreboard() {
+		if (startup == true) {
+			getData();
+			startup = false;
+			animated = true;
+		}
+		else {
+			getData();
+		}
+	}
+	
+	setTimeout(scoreboard, 300); // runs it if parseJSON doesn't, aka animates it in
+	
+	
+	function getData() {
+		// We can access Replicants from other bundles by specifying the bundle name as a second parameter.
+		// NodeCG requires that bundle names match their directory names, but you can always check the `package.json` to double check.
+		
+		const matchRep = nodecg.Replicant('match')
+
+		function grandsStuff (vari) {
+
+				let p1G = vari.players[0].grandsIndicator;
+				let p2G = vari.players[1].grandsIndicator;
+
+				p1G = p1G.toLowerCase();
+				p2G = p2G.toLowerCase();
+
+
+				// console.log(eventRep.value.game);
+
+				
+				gsap.to("#grandsBG", { duration: scTime, opacity: 1, delay: scDelay});
+				switch (true) {
+					case (p1G === 'w' && p2G === 'l'):
+						console.log(p1G)
+						p1Grands.innerHTML = 'winners';
+						p2Grands.innerHTML = 'losers';
+						break;
+					case (p1G === 'l' && p2G === 'w'):
+						console.log(p2G)
+						p1Grands.innerHTML = 'losers';
+						p2Grands.innerHTML = 'winners';
+						break;
+					case (p1G === 'w' && p2G === 'w') || (p1G === 'l'&& p2G === 'l'):	
+						p1Grands.innerHTML = 'losers';
+						p2Grands.innerHTML = 'losers';
+						break;
+					default:
+						gsap.to("#grandsBG", { duration: scTime, opacity: 0, delay: scDelay});
+					};
+
+			
+		}
+
+		function updateInfo ( doodle ) {
+
+			for ( let i = 0; i < 4; i++ ) {
+
+				document.querySelectorAll(".names")[i].innerHTML = doodle.players[i].tag;
+				document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team;
+				textFit(document.querySelectorAll('.wrappers')[i], { maxFontSize: nameSize, alignVert: true });
+				document.querySelectorAll(".scores")[i].innerHTML = doodle.players[i].score;				
+			}
+			bracketLoc.innerHTML = doodle.bracketLoc;
+			bracketLen.innerHTML = doodle.bracketLen;
+			grandsStuff ( doodle );
+		}
+
+		function updateInfoVisible ( newShit , oldShit ) {
+
+			for (let x = 0; x < 4; x++) {
+
+				// check if either TAG or TEAM changed
+				if (newShit.players[x].tag != oldShit.players[x].tag || newShit.players[x].team != oldShit.players[x].team) {
+					gsap.to(document.querySelectorAll(".wrappers")[x], {x:nameMove[x], startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
+						document.querySelectorAll(".names")[x].innerHTML = newShit.players[x].tag;
+						document.querySelectorAll(".teams")[x].innerHTML = newShit.players[x].team;
+						textFit(document.querySelectorAll(".wrappers")[x], {maxFontSize:nameSize, alignVert:true});
+						gsap.to(document.querySelectorAll(".wrappers")[x], {x:0, startAt:{x:nameMove[x]}, duration:nameTime, opacity:1, delay:0});
+					}});
+
+				}
+
+				// check if SCORE changed
+	
+				if (newShit.players[x].score != oldShit.players[x].score) {
+					gsap.to(document.querySelectorAll(".scores")[x], {duration: scTime, opacity: 0, delay: 0, onComplete: function () {
+						document.querySelectorAll(".scores")[x].innerHTML = matchRep.value.players[x].score;
+						gsap.to(document.querySelectorAll(".scores")[x], { duration: scTime, opacity: 1, delay: 0 });
+					}
+				})};
+
+			// 	// check if PORT changed 
+			// 	if (newShit.players[x].port != oldShit.players[x].port) {
+			// 		document.querySelectorAll(".ports")[x].style.backgroundColor = matchRep.value.players[x].port;
+			// };
+
+				// check if BRACKET changed
+
+				if (newShit.bracketLoc != oldShit.bracketLoc || newShit.bracketLen != oldShit.bracketLen) {
+					switch (eventRep.value.event) {
+						case ('USW'):
+						case ('TMTT'):
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+							bracketLoc.innerHTML = matchRep.value.bracketLoc;
+							bracketLen.innerHTML = matchRep.value.bracketLen;
+							spacer.innerHTML = " - "
+								
+							textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0 });
+							}});
+							break;
+						default:
+							if (newShit.bracketLoc != oldShit.bracketLoc) {
+								gsap.to("#bracketLoc", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+									bracketLoc.innerHTML = newShit.bracketLoc;
+									textFit(document.getElementById('bracketLoc'), { maxFontSize: rdSize, alignVert: true });
+									gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
+								}
+							})};
+							if (newShit.bracketLen != oldShit.bracketLen) {
+								gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
+									bracketLen.innerHTML = newShit.bracketLen;
+									textFit(document.getElementById('bracketLen'), { maxFontSize: rdSize, alignVert: true });
+									gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0 });
+								}
+							})};
+							break;
+						}};
+
+					// if (newShit.players[0].grandsIndicator && newShit.players[1].grandsIndicator) {
+						grandsStuff( newShit );
+					
+
+			}
+		}
+
+		if (startup == true) {
+
+			gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
+
+			// Load match replicant
+			NodeCG.waitForReplicants(matchRep).then(() => {
+				matchRep.value.isVisible = true;
+				updateInfo (matchRep.value);
+				spacer.innerHTML = " - "
+				textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+				gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+				gsap.to(".wrappers", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+				gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
+			});
+					
+		};
+						
+						
+			matchRep.on('change', (newValue, oldValue) => {
+
+				console.log('change event fired');
+
+				if (newValue.isVisible != oldValue.isVisible) {
+					switch (newValue.isVisible) {
+						case false:
+							console.log(newValue.isVisible)
+							gsap.to("#scoreBG", { duration: 0.3, opacity: 0, delay: 0 })
+							gsap.to("#.wrappers", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to(".scores", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to("#rdWrapper", {duration: 0.3, opacity: 0, delay: 0 });
+							updateInfo (newValue);
+							break;
+						case true:
+							console.log(newValue.isVisible)
+							gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
+							gsap.to(".wrappers", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+							gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+							updateInfoVisible (newValue, oldValue);
+							break;
+					}
+
+				} else {
+					switch (newValue.isVisible) {
+						case true:
+							updateInfoVisible (newValue, oldValue);
+							break;
+						case false:
+							updateInfo (newValue);
+					}
+				}
+		});
+	}
+}
+
+
+
+

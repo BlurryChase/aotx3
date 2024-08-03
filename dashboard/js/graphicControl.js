@@ -20,9 +20,12 @@ var lowerThirdsVisibleBTN = document.querySelector('#lowerThirdsVisibleButton');
 matchRep.on('change', newValue => {
 
   if (newValue.isVisible === false) {
-    singlesVisibleBTN.innerHTML = 'NOT VISIBLE';
+    singlesVisibleBTN.innerHTML = 'HIDDEN';
+    singlesVisibleBTN.style.backgroundColor = "darkorange";
   } else {
     singlesVisibleBTN.innerHTML = 'VISIBLE';
+    singlesVisibleBTN.style.backgroundColor = "blue";
+
   }
 
 });
@@ -30,18 +33,22 @@ matchRep.on('change', newValue => {
 commRep.on('change', newValue => {
 
   if (newValue.isVisible === false) {
-    commentaryVisibleBTN.innerHTML = 'NOT VISIBLE';
+    commentaryVisibleBTN.innerHTML = 'HIDDEN';
+    commentaryVisibleBTN.style.backgroundColor = "darkorange";
   } else {
     commentaryVisibleBTN.innerHTML = 'VISIBLE';
+    commentaryVisibleBTN.style.backgroundColor = "blue";
   }
 });
 
 lowerRep.on('change', newValue => {
 
   if (newValue.isVisible === false) {
-    lowerThirdsVisibleBTN.innerHTML = 'NOT VISIBLE';
+    lowerThirdsVisibleBTN.innerHTML = 'HIDDEN';
+    lowerThirdsVisibleBTN.style.backgroundColor = "darkorange";
   } else {
     lowerThirdsVisibleBTN.innerHTML = 'VISIBLE';
+    lowerThirdsVisibleBTN.style.backgroundColor = "blue";
   }
 });
 
