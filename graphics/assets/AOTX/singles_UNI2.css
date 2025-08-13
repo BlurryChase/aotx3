@@ -1,0 +1,180 @@
+@font-face {
+	font-family: MainFont;
+	src: url('../fonts/Vegabond-Regular.ttf');	
+
+}
+
+@font-face {
+	font-family: ScoreFont;
+	src: url('../fonts/Moctavo.ttf');	
+
+}
+
+@font-face {
+	font-family: BracketFont;
+	src: url('../fonts/Erato\ W01\ Regular.ttf');	
+
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	width: 1920px;
+	height: 1080px;
+	overflow: hidden;
+	background: transparent;
+	color: white;
+	font-family: MainFont;
+	text-transform: uppercase;
+	/* background-color: plum; */
+}
+
+#scoreBG {
+	opacity: 0;
+	background: url("../AOTX/GAMES/UNI2/AOT_B_NameBars_Overlay_Base_UNI2.png");
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1920px;
+	height: 1080px;
+}
+
+#glowOverlay {
+	opacity: 1;
+	background: url("../AOTX/GAMES/UNI2/AOT_B_NameBars_Overlay_Glow_UNI2.png");
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1920px;
+	height: 1080px;
+	z-index: 1;
+}
+
+#grandsBG {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	opacity: 0;
+}
+
+.wrappers {
+
+	position: absolute;
+	width: 280px;
+	height: 30px;
+	top: 137px;
+
+	line-height: 30px;
+	text-align: center;
+	font-size: 40px;
+	opacity: 0;
+
+	/* background-color: brown; */
+}
+
+#p1Wrapper {
+	left: 175px;
+	text-align: left;
+}
+
+#p2Wrapper {
+	right: 175px;
+	text-align: right;
+}
+
+.scores {
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	text-align: center;
+
+	line-height: 48px;
+	font-size: 48px;
+	top: 131px;
+	opacity: 0;
+
+	font-family: ScoreFont;
+
+	/* background-color: lawngreen; */
+}
+
+#p1Score {
+	left: 100px;
+}
+
+#p2Score {
+	right: 98px;
+}
+
+.rounds {
+	position: absolute;
+	width: 300px;
+	height: 46px;
+	left: 811px;
+	top: 166px;
+
+	font-family: ScoreFont;
+
+
+	color: white;
+	/* background-color: gray; */
+
+	line-height: 46px;
+	text-align: center;
+	font-size: 30px;
+
+	text-transform: capitalize;
+
+	opacity: 0;
+}
+
+.formats {
+	position: absolute;
+	width: 160px;
+	height: 46px;
+	left: 877px;
+	top: -201px;
+
+	color: white;
+	/* background-color: gray; */
+
+	line-height: 46px;
+	text-align: center;
+	font-size: 15px;
+
+	opacity: 0;
+}
+
+#gameHold {
+	display: none;
+}
+
+.indicator {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	top: 66px;	
+
+	color: white;
+
+	line-height: 32px;
+	text-transform: uppercase;
+	font-size: 24px;
+	text-align: center;
+
+	/* background-color: red; */
+	
+}
+
+#p1Grands{
+	left: 563px;
+}
+
+#p2Grands{
+	left: 1329px;
+}

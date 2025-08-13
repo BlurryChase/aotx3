@@ -1,120 +1,28 @@
 {
-  "USW" :{
+  "GGST" :{
     "nameSize" : 40,
     "nameMove" : [ "-60px", "60px"],
     "nameTime" : 0.3,
   
-    "rdSize" : 17,
+    "rdSize" : 46,
     "rdTime" : 0.2,
   
     "scTime" : 0.3,
-    "scDelay" : 0,
-
-
-    "topTextSize" : 40,
-    "topTextMove" : "-128px",
-    "topTextTime" : 0.3,
-    "topTextDelay" : 0.3,
-
-    "botTextSize" : 20,
-    "botTextMove" : "93px",
-    "botTextTime" : 0.3,
-    "botTextDelay" : 0.3,
-
-
-    "commNameSize" : 50,
-    "commMove" : ["-144px", "144px"],
-    "commNameTime" : 0.3,
-    "commnameDelay" : 0.1,
-
-    "twitterSize" : 20,
-    "twitterMove" : ["-87px", "87px"],
-    "twitterTime" : 0.3,
-    "twitterDelay" : 0.1,
-
-    "sponsors": [
-      "fx_test",
-      "tloc1"
-    ]
+    "scDelay" : 0
   },
-  "MNM": {
-    "nameSize" : 60,
-    "nameMove" : [ "-45px", "45px"],
-    "nameTime" : 0.3,
-  
-    "rdSize" : 18,
-    "rdTime" : 0.2,
-  
-    "scTime" : 0.3,
-    "scDelay" : 0,
-
-
-    "topTextSize" : 74,
-    "topTextMove" : "-128px",
-    "topTextTime" : 0.3,
-    "topTextDelay" : 0.3,
-
-    "botTextSize" : 34,
-    "botTextMove" : "93px",
-    "botTextTime" : 0.3,
-    "botTextDelay" : 0.3,
-  
-    
-    "commNameSize" : 99,
-    "commMove" : ["-144px", "144px"],
-    "commNameTime" : 0.3,
-    "commnameDelay" : 0.1,
-
-    "twitterSize" : 20,
-    "twitterMove" : ["-87px", "87px"],
-    "twitterTime" : 0.3,
-    "twitterDelay" : 0.1,
-
-    "sponsors": [
-      "fx_test",
-      "tloc1"
-    ]
-  },
-  "SUPLEX" :{
+    "DBFZ" :{
     "nameSize" : 40,
     "nameMove" : [ "-60px", "60px"],
     "nameTime" : 0.3,
   
-    "rdSize" : 17,
+    "rdSize" : 46,
     "rdTime" : 0.2,
   
     "scTime" : 0.3,
-    "scDelay" : 0,
-
-
-    "topTextSize" : 32,
-    "topTextMove" : "-100px",
-    "topTextTime" : 0.3,
-    "topTextDelay" : 0.3,
-
-    "botTextSize" : 24,
-    "botTextMove" : "100px",
-    "botTextTime" : 0.3,
-    "botTextDelay" : 0.3,
-  
-    
-    "commNameSize" : 32,
-    "commMove" : ["-144px", "144px"],
-    "commNameTime" : 0.3,
-    "commnameDelay" : 0.1,
-
-    "twitterSize" : 20,
-    "twitterMove" : ["-87px", "87px"],
-    "twitterTime" : 0.3,
-    "twitterDelay" : 0.1,
-
-    "sponsors": [
-      "FXSuplex2",
-      "TLOCSuplex"
-    ]
+    "scDelay" : 0
   },
-  "TMTT" :{
-    "nameSize" : 40,
+    "GBFVSR" :{
+    "nameSize" : 44,
     "nameMove" : [ "-60px", "60px"],
     "nameTime" : 0.3,
   
@@ -122,31 +30,50 @@
     "rdTime" : 0.2,
   
     "scTime" : 0.3,
-    "scDelay" : 0,
-
-
-    "topTextSize" : 32,
-    "topTextMove" : "-100px",
-    "topTextTime" : 0.3,
-    "topTextDelay" : 0.3,
-
-    "botTextSize" : 24,
-    "botTextMove" : "100px",
-    "botTextTime" : 0.3,
-    "botTextDelay" : 0.3,
+    "scDelay" : 0
+  },
+    "SF6" :{
+    "nameSize" : 40,
+    "nameMove" : [ "-60px", "60px"],
+    "nameTime" : 0.3,
   
-    
-    "commNameSize" : 42,
-    "commMove" : ["-144px", "144px"],
-    "commNameTime" : 0.3,
-    "commnameDelay" : 0.1,
-
-    "twitterSize" : 20,
-    "twitterMove" : ["-87px", "87px"],
-    "twitterTime" : 0.3,
-    "twitterDelay" : 0.1
+    "rdSize" : 46,
+    "rdTime" : 0.2,
+  
+    "scTime" : 0.3,
+    "scDelay" : 0
+  },
+    "T8" :{
+    "nameSize" : 40,
+    "nameMove" : [ "-60px", "60px"],
+    "nameTime" : 0.3,
+  
+    "rdSize" : 48,
+    "rdTime" : 0.2,
+  
+    "scTime" : 0.3,
+    "scDelay" : 0
+  },
+    "UNI2" :{
+    "nameSize" : 40,
+    "nameMove" : [ "-60px", "60px"],
+    "nameTime" : 0.3,
+  
+    "rdSize" : 36,
+    "rdTime" : 0.2,
+  
+    "scTime" : 0.3,
+    "scDelay" : 0
+  },
+    "XRD" :{
+    "nameSize" : 40,
+    "nameMove" : [ "-60px", "60px"],
+    "nameTime" : 0.3,
+  
+    "rdSize" : 36,
+    "rdTime" : 0.2,
+  
+    "scTime" : 0.3,
+    "scDelay" : 0
   }
-  
-
-  
 }

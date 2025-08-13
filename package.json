@@ -1,5 +1,5 @@
 {
-  "name": "tlocCG",
+  "name": "aotx3",
   "version": "1.3.0",
   "description": "",
   "homepage": "",
@@ -25,20 +25,6 @@
         "title": "Players",
         "width": 4,
         "file": "dPlayers.html",
-        "headerColor": "#525F78"
-      },
-      {
-        "name": "commentary",
-        "title": "Commentary",
-        "width": 4,
-        "file": "dCommentary.html",
-        "headerColor": "#525F78"
-      },
-      {
-        "name": "l3rds",
-        "title": "Lower Thirds & Downtime",
-        "width": 3,
-        "file": "dL3rds.html",
         "headerColor": "#525F78"
       },
       {
@@ -70,32 +56,7 @@
         "height": 1080
       },
       {
-        "file": "doubles.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "comm.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "lowerthird.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
         "file": "2box.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "panel.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "timer.html",
         "width": 1920,
         "height": 1080
       }

@@ -14,11 +14,14 @@ function init(){
 var thisGame;
 
 var startup = true;
+var isVisible = false;
+
 var nameSize = 40;
-var nameMove = ['-60px', '-60px', '-60px', '-60px'];
+var p1Move = '-60px';
+var p2Move = '60px';
 var nameTime = 0.3;
 
-var rdSize = 40;
+var rdSize = 17;
 var rdTime = 0.2;
 
 var scTime = 0.3;
@@ -38,12 +41,30 @@ link.type = 'text/css';
 NodeCG.waitForReplicants(eventRep).then(() => {
     // load replicants
     thisEvent = eventRep.value.event;
+    console.log(thisEvent)
     thisGame = eventRep.value.game;
+    console.log(thisGame)
+    
     
     link.href = `assets/${thisEvent}/doubles_${thisGame}.css`;
     
     head.appendChild(link);
-
+    
+    let suplexOverlay = document.querySelector("#suplexOverlay")
+    let suplexHTML = ''
+    if (thisGame === 'SF6' || thisGame === 'GGST' ) {
+        suplexOverlay.innerHTML = '';
+        suplexHTML +=
+        `<video loop preload mute id="suplexVideo">
+        <source src="assets/${thisEvent}/img/${thisGame}.webm" type="video/webm">
+        </video>`;
+        suplexOverlay.innerHTML = suplexHTML;
+        var bgVid = document.getElementById("suplexVideo");
+        console.log(bgVid)
+        
+    }
+    
+    
     nameSize = params[thisEvent]["nameSize"]; // name size
     nameTime = params[thisEvent]["nameTime"]; // name time
 
@@ -54,8 +75,13 @@ NodeCG.waitForReplicants(eventRep).then(() => {
     
     scTime = params[thisEvent]["scTime"]; // score timer
     scDelay = params[thisEvent]["scDelay"]; // delay for score timer
+    
+    bgVid.play()
+    
+    console.log(images);
+    
+})
 
-	});
 
 eventRep.on('change', (newValue, oldValue) => { 
 
@@ -67,6 +93,7 @@ eventRep.on('change', (newValue, oldValue) => {
 });
 
 
+	let sideVal = ['LeftSide', 'RightSide']
 	// create the link for the html page
 	
 	function scoreboard() {
@@ -97,25 +124,35 @@ eventRep.on('change', (newValue, oldValue) => {
 				p1G = p1G.toLowerCase();
 				p2G = p2G.toLowerCase();
 
+				let winners;
+				let losers;
+
 
 				// console.log(eventRep.value.game);
+				if (eventRep.value.game === 'GGST' || eventRep.value.game === 'SF6') {
+					winners = 'W';
+					losers = 'L';
+				} else {
+					winners = 'Winners';
+					losers = 'Losers';
+				}
 
 				
 				gsap.to("#grandsBG", { duration: scTime, opacity: 1, delay: scDelay});
 				switch (true) {
 					case (p1G === 'w' && p2G === 'l'):
 						console.log(p1G)
-						p1Grands.innerHTML = 'winners';
-						p2Grands.innerHTML = 'losers';
+						p1Grands.innerHTML = winners;
+						p2Grands.innerHTML = losers;
 						break;
 					case (p1G === 'l' && p2G === 'w'):
 						console.log(p2G)
-						p1Grands.innerHTML = 'losers';
-						p2Grands.innerHTML = 'winners';
+						p1Grands.innerHTML = losers;
+						p2Grands.innerHTML = winners;
 						break;
 					case (p1G === 'w' && p2G === 'w') || (p1G === 'l'&& p2G === 'l'):	
-						p1Grands.innerHTML = 'losers';
-						p2Grands.innerHTML = 'losers';
+						p1Grands.innerHTML = losers;
+						p2Grands.innerHTML = losers;
 						break;
 					default:
 						gsap.to("#grandsBG", { duration: scTime, opacity: 0, delay: scDelay});
@@ -126,27 +163,56 @@ eventRep.on('change', (newValue, oldValue) => {
 
 		function updateInfo ( doodle ) {
 
-			for ( let i = 0; i < 4; i++ ) {
+			for ( let i = 0; i < 2; i++ ) {
 
 				document.querySelectorAll(".names")[i].innerHTML = doodle.players[i].tag;
-				document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team;
+
+				if (eventRep.value.game == 'SUPLEX') {
+					if (doodle.players[i].team === "") {
+						document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team;
+					} else {
+						document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team + ' |';
+					}
+				} else {
+					document.querySelectorAll(".teams")[i].innerHTML = doodle.players[i].team;
+				}
+
 				textFit(document.querySelectorAll('.wrappers')[i], { maxFontSize: nameSize, alignVert: true });
-				document.querySelectorAll(".scores")[i].innerHTML = doodle.players[i].score;				
+				document.querySelectorAll(".scores")[i].innerHTML = doodle.players[i].score;
+				if (eventRep.value.game === "SSBM" ) {
+					document.querySelectorAll(".characters")[i].setAttribute("src", `assets/MNM/img/chars/${sideVal[i]}/${doodle.players[i].character.toLowerCase()}.png`);
+				}
+				// document.querySelectorAll(".ports")[i].style.backgroundColor = matchRep.value.players[i].port;
 			}
 			bracketLoc.innerHTML = doodle.bracketLoc;
 			bracketLen.innerHTML = doodle.bracketLen;
+
 			grandsStuff ( doodle );
+
 		}
 
 		function updateInfoVisible ( newShit , oldShit ) {
 
-			for (let x = 0; x < 4; x++) {
+			for (let x = 0; x < 2; x++) {
+
 
 				// check if either TAG or TEAM changed
 				if (newShit.players[x].tag != oldShit.players[x].tag || newShit.players[x].team != oldShit.players[x].team) {
 					gsap.to(document.querySelectorAll(".wrappers")[x], {x:nameMove[x], startAt:{x:0}, duration:nameTime, opacity:0, delay:0, onComplete:function(){
+		
 						document.querySelectorAll(".names")[x].innerHTML = newShit.players[x].tag;
-						document.querySelectorAll(".teams")[x].innerHTML = newShit.players[x].team;
+						console.log(document.querySelectorAll(".names")[x].innerHTML)
+
+						if (eventRep.value.game == 'SUPLEX') {
+							if (newShit.players[x].team === "") {
+								document.querySelectorAll(".teams")[x].innerHTML = newShit.players[x].team;
+							} else {
+								document.querySelectorAll(".teams")[x].innerHTML = newShit.players[x].team + ' |';
+							}
+						} else {
+							document.querySelectorAll(".teams")[x].innerHTML = newShit.players[x].team;
+						}
+
 						textFit(document.querySelectorAll(".wrappers")[x], {maxFontSize:nameSize, alignVert:true});
 						gsap.to(document.querySelectorAll(".wrappers")[x], {x:0, startAt:{x:nameMove[x]}, duration:nameTime, opacity:1, delay:0});
 					}});
@@ -162,10 +228,27 @@ eventRep.on('change', (newValue, oldValue) => {
 					}
 				})};
 
-			// 	// check if PORT changed 
-			// 	if (newShit.players[x].port != oldShit.players[x].port) {
-			// 		document.querySelectorAll(".ports")[x].style.backgroundColor = matchRep.value.players[x].port;
-			// };
+
+				// check if CHARACTERS changed
+
+				if (eventRep.value.game === "SSBM") {
+
+					if (newShit.players[x].character != oldShit.players[x].character) {
+
+						console.log('character side: ' + sideVal)
+
+						gsap.to(document.querySelectorAll(".characters")[x], {duration: nameTime, opacity: 0, delay: 0, onComplete: function () {
+							document.querySelectorAll(".characters")[x].setAttribute("src", `assets/MNM/img/chars/${sideVal[x]}/${newShit.players[x].character.toLowerCase()}.png`);
+							gsap.to(document.querySelectorAll(".characters")[x], {duration: nameTime, opacity:1});
+						}
+					})};
+				};
+				
+				// check if PORT changed 
+				
+				if (newShit.players[x].port != oldShit.players[x].port) {
+					document.querySelectorAll(".ports")[x].style.backgroundColor = matchRep.value.players[x].port;
+				};
 
 				// check if BRACKET changed
 
@@ -190,6 +273,7 @@ eventRep.on('change', (newValue, oldValue) => {
 									gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0 });
 								}
 							})};
+				
 							if (newShit.bracketLen != oldShit.bracketLen) {
 								gsap.to("#bracketLen", {duration: rdTime, opacity: 0, delay: 0, onComplete: function () {
 									bracketLen.innerHTML = newShit.bracketLen;
@@ -214,15 +298,44 @@ eventRep.on('change', (newValue, oldValue) => {
 			// Load match replicant
 			NodeCG.waitForReplicants(matchRep).then(() => {
 				matchRep.value.isVisible = true;
+
 				updateInfo (matchRep.value);
-				spacer.innerHTML = " - "
-				textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
-				gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
-				gsap.to(".wrappers", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
-				gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
-			});
+
+				
+				switch (eventRep.value.event) {
+					case ('USW'):
+							spacer.innerHTML = " - "
+							
+							textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+						break;
+						case ('TMTT'):
+							spacer.innerHTML = " - "
+							textFit(document.getElementsByClassName('rdWrapperClass'), { maxFontSize: rdSize, alignVert: true });
+							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+							gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
+							gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});
+							break;
+						case ('MNM'):
+							gsap.to("#seat1Character", {duration: nameTime, opacity:1, delay:nameTime});
+							gsap.to("#seat2Character", {duration: nameTime, opacity:1, delay:nameTime});						
+						default:
+							spacer.innerHTML = ""
+							textFit(document.getElementsByClassName('rounds'), { maxFontSize: rdSize, alignVert: true });
+							textFit(document.getElementsByClassName('formats'), { maxFontSize: rdSize, alignVert: true });
+							
+							gsap.to("#bracketLoc", {duration: rdTime, opacity: 1, delay: 0.3 });
+							gsap.to("#bracketLen", {duration: rdTime, opacity: 1, delay: 0.3 });
+							
+						};
+
+						gsap.to("#p1Wrapper", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+						gsap.to("#p2Wrapper", { x: 0, startAt: { x: nameMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
+						gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
+								
+					});
 					
-		};
+				}
 						
 						
 			matchRep.on('change', (newValue, oldValue) => {
@@ -234,7 +347,8 @@ eventRep.on('change', (newValue, oldValue) => {
 						case false:
 							console.log(newValue.isVisible)
 							gsap.to("#scoreBG", { duration: 0.3, opacity: 0, delay: 0 })
-							gsap.to("#.wrappers", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to("#p1Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to("#p2Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
 							gsap.to(".scores", { duration: 0.3, opacity: 0, delay: 0 });
 							gsap.to("#rdWrapper", {duration: 0.3, opacity: 0, delay: 0 });
 							updateInfo (newValue);
@@ -242,7 +356,8 @@ eventRep.on('change', (newValue, oldValue) => {
 						case true:
 							console.log(newValue.isVisible)
 							gsap.to("#scoreBG", { duration: 0.3, opacity: 1, delay: 0 })
-							gsap.to(".wrappers", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+							gsap.to("#p1Wrapper", { x: 0, startAt: { x: nameMove[0] }, duration: nameTime, opacity: 1, delay: 0.3 });
+							gsap.to("#p2Wrapper", { x: 0, startAt: { x: nameMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
 							gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
 							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
 							updateInfoVisible (newValue, oldValue);
@@ -258,6 +373,8 @@ eventRep.on('change', (newValue, oldValue) => {
 							updateInfo (newValue);
 					}
 				}
+
+
 		});
 	}
 }

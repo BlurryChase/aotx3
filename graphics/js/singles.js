@@ -10,7 +10,7 @@ fetch("js/params.json")
 
 function init(){
 
-	var thisEvent;
+var thisEvent;
 var thisGame;
 
 var startup = true;
@@ -40,52 +40,32 @@ link.type = 'text/css';
 
 NodeCG.waitForReplicants(eventRep).then(() => {
     // load replicants
-    thisEvent = eventRep.value.event;
-    console.log(thisEvent)
     thisGame = eventRep.value.game;
     console.log(thisGame)
     
     
-    link.href = `assets/${thisEvent}/singles_${thisGame}.css`;
+    link.href = `assets/AOTX/singles_${thisGame}.css`;
     
     head.appendChild(link);
     
-    let suplexOverlay = document.querySelector("#suplexOverlay")
-    let suplexHTML = ''
-    if (thisGame === 'SF6' || thisGame === 'GGST' ) {
-        suplexOverlay.innerHTML = '';
-        suplexHTML +=
-        `<video loop preload mute id="suplexVideo">
-        <source src="assets/${thisEvent}/img/${thisGame}.webm" type="video/webm">
-        </video>`;
-        suplexOverlay.innerHTML = suplexHTML;
-        var bgVid = document.getElementById("suplexVideo");
-        console.log(bgVid)
-        
-    }
     
-    
-    nameSize = params[thisEvent]["nameSize"]; // name size
-    nameTime = params[thisEvent]["nameTime"]; // name time
+    nameSize = params[thisGame]["nameSize"]; // name size
+    nameTime = params[thisGame]["nameTime"]; // name time
 
-    nameMove = params[thisEvent]["nameMove"]; // px move for players
+    nameMove = params[thisGame]["nameMove"]; // px move for players
     
-    rdSize = params[thisEvent]["rdSize"]; // round size
-    rdTime = params[thisEvent]["rdTime"]; // round time
+    rdSize = params[thisGame]["rdSize"]; // round size
+    rdTime = params[thisGame]["rdTime"]; // round time
     
-    scTime = params[thisEvent]["scTime"]; // score timer
-    scDelay = params[thisEvent]["scDelay"]; // delay for score timer
-    
-    bgVid.play()
-    
-    console.log(images);
+    scTime = params[thisGame]["scTime"]; // score timer
+    scDelay = params[thisGame]["scDelay"]; // delay for score timer
     
 })
 
 
 eventRep.on('change', (newValue, oldValue) => { 
 
-    if (newValue.event != oldValue.event || newValue.game != oldValue.game) {
+    if (newValue.game != oldValue.game) {
         location.reload()
         startup = true;
     }
@@ -351,6 +331,7 @@ eventRep.on('change', (newValue, oldValue) => {
 							gsap.to("#p2Wrapper", { duration: 0.3, opacity: 0, delay: 0 });
 							gsap.to(".scores", { duration: 0.3, opacity: 0, delay: 0 });
 							gsap.to("#rdWrapper", {duration: 0.3, opacity: 0, delay: 0 });
+							gsap.to("#glowOverlay", {duration: 0.7, opacity: 0, delay: 0 });
 							updateInfo (newValue);
 							break;
 						case true:
@@ -360,6 +341,7 @@ eventRep.on('change', (newValue, oldValue) => {
 							gsap.to("#p2Wrapper", { x: 0, startAt: { x: nameMove[1] }, duration: nameTime, opacity: 1, delay: 0.3 });
 							gsap.to(".scores", { duration: scTime, opacity: 1, delay: 0 });
 							gsap.to("#rdWrapper", {duration: rdTime, opacity: 1, delay: 0.3 });
+							gsap.to("#glowOverlay", {duration: 0.7, opacity: 1, delay: 0 });
 							updateInfoVisible (newValue, oldValue);
 							break;
 					}

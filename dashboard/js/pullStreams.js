@@ -39,7 +39,7 @@ async function pullStreams() {
     body: JSON.stringify({
       query,
       variables: {
-          "tourneySlug": slug.value,
+          "tourneySlug": "tournament/" + slug.value,
       },
     }),
   });
