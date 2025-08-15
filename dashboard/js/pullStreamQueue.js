@@ -45,7 +45,7 @@ async function startGGPull() {
     body: JSON.stringify({
       query,
       variables: {
-          "tourneySlug": "tournament/" + slug.value,
+          "tourneySlug": `tournament/${slug.value}`
       },
     }),
   })
