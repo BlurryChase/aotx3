@@ -1,6 +1,19 @@
 @font-face {
-  font-family: MainFont;
-  src: url('../fonts/gomarice_no_continue.ttf');
+	font-family: MainFont;
+	src: url('../fonts/Vegabond-Regular.ttf');	
+
+}
+
+@font-face {
+	font-family: ScoreFont;
+	src: url('../fonts/Moctavo.ttf');	
+
+}
+
+@font-face {
+	font-family: BracketFont;
+	src: url('../fonts/Erato\ W01\ Regular.ttf');	
+
 }
 
 * {
@@ -13,7 +26,7 @@ body {
   height: 1080px;
   overflow: hidden;
   background: transparent;
-  color: black;
+  color: white;
   font-family: MainFont;
   text-transform: uppercase;
   
@@ -21,11 +34,11 @@ body {
 
 #l3rdBG {
   position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  top: 0px;
-  background: url(img/l3rd.png) no-repeat;
+	width: 1920px;
+	height: 86px;
+  left: 96px;
+  bottom: 200px;
+  background: url('./thirds/players.png') no-repeat;
 }
 
 #l3rdsTop {
@@ -33,16 +46,18 @@ body {
   margin: 0px;
 
   position: absolute;
-  width: 550px;
+  width: 400px;
   height: 45px;
-  top: 914px;
-  left: 158px;
+  bottom: 225px;
+  left: 182px;
 
   line-height: 45px;
   text-align: center;
   font-size: 32px;
 
   opacity: 0;
+
+  /* background: blue; */
 
 
 }

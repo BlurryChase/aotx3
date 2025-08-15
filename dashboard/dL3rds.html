@@ -15,13 +15,15 @@
 	<br>
 	<input id="l3rdsBottom" type="text" placeholder="Lower 3rds Bottom" size="30"></input>
 	<br><br>
-	<div><b>Downtime</b></div>
-	<input id="panelTop" type="text" placeholder="Downtime Top" size="30"></input>
-	<button id="clearBRBButton">CLEAR</button>
+	<div style="display: none;"><b>Downtime</b></div>
+	<input id="panelTop" type="text" placeholder="Downtime Top" size="30"  style="display: none;"></input>
+	<button id="clearBRBButton"  style="display: none;">CLEAR</button>
 	<br>
-	<input id="panelBottom" type="text" placeholder="Downtime Bottom" size="30"></input>
+	<input id="panelBottom" type="text" placeholder="Downtime Bottom" size="30"  style="display: none;"></input>
 	<br><br>
-	Timer: <input id="panelTimer" type="text" placeholder="Timer" size="7"></input> Minutes
+	<div  style="display: none;">
+		Timer: <input id="panelTimer" type="text" placeholder="Timer" size="7"></input> Minutes
+	</div>
 </body>
 
 <script src="js/l3rds.js"></script>

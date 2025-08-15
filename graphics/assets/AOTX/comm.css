@@ -1,6 +1,19 @@
-@font-face{
+@font-face {
 	font-family: MainFont;
-	src: url('../fonts/gomarice_no_continue.ttf');	
+	src: url('../fonts/Vegabond-Regular.ttf');	
+
+}
+
+@font-face {
+	font-family: ScoreFont;
+	src: url('../fonts/Moctavo.ttf');	
+
+}
+
+@font-face {
+	font-family: BracketFont;
+	src: url('../fonts/Erato\ W01\ Regular.ttf');	
+
 }
 
 *{
@@ -13,18 +26,17 @@ body{
 	height: 1080px;
 	overflow: hidden;
 	background: transparent;
-	color: black;
+	color: white;
 	font-family: MainFont;
 	text-transform: uppercase;
 } 
 
 #commBG{
   position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  top: 0px;
-  background: url(img/comm.png) no-repeat;
+	width: 1920px;
+	height: 86px;
+  bottom: 240px;
+  background: url("./thirds/commentary.png") no-repeat;
  }
 
  .wrappers{
@@ -32,12 +44,11 @@ body{
 	margin:0px;
 
 	position: absolute;
-	width:	568px;
-	height: 58px;
-	top: 946px;
+	width:	400px;
+	height: 44px;
+	bottom: 264px;
 
-	line-height: 58px;
-	text-align: center;	
+	line-height: 44px;
 	font-size: 32px;
 	opacity: 0;
 
@@ -46,11 +57,13 @@ body{
 }
 
 #c1Wrapper{
-	left: 25px;
+	text-align: left;	
+	left: 220px;
 }
 
 #c2Wrapper{
-	left: 1327px;
+	text-align: right;	
+	right: 220px;
 }
 
 .twitters{
@@ -77,5 +90,5 @@ body{
 }
 
 .team{
-	opacity: 0.7;
+	color: crimson;
 }
